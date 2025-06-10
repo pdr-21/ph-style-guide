@@ -91,7 +91,7 @@ const ShadowsSection: React.FC = () => {
                   {/* Visual Example */}
                   <div className="flex items-center justify-center p-8">
                     <div 
-                      className={`w-32 h-24 bg-white rounded-lg flex items-center justify-center ${shadow.class}`}
+                      className={`w-32 h-24 bg-white border border-gray-100 rounded-lg flex items-center justify-center ${shadow.class}`}
                     >
                       <div className="text-center">
                         <div className="text-sm font-medium text-gray-800">{shadow.name}</div>
@@ -113,19 +113,19 @@ const ShadowsSection: React.FC = () => {
           <div className="mb-8">
             <h4 className="text-md font-medium text-gray-700 mb-4">Card Examples</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-depth-05">
+              <div className="bg-white p-6 rounded-lg shadow-depth-05 border border-gray-100">
                 <div className="text-sm font-medium text-gray-800 mb-2">Subtle Card</div>
                 <div className="text-xs text-gray-600 mb-3">Depth 0.5 - Minimal elevation</div>
                 <div className="text-xs text-gray-500">Perfect for hover states and subtle content separation</div>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-depth-1">
+              <div className="bg-white p-6 rounded-lg shadow-depth-1 border border-gray-100">
                 <div className="text-sm font-medium text-gray-800 mb-2">Standard Card</div>
                 <div className="text-xs text-gray-600 mb-3">Depth 1 - Standard elevation</div>
                 <div className="text-xs text-gray-500">Ideal for content cards and form containers</div>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow-depth-2">
+              <div className="bg-white p-6 rounded-lg shadow-depth-2 border border-gray-100">
                 <div className="text-sm font-medium text-gray-800 mb-2">Elevated Card</div>
                 <div className="text-xs text-gray-600 mb-3">Depth 2 - Enhanced elevation</div>
                 <div className="text-xs text-gray-500">Great for important content and navigation elements</div>
@@ -139,26 +139,26 @@ const ShadowsSection: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="relative">
-                  <button className="w-full px-4 py-3 bg-white rounded-lg shadow-depth-1 hover:shadow-depth-2 transition-shadow duration-200 text-left">
+                  <button className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg shadow-depth-1 hover:shadow-depth-2 transition-shadow duration-200 text-left">
                     <div className="text-sm font-medium text-gray-800">Dropdown Button</div>
                     <div className="text-xs text-gray-600">Hover to see shadow change</div>
                   </button>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-input-overlay p-4">
+                <div className="bg-white border border-gray-200 rounded-lg shadow-input-overlay p-4">
                   <div className="text-sm font-medium text-gray-800 mb-2">Input Overlay</div>
                   <div className="text-xs text-gray-600">Uses input-overlay shadow for dropdown menus</div>
                 </div>
               </div>
               
               <div className="space-y-4">
-                <div className="bg-white p-6 rounded-lg shadow-depth-3">
+                <div className="bg-white p-6 rounded-lg shadow-depth-3 border border-gray-100">
                   <div className="text-sm font-medium text-gray-800 mb-2">Modal Content</div>
                   <div className="text-xs text-gray-600 mb-3">Depth 3 - Strong elevation</div>
                   <div className="text-xs text-gray-500">Perfect for modals and floating panels</div>
                 </div>
                 
-                <div className="bg-white p-6 rounded-lg shadow-depth-4">
+                <div className="bg-white p-6 rounded-lg shadow-depth-4 border border-gray-100">
                   <div className="text-sm font-medium text-gray-800 mb-2">Hero Section</div>
                   <div className="text-xs text-gray-600 mb-3">Depth 4 - Maximum elevation</div>
                   <div className="text-xs text-gray-500">For high-priority content and overlays</div>
