@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from '../ui/input';
-import { Search, Mail, Lock, Eye, EyeOff, User, Phone, Calendar, DollarSign } from 'lucide-react';
+import { Search, Mail, Lock, Eye, EyeOff, User, Phone, Calendar, DollarSign, Check } from 'lucide-react';
 
 const InputPreview: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,32 +27,127 @@ const InputPreview: React.FC = () => {
           <p className="text-gray-600">ShadCN input component integrated with our design system</p>
         </div>
 
-        {/* Basic Variants */}
+        {/* Basic States */}
         <div className="space-y-8">
           <div>
-            <h2 className="text-lg font-medium text-gray-700 mb-6">Variants</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-3">
+            <h2 className="text-lg font-medium text-gray-700 mb-6">Input States</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Left Column */}
+              <div className="space-y-6">
                 <Input 
-                  placeholder="Default input" 
-                  value={formData.text}
-                  onChange={(e) => handleInputChange('text', e.target.value)}
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
                 />
-                <div className="text-xs text-gray-600">
-                  <div className="font-medium">Default</div>
-                  <div className="font-mono">variant="default"</div>
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  className="focus:border-b-200"
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  variant="filled"
+                />
+                
+                <Input 
+                  label="Label"
+                  defaultValue="Filled text"
+                  helperText="Helper text"
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  error={true}
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  disabled={true}
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  disabled={true}
+                  variant="filled"
+                />
+                
+                <div className="relative">
+                  <Input 
+                    label="Label"
+                    placeholder="Placeholder"
+                    helperText="Helper text"
+                    className="pr-10"
+                  />
+                  <Check className="absolute right-3 top-[42px] transform -translate-y-1/2 text-g-300 w-4 h-4" />
                 </div>
               </div>
-              
-              <div className="space-y-3">
+
+              {/* Right Column */}
+              <div className="space-y-6">
                 <Input 
-                  variant="error" 
-                  placeholder="Error state input"
-                  defaultValue="Invalid input"
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
                 />
-                <div className="text-xs text-gray-600">
-                  <div className="font-medium">Error</div>
-                  <div className="font-mono">variant="error"</div>
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                />
+                
+                <Input 
+                  label="Label"
+                  defaultValue="Filled text"
+                  helperText="Helper text"
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  error={true}
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  disabled={true}
+                />
+                
+                <Input 
+                  label="Label"
+                  placeholder="Placeholder"
+                  helperText="Helper text"
+                  disabled={true}
+                />
+                
+                <div className="relative">
+                  <Input 
+                    label="Label"
+                    placeholder="Placeholder"
+                    helperText="Helper text"
+                    className="pr-10"
+                  />
+                  <Check className="absolute right-3 top-[42px] transform -translate-y-1/2 text-g-300 w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -61,125 +156,105 @@ const InputPreview: React.FC = () => {
           {/* Sizes */}
           <div>
             <h2 className="text-lg font-medium text-gray-700 mb-6">Sizes</h2>
-            <div className="space-y-4">
-              <div className="space-y-3">
-                <Input 
-                  size="sm" 
-                  placeholder="Small input"
-                />
-                <div className="text-xs text-gray-600">
-                  <div className="font-medium">Small</div>
-                  <div className="font-mono">size="sm"</div>
-                </div>
-              </div>
+            <div className="space-y-6 max-w-md">
+              <Input 
+                size="sm" 
+                label="Small Input"
+                placeholder="Small input"
+                helperText="This is a small input field"
+              />
               
-              <div className="space-y-3">
-                <Input 
-                  size="default" 
-                  placeholder="Default input"
-                />
-                <div className="text-xs text-gray-600">
-                  <div className="font-medium">Default</div>
-                  <div className="font-mono">size="default"</div>
-                </div>
-              </div>
+              <Input 
+                size="default" 
+                label="Default Input"
+                placeholder="Default input"
+                helperText="This is a default input field"
+              />
               
-              <div className="space-y-3">
-                <Input 
-                  size="lg" 
-                  placeholder="Large input"
-                />
-                <div className="text-xs text-gray-600">
-                  <div className="font-medium">Large</div>
-                  <div className="font-mono">size="lg"</div>
-                </div>
-              </div>
+              <Input 
+                size="lg" 
+                label="Large Input"
+                placeholder="Large input"
+                helperText="This is a large input field"
+              />
             </div>
           </div>
 
           {/* Input Types */}
           <div>
             <h2 className="text-lg font-medium text-gray-700 mb-6">Input Types</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Text Input</label>
-                  <Input 
-                    type="text" 
-                    placeholder="Enter your name"
-                    value={formData.text}
-                    onChange={(e) => handleInputChange('text', e.target.value)}
-                  />
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <Input 
+                  type="text" 
+                  label="Text Input"
+                  placeholder="Enter your name"
+                  helperText="Enter your full name"
+                  value={formData.text}
+                  onChange={(e) => handleInputChange('text', e.target.value)}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Input</label>
-                  <Input 
-                    type="email" 
-                    placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                  />
-                </div>
+                <Input 
+                  type="email" 
+                  label="Email Input"
+                  placeholder="Enter your email"
+                  helperText="We'll never share your email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Password Input</label>
-                  <Input 
-                    type="password" 
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={(e) => handleInputChange('password', e.target.value)}
-                  />
-                </div>
+                <Input 
+                  type="password" 
+                  label="Password Input"
+                  placeholder="Enter your password"
+                  helperText="Must be at least 8 characters"
+                  value={formData.password}
+                  onChange={(e) => handleInputChange('password', e.target.value)}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Search Input</label>
-                  <Input 
-                    type="search" 
-                    placeholder="Search..."
-                    value={formData.search}
-                    onChange={(e) => handleInputChange('search', e.target.value)}
-                  />
-                </div>
+                <Input 
+                  type="search" 
+                  label="Search Input"
+                  placeholder="Search..."
+                  helperText="Search through our database"
+                  value={formData.search}
+                  onChange={(e) => handleInputChange('search', e.target.value)}
+                />
               </div>
               
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Input</label>
-                  <Input 
-                    type="tel" 
-                    placeholder="+1 (555) 123-4567"
-                    value={formData.phone}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
-                  />
-                </div>
+              <div className="space-y-6">
+                <Input 
+                  type="tel" 
+                  label="Phone Input"
+                  placeholder="+1 (555) 123-4567"
+                  helperText="Include country code"
+                  value={formData.phone}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Number Input</label>
-                  <Input 
-                    type="number" 
-                    placeholder="Enter a number"
-                    value={formData.number}
-                    onChange={(e) => handleInputChange('number', e.target.value)}
-                  />
-                </div>
+                <Input 
+                  type="number" 
+                  label="Number Input"
+                  placeholder="Enter a number"
+                  helperText="Only numeric values allowed"
+                  value={formData.number}
+                  onChange={(e) => handleInputChange('number', e.target.value)}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Date Input</label>
-                  <Input 
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => handleInputChange('date', e.target.value)}
-                  />
-                </div>
+                <Input 
+                  type="date"
+                  label="Date Input"
+                  helperText="Select a date"
+                  value={formData.date}
+                  onChange={(e) => handleInputChange('date', e.target.value)}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">URL Input</label>
-                  <Input 
-                    type="url" 
-                    placeholder="https://example.com"
-                  />
-                </div>
+                <Input 
+                  type="url" 
+                  label="URL Input"
+                  placeholder="https://example.com"
+                  helperText="Enter a valid URL"
+                />
               </div>
             </div>
           </div>
@@ -187,123 +262,127 @@ const InputPreview: React.FC = () => {
           {/* With Icons */}
           <div>
             <h2 className="text-lg font-medium text-gray-700 mb-6">With Icons</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Search with Icon</label>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                    <Input 
-                      type="search" 
-                      placeholder="Search..."
-                      className="pl-10"
-                    />
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="relative">
+                  <Input 
+                    type="search" 
+                    label="Search with Icon"
+                    placeholder="Search..."
+                    helperText="Search through our database"
+                    className="pl-10"
+                  />
+                  <Search className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email with Icon</label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                    <Input 
-                      type="email" 
-                      placeholder="Enter your email"
-                      className="pl-10"
-                    />
-                  </div>
+                <div className="relative">
+                  <Input 
+                    type="email" 
+                    label="Email with Icon"
+                    placeholder="Enter your email"
+                    helperText="We'll never share your email"
+                    className="pl-10"
+                  />
+                  <Mail className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">User with Icon</label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                    <Input 
-                      type="text" 
-                      placeholder="Enter your name"
-                      className="pl-10"
-                    />
-                  </div>
+                <div className="relative">
+                  <Input 
+                    type="text" 
+                    label="User with Icon"
+                    placeholder="Enter your name"
+                    helperText="Enter your full name"
+                    className="pl-10"
+                  />
+                  <User className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
               </div>
               
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Password with Toggle</label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                    <Input 
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
-                      className="pl-10 pr-10"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-n-200 hover:text-n-400 transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
+              <div className="space-y-6">
+                <div className="relative">
+                  <Input 
+                    type={showPassword ? "text" : "password"}
+                    label="Password with Toggle"
+                    placeholder="Enter your password"
+                    helperText="Must be at least 8 characters"
+                    className="pl-10 pr-10"
+                  />
+                  <Lock className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-[42px] transform -translate-y-1/2 text-n-200 hover:text-n-400 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone with Icon</label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                    <Input 
-                      type="tel" 
-                      placeholder="+1 (555) 123-4567"
-                      className="pl-10"
-                    />
-                  </div>
+                <div className="relative">
+                  <Input 
+                    type="tel" 
+                    label="Phone with Icon"
+                    placeholder="+1 (555) 123-4567"
+                    helperText="Include country code"
+                    className="pl-10"
+                  />
+                  <Phone className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Currency with Icon</label>
-                  <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                    <Input 
-                      type="number" 
-                      placeholder="0.00"
-                      className="pl-10"
-                      step="0.01"
-                    />
-                  </div>
+                <div className="relative">
+                  <Input 
+                    type="number" 
+                    label="Currency with Icon"
+                    placeholder="0.00"
+                    helperText="Enter amount in USD"
+                    className="pl-10"
+                    step="0.01"
+                  />
+                  <DollarSign className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* States */}
+          {/* Error and Success States */}
           <div>
-            <h2 className="text-lg font-medium text-gray-700 mb-6">States</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Normal State</label>
-                  <Input placeholder="Normal input" />
-                </div>
+            <h2 className="text-lg font-medium text-gray-700 mb-6">Validation States</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <Input 
+                  label="Error State"
+                  placeholder="Enter valid email"
+                  helperText="Please enter a valid email address"
+                  error={true}
+                  defaultValue="invalid-email"
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Focused State</label>
-                  <Input placeholder="Click to focus" autoFocus />
-                </div>
+                <Input 
+                  label="Success State"
+                  placeholder="Enter your email"
+                  helperText="Email address is valid"
+                  success={true}
+                  defaultValue="user@example.com"
+                />
               </div>
               
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">Disabled State</label>
-                  <Input placeholder="Disabled input" disabled />
-                </div>
+              <div className="space-y-6">
+                <Input 
+                  label="Required Field Error"
+                  placeholder="This field is required"
+                  helperText="This field cannot be empty"
+                  error={true}
+                />
                 
-                <div>
-                  <label className="block text-sm font-medium text-red-700 mb-2">Error State</label>
+                <div className="relative">
                   <Input 
-                    variant="error" 
-                    placeholder="Error input"
-                    defaultValue="Invalid value"
+                    label="Validated Input"
+                    placeholder="Enter your username"
+                    helperText="Username is available"
+                    success={true}
+                    defaultValue="john_doe"
+                    className="pr-10"
                   />
-                  <p className="text-xs text-r-400 mt-1">This field contains an error</p>
+                  <Check className="absolute right-3 top-[42px] transform -translate-y-1/2 text-g-300 w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -315,60 +394,56 @@ const InputPreview: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Login Form */}
               <div className="p-6 bg-gray-50 rounded-lg">
-                <h3 className="text-md font-medium text-gray-700 mb-4">Login Form</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                      <Input 
-                        type="email" 
-                        placeholder="Enter your email"
-                        className="pl-10"
-                      />
-                    </div>
+                <h3 className="text-md font-medium text-gray-700 mb-6">Login Form</h3>
+                <div className="space-y-6">
+                  <div className="relative">
+                    <Input 
+                      type="email" 
+                      label="Email Address"
+                      placeholder="Enter your email"
+                      helperText="We'll never share your email"
+                      className="pl-10"
+                    />
+                    <Mail className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                   
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                      <Input 
-                        type="password" 
-                        placeholder="Enter your password"
-                        className="pl-10"
-                      />
-                    </div>
+                  <div className="relative">
+                    <Input 
+                      type="password" 
+                      label="Password"
+                      placeholder="Enter your password"
+                      helperText="Must be at least 8 characters"
+                      className="pl-10"
+                    />
+                    <Lock className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Contact Form */}
               <div className="p-6 bg-gray-50 rounded-lg">
-                <h3 className="text-md font-medium text-gray-700 mb-4">Contact Form</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                      <Input 
-                        type="text" 
-                        placeholder="Enter your full name"
-                        className="pl-10"
-                      />
-                    </div>
+                <h3 className="text-md font-medium text-gray-700 mb-6">Contact Form</h3>
+                <div className="space-y-6">
+                  <div className="relative">
+                    <Input 
+                      type="text" 
+                      label="Full Name"
+                      placeholder="Enter your full name"
+                      helperText="First and last name"
+                      className="pl-10"
+                    />
+                    <User className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                   
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
-                      <Input 
-                        type="tel" 
-                        placeholder="+1 (555) 123-4567"
-                        className="pl-10"
-                      />
-                    </div>
+                  <div className="relative">
+                    <Input 
+                      type="tel" 
+                      label="Phone Number"
+                      placeholder="+1 (555) 123-4567"
+                      helperText="Include country code"
+                      className="pl-10"
+                    />
+                    <Phone className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                 </div>
               </div>
@@ -381,16 +456,14 @@ const InputPreview: React.FC = () => {
           <h3 className="text-lg font-medium text-gray-800 mb-4">Usage Guidelines</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-md font-medium text-gray-700 mb-3">Input Types</h4>
+              <h4 className="text-md font-medium text-gray-700 mb-3">Input States</h4>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><strong>Text:</strong> General text input, names, titles</p>
-                <p><strong>Email:</strong> Email addresses with validation</p>
-                <p><strong>Password:</strong> Secure password entry</p>
-                <p><strong>Search:</strong> Search queries and filters</p>
-                <p><strong>Tel:</strong> Phone numbers and contact info</p>
-                <p><strong>Number:</strong> Numeric values and quantities</p>
-                <p><strong>Date:</strong> Date selection and scheduling</p>
-                <p><strong>URL:</strong> Website addresses and links</p>
+                <p><strong>Default:</strong> Standard input state for user interaction</p>
+                <p><strong>Focused:</strong> Active state when user clicks or tabs into field</p>
+                <p><strong>Filled:</strong> State when input contains user-entered data</p>
+                <p><strong>Error:</strong> Invalid input with error message and styling</p>
+                <p><strong>Success:</strong> Valid input with confirmation styling</p>
+                <p><strong>Disabled:</strong> Non-interactive state for read-only fields</p>
               </div>
             </div>
             
@@ -398,11 +471,11 @@ const InputPreview: React.FC = () => {
               <h4 className="text-md font-medium text-gray-700 mb-3">Best Practices</h4>
               <div className="space-y-2 text-sm text-gray-600">
                 <p><strong>Labels:</strong> Always provide clear, descriptive labels</p>
-                <p><strong>Placeholders:</strong> Use helpful placeholder text</p>
-                <p><strong>Validation:</strong> Show error states with helpful messages</p>
-                <p><strong>Icons:</strong> Use relevant icons to improve usability</p>
-                <p><strong>Accessibility:</strong> Ensure proper focus management</p>
-                <p><strong>Responsive:</strong> Test across different screen sizes</p>
+                <p><strong>Helper Text:</strong> Use to provide additional context or instructions</p>
+                <p><strong>Validation:</strong> Show error states with helpful, actionable messages</p>
+                <p><strong>Icons:</strong> Use relevant icons to improve usability and recognition</p>
+                <p><strong>Accessibility:</strong> Ensure proper focus management and screen reader support</p>
+                <p><strong>Consistency:</strong> Maintain consistent styling across all form inputs</p>
               </div>
             </div>
           </div>
