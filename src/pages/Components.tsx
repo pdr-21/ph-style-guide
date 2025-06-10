@@ -1,14 +1,30 @@
 import React from 'react';
+import ButtonPreview from '../components/component_previews/ButtonPreview';
 
-const Components: React.FC = () => {
+interface ComponentsProps {
+  activeComponentSection: string;
+}
+
+const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
+  const renderComponentPreview = () => {
+    switch (activeComponentSection) {
+      case 'buttons':
+        return <ButtonPreview />;
+      default:
+        return (
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="text-center">
+              <h2 className="text-xl font-semibold text-gray-800 mb-2">Component Preview</h2>
+              <p className="text-gray-600">Select a component from the sidebar to preview it</p>
+            </div>
+          </div>
+        );
+    }
+  };
+
   return (
-    <div className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="text-2xl font-semibold text-gray-800">Components</h1>
-        <p className="text-gray-600 mt-1">Reusable UI components library</p>
-      </div>
-      
-      {/* Component library will be added later */}
+    <div className="w-full">
+      {renderComponentPreview()}
     </div>
   );
 };

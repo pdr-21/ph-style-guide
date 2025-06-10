@@ -15,11 +15,11 @@ interface SideNavigationProps {
   currentView: Environment;
   onEnvironmentChange: (view: Environment, subView?: string) => void;
   activeStyleGuideSection: string;
+  activeComponentSection: string;
 }
 
-const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection }) => {
+const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection, activeComponentSection }) => {
   const [activeItem, setActiveItem] = useState('dashboard');
-  const [activeComponentItem, setActiveComponentItem] = useState('buttons');
 
   // App navigation items (icons only)
   const appNavigationItems: NavigationItem[] = [
@@ -120,7 +120,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
   } else if (currentView === 'Style Guide') {
     return renderTextNavigation(styleGuideItems, activeStyleGuideSection, (id) => onEnvironmentChange('Style Guide', id));
   } else if (currentView === 'Components') {
-    return renderTextNavigation(componentItems, activeComponentItem, setActiveComponentItem);
+    return renderTextNavigation(componentItems, activeComponentSection, (id) => onEnvironmentChange('Components', id));
   }
 
   return renderAppNavigation();
