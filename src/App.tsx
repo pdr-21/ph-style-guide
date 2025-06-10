@@ -7,6 +7,14 @@ import { Environment } from './types';
 
 function App() {
   const [currentView, setCurrentView] = useState<Environment>('App');
+  const [activeStyleGuideSection, setActiveStyleGuideSection] = useState('colors');
+
+  const handleViewChange = (view: Environment, subView?: string) => {
+    setCurrentView(view);
+    if (view === 'Style Guide' && subView) {
+      setActiveStyleGuideSection(subView);
+    }
+  };
 
   const renderContent = () => {
     switch (currentView) {
@@ -15,14 +23,18 @@ function App() {
       case 'Components':
         return <Components />;
       case 'Style Guide':
-        return <StyleGuide />;
+        return <StyleGuide activeSection={activeStyleGuideSection} />;
       default:
         return <Dashboard />;
     }
   };
 
   return (
-    <Layout currentView={currentView} onViewChange={setCurrentView}>
+    <Layout 
+      currentView={currentView} 
+      onViewChange={handleViewChange}
+      activeStyleGuideSection={activeStyleGuideSection}
+    >
       {renderContent()}
     </Layout>
   );

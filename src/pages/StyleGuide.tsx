@@ -1,7 +1,10 @@
 import React from 'react';
 
-const StyleGuide: React.FC = () => {
-  const [activeSection, setActiveSection] = React.useState('colors');
+interface StyleGuideProps {
+  activeSection: string;
+}
+
+const StyleGuide: React.FC<StyleGuideProps> = ({ activeSection }) => {
 
   const renderColorsSection = () => (
     <section className="space-y-8">

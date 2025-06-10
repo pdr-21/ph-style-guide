@@ -13,11 +13,12 @@ import { NavigationItem, Environment } from '../../types';
 
 interface SideNavigationProps {
   currentView: Environment;
+  onEnvironmentChange: (view: Environment, subView?: string) => void;
+  activeStyleGuideSection: string;
 }
 
-const SideNavigation: React.FC<SideNavigationProps> = ({ currentView }) => {
+const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection }) => {
   const [activeItem, setActiveItem] = useState('dashboard');
-  const [activeStyleGuideItem, setActiveStyleGuideItem] = useState('colors');
   const [activeComponentItem, setActiveComponentItem] = useState('buttons');
 
   // App navigation items (icons only)
@@ -86,7 +87,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView }) => {
     </aside>
   );
 
-  const renderTextNavigation = (items: any[], activeItemState: string, setActiveItemState: (id: string) => void) => (
+  const renderTextNavigation = (items: any[], activeItemState: string, handleItemClick: (id: string) => void) => (
     <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-4.5rem)] bg-gray-50 border-r border-gray-200 z-40">
       <nav className="py-4">
         <ul className="space-y-1">
@@ -96,7 +97,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView }) => {
             return (
               <li key={item.id}>
                 <button
-                  onClick={() => setActiveItemState(item.id)}
+                  onClick={() => handleItemClick(item.id)}
                   className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors ${
                     isActive 
                       ? 'bg-primary-50 text-primary-600 border-r-2 border-primary-600' 
@@ -116,7 +117,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView }) => {
   if (currentView === 'App') {
     return renderAppNavigation();
   } else if (currentView === 'Style Guide') {
-    return renderTextNavigation(styleGuideItems, activeStyleGuideItem, setActiveStyleGuideItem);
+    return renderTextNavigation(styleGuideItems, activeStyleGuideSection, (id) => onEnvironmentChange('Style Guide', id));
   } else if (currentView === 'Components') {
     return renderTextNavigation(componentItems, activeComponentItem, setActiveComponentItem);
   }
