@@ -807,6 +807,11 @@ const StyleGuide: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <div className="space-y-8">
       <div className="border-b border-gray-200 pb-4">
@@ -821,5 +826,3 @@ const StyleGuide: React.FC = () => {
 };
 
 export default StyleGuide;
-  )
-}
