@@ -40,7 +40,6 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
     { id: 'spacing', label: 'Spacing' },
     { id: 'corner-radius', label: 'Corner Radius' },
     { id: 'borders', label: 'Borders' },
-    { id: 'borders', label: 'Borders' },
     { id: 'shadows', label: 'Shadows' },
   ];
 
