@@ -61,6 +61,57 @@ export default {
           40: '#EAE8FB',
         },
         
+        // Kobe (K)
+        k: {
+          500: '#491F08',
+          400: '#913D1C',
+          300: '#DA5C30',
+          200: '#F6814B',
+          100: '#EBA47F',
+          75: '#F0C1A8',
+          50: '#F7E1D4',
+        },
+        
+        // Brown (BR)
+        br: {
+          500: '#4A350F',
+          400: '#956727',
+          300: '#E09E3E',
+          200: '#F8BA4B',
+          100: '#FACD78',
+          75: '#F5DDAB',
+          50: '#FBEDD5',
+        },
+        
+        // Red (R) - Semantic
+        r: {
+          500: '#C40F24',
+          400: '#EF233C',
+          300: '#F14458',
+          200: '#F36374',
+          100: '#F9B1B9',
+          75: '#FCD9DD',
+          50: '#FFE9EB',
+        },
+        
+        // Yellow (Y) - Semantic
+        y: {
+          500: '#C24B00',
+          400: '#DF6E38',
+          300: '#FF8B00',
+          200: '#FFCD92',
+          100: '#FFFAE6',
+        },
+        
+        // Green (G) - Semantic
+        g: {
+          500: '#006644',
+          400: '#4B6479',
+          300: '#36B37E',
+          200: '#85DBBE',
+          100: '#E6F9F3',
+        },
+        
         // Keep existing gray for compatibility
         gray: {
           50: '#F8F9FB',

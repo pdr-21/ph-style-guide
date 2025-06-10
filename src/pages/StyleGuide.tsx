@@ -335,3 +335,5 @@ const StyleGuide: React.FC = () => {
 };
 
 export default StyleGuide;
+
+export default StyleGuide
