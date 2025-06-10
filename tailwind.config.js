@@ -133,12 +133,6 @@ export default {
       boxShadow: {
         'focus-normal': '0 0 0 2px #4D3EE0, 0 0 0 3px rgba(174, 181, 194, 0.3)',
         'focus-medium': '0 0 0 2px #4D3EE0, 0 0 0 8px rgba(202, 193, 242, 0.4)',
-        'depth-05': '0px 2px 3px 0px #353B4626',
-        'depth-1': '0px 2px 14px 0px #353B4626',
-        'depth-2': '0px 2px 4px 0px #0C0B3B33, 0px 1px 10px 0px #0C0B3B1F, 0px 2px 5px 0px #0C0B3B24',
-        'depth-3': '0px 4px 12px 0px #353B4666',
-        'depth-4': '0px 12px 25px 0px #353B4666, 0px 0px 4px 0px #353B464D',
-        'input-overlay': '0px 4px 12px 0px #00000026',
       },
       spacing: {
         '18': '4.5rem', // 72px
