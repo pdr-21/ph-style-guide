@@ -1,0 +1,26 @@
+For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+
+By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+
+You will develop a style guide, components and pages. These should be separated in environments that can be accessed through the dropdown in the top navigation. These should redirect the user to each specific page. So App will take the user to /pages/Dashboard, the components will take them to /components where they can see all the components we develop and style guide should be a separate page where they can see only the style guide. We will also have different content in the side navigation for each. Only the main app will have icons, components and styleguide will have text in the side navigation, so it needs to be a bit bigger to fit the components. Content area should resize accordingly.
+
+In the style guide environment:
+This will be our place to store and view styles. You should not add new styles, unless specifically instructed to add more styles. You NEED to use the styles available.
+The side navigation will have all the main sections of the style guide as we add themm such as Colors, Typograhpy, States, Radiuses, etc. This is how we keep them separate. Don't add them on the same page, we need them separated.
+
+In the components environment:
+This will be like our component library where we can analyze and improve individual components for later usage in our app.
+The side navigation will have all components as we add them such as Buttons, Dropdown, Top navigation, Side navigation, etc. This is how we keep them separate. 
+
+Unless instructed to create a component set (containing multiple other components), you need to create components each by each on separate pages in the components environment. These components will be then used to build pages in the app environment.
+
+Each side navigation element should show me a different component in the main content area. The content Area should center the component both vertically and horizontally. This way I can analyze and decide if the individual components behave as intended.
+
+The components should be created in a way that they will be able to pull data from a database that we will setup later.
+
+In the app environment:
+This should be our main app. Here we will build pages using our components and elements from the style guide and components environment.
+The pages between the 3 environment shouldn't affect one another. So for example if i am on a page in the app environment, i shouldn't be redirected to the components library. The same goes for the component preview page in the component environment. If i choose to view another component, i shouldn't be redirected to the pages environment. Treat them separately.
+
+General guidance:
+Remember, the data should be easily replaceable at a later stage, when instructed, by things from a database
