@@ -47,7 +47,6 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
   const componentItems = [
     { id: 'buttons', label: 'Buttons' },
     { id: 'inputs', label: 'Inputs' },
-    { id: 'inputs', label: 'Inputs' },
     { id: 'dropdowns', label: 'Dropdowns' },
     { id: 'modals', label: 'Modals' },
     { id: 'cards', label: 'Cards' },
