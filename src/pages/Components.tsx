@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonPreview from '../components/component_previews/ButtonPreview';
+import InputPreview from '../components/component_previews/InputPreview';
 
 interface ComponentsProps {
   activeComponentSection: string;
@@ -10,6 +11,8 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
     switch (activeComponentSection) {
       case 'buttons':
         return <ButtonPreview />;
+      case 'inputs':
+        return <InputPreview />;
       default:
         return (
           <div className="min-h-screen flex items-center justify-center">

@@ -47,6 +47,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
   const componentItems = [
     { id: 'buttons', label: 'Buttons' },
     { id: 'inputs', label: 'Inputs' },
+    { id: 'inputs', label: 'Inputs' },
     { id: 'dropdowns', label: 'Dropdowns' },
     { id: 'modals', label: 'Modals' },
     { id: 'cards', label: 'Cards' },
@@ -69,7 +70,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
                 >
                   <div className={`w-10 h-10 flex items-center justify-center rounded-xl transition-colors ${
                     isActive 
-                      ? 'bg-p-50 text-p-300' 
+                      ? 'bg-b-40 text-b-300' 
                       : 'text-n-300 hover:text-n-500 hover:bg-n-50'
                   }`}>
                     <Icon className="w-5 h-5" />
@@ -103,7 +104,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
                   onClick={() => handleItemClick(item.id)}
                   className={`w-full px-2 py-2 text-left text-sm font-medium transition-colors rounded-xl ${
                     isActive 
-                      ? 'bg-p-50 text-p-300' 
+                      ? 'bg-b-40 text-b-300' 
                       : 'text-n-400 hover:text-n-500 hover:bg-n-50'
                   }`}
                 >
