@@ -2,6 +2,8 @@ import React from 'react';
 import ColorsSection from '../components/styleguide/ColorsSection';
 import TypographySection from '../components/styleguide/TypographySection';
 import SpacingSection from '../components/styleguide/SpacingSection';
+import CornerRadiusSection from '../components/styleguide/CornerRadiusSection';
+import BordersSection from '../components/styleguide/BordersSection';
 
 interface StyleGuideProps {
   activeSection: string;
@@ -18,6 +20,8 @@ const StyleGuide: React.FC<StyleGuideProps> = ({ activeSection }) => {
       {activeSection === 'colors' && <ColorsSection />}
       {activeSection === 'typography' && <TypographySection />}
       {activeSection === 'spacing' && <SpacingSection />}
+      {activeSection === 'corner-radius' && <CornerRadiusSection />}
+      {activeSection === 'borders' && <BordersSection />}
     </div>
   );
 };

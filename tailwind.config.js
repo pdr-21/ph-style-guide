@@ -122,6 +122,18 @@ export default {
           800: '#1F2937',
         }
       },
+      borderRadius: {
+        'xs': '2px',
+        'sm': '4px',
+        'md': '6px',
+        'lg': '8px',
+        '2xl': '12px',
+        'rounded': '9999px',
+      },
+      boxShadow: {
+        'focus-normal': '0 0 0 2px #4D3EE0, 0 0 0 3px #AEB5C2',
+        'focus-medium': '0 0 0 2px #4D3EE0, 0 0 0 8px #CAC1F2',
+      },
       spacing: {
         '18': '4.5rem', // 72px
         '22': '5.5rem', // 88px
