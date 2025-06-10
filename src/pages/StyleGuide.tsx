@@ -316,6 +316,314 @@ const StyleGuide: React.FC = () => {
             </div>
           </div>
 
+          {/* Kobe Colors */}
+          <div className="mb-8">
+            <h3 className="text-lg font-medium text-gray-700 mb-4">Kobe (K)</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              The "Kobe" colors include warm shades from orange to lighter browns. This group can serve as 
+              energizing accents, draw attention, or be used in thematic contexts, adding warmth and dynamism.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#491F08' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K500</div>
+                  <div className="text-gray-500">#491F08</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#913D1C' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K400</div>
+                  <div className="text-gray-500">#913D1C</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#DA5C30' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K300</div>
+                  <div className="text-gray-500">#DA5C30</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F6814B' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K200</div>
+                  <div className="text-gray-500">#F6814B</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#EBA47F' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K100</div>
+                  <div className="text-gray-500">#EBA47F</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F0C1A8' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K75</div>
+                  <div className="text-gray-500">#F0C1A8</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F7E1D4' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">K50</div>
+                  <div className="text-gray-500">#F7E1D4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Brown Colors */}
+          <div className="mb-8">
+            <h3 className="text-lg font-medium text-gray-700 mb-4">Brown (BR)</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Browns, ranging from lighter to darker shades, are rooted in nature, evoking earth, wood, 
+              stability, and warmth. They can ground a palette, adding seriousness and balance.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#4A350F' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR500</div>
+                  <div className="text-gray-500">#4A350F</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#956727' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR400</div>
+                  <div className="text-gray-500">#956727</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#E09E3E' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR300</div>
+                  <div className="text-gray-500">#E09E3E</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F8BA4B' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR200</div>
+                  <div className="text-gray-500">#F8BA4B</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FACD78' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR100</div>
+                  <div className="text-gray-500">#FACD78</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F5DDAB' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR75</div>
+                  <div className="text-gray-500">#F5DDAB</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FBEDD5' }}></div>
+                <div className="text-sm">
+                  <div className="font-medium text-gray-800">BR50</div>
+                  <div className="text-gray-500">#FBEDD5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Semantic Colors Section */}
+          <div className="mb-8">
+            <h3 className="text-lg font-medium text-gray-700 mb-6">Semantic Colors</h3>
+            <p className="text-sm text-gray-600 mb-6">
+              Semantic colors are used for specific UI states and feedback, providing clear visual communication 
+              for success, warning, and error states.
+            </p>
+
+            {/* Red Colors */}
+            <div className="mb-8">
+              <h4 className="text-md font-medium text-gray-700 mb-4">Red (R)</h4>
+              <p className="text-sm text-gray-600 mb-4">
+                Red is one of the most potent and emotionally charged colors. In UI design, it's specifically 
+                used for critical states, errors, warnings, and destructive actions. It demands careful and precise application.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#C40F24' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R500</div>
+                    <div className="text-gray-500">#C40F24</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#EF233C' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R400</div>
+                    <div className="text-gray-500">#EF233C</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F14458' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R300</div>
+                    <div className="text-gray-500">#F14458</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F36374' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R200</div>
+                    <div className="text-gray-500">#F36374</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#F9B1B9' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R100</div>
+                    <div className="text-gray-500">#F9B1B9</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FCD9DD' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R75</div>
+                    <div className="text-gray-500">#FCD9DD</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FFE9EB' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">R50</div>
+                    <div className="text-gray-500">#FFE9EB</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Yellow Colors */}
+            <div className="mb-8">
+              <h4 className="text-md font-medium text-gray-700 mb-4">Yellow (Y)</h4>
+              <p className="text-sm text-gray-600 mb-4">
+                Yellow is the brightest and most energetic chromatic color, instantly grabbing attention. In UI, 
+                it often communicates information requiring notice but less critical than red-flagged issues, such as 
+                lower-priority warnings or highlighting important, non-alarming content.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#C24B00' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">Y500</div>
+                    <div className="text-gray-500">#C24B00</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#DF6E38' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">Y400</div>
+                    <div className="text-gray-500">#DF6E38</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FF8B00' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">Y300</div>
+                    <div className="text-gray-500">#FF8B00</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FFCD92' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">Y200</div>
+                    <div className="text-gray-500">#FFCD92</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#FFFAE6' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">Y100</div>
+                    <div className="text-gray-500">#FFFAE6</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Green Colors */}
+            <div className="mb-8">
+              <h4 className="text-md font-medium text-gray-700 mb-4">Green (G)</h4>
+              <p className="text-sm text-gray-600 mb-4">
+                Green has a vital and established semantic role in UI design, universally understood as 
+                signaling positive states like operational success or confirmation.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#006644' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">G500</div>
+                    <div className="text-gray-500">#006644</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#4B6479' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">G400</div>
+                    <div className="text-gray-500">#4B6479</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#36B37E' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">G300</div>
+                    <div className="text-gray-500">#36B37E</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#85DBBE' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">G200</div>
+                    <div className="text-gray-500">#85DBBE</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: '#E6F9F3' }}></div>
+                  <div className="text-sm">
+                    <div className="font-medium text-gray-800">G100</div>
+                    <div className="text-gray-500">#E6F9F3</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Usage Guidelines */}
           <div className="bg-gray-50 p-6 rounded-lg">
             <h4 className="text-md font-medium text-gray-800 mb-3">Usage Guidelines</h4>
@@ -325,6 +633,11 @@ const StyleGuide: React.FC = () => {
               <p><strong>Neutrals (N):</strong> Use for sophisticated UI chrome and structural elements with subtle blue undertones</p>
               <p><strong>Primary (P):</strong> Use Myrtle Green for main CTAs, key interactions, and brand emphasis</p>
               <p><strong>Secondary (B):</strong> Use Blue for supporting actions, links, and complementary interactions</p>
+              <p><strong>Kobe (K):</strong> Use warm orange-brown shades for energizing accents and thematic warmth</p>
+              <p><strong>Brown (BR):</strong> Use earth tones for stability, grounding, and natural elements</p>
+              <p><strong>Red (R):</strong> Use for errors, warnings, destructive actions, and critical states</p>
+              <p><strong>Yellow (Y):</strong> Use for attention-grabbing warnings and important non-critical information</p>
+              <p><strong>Green (G):</strong> Use for success states, confirmations, and positive feedback</p>
               <p><strong>Contrast:</strong> Ensure sufficient contrast ratios for accessibility (4.5:1 minimum for text)</p>
             </div>
           </div>
