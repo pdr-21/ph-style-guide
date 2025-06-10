@@ -38,6 +38,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
     { id: 'colors', label: 'Colors' },
     { id: 'typography', label: 'Typography' },
     { id: 'spacing', label: 'Spacing' },
+    { id: 'spacing', label: 'Spacing' },
     { id: 'borders', label: 'Borders' },
     { id: 'shadows', label: 'Shadows' },
   ];
