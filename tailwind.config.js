@@ -133,6 +133,13 @@ export default {
       boxShadow: {
         'focus-normal': '0 0 0 2px #4D3EE0, 0 0 0 3px rgba(174, 181, 194, 0.3)',
         'focus-medium': '0 0 0 2px #4D3EE0, 0 0 0 8px rgba(202, 193, 242, 0.4)',
+        // Depth shadows (converted to rem and using design system colors)
+        'depth-05': '0 0.125rem 0.1875rem 0 rgba(53, 59, 70, 0.15)',
+        'depth-1': '0 0.125rem 0.875rem 0 rgba(53, 59, 70, 0.15)',
+        'depth-2': '0 0.125rem 0.25rem 0 rgba(12, 11, 59, 0.2), 0 0.0625rem 0.625rem 0 rgba(12, 11, 59, 0.12)',
+        'depth-3': '0 0.25rem 0.75rem 0 rgba(53, 59, 70, 0.4)',
+        'depth-4': '0 0.75rem 1.5625rem 0 rgba(53, 59, 70, 0.4), 0 0 0.25rem 0 rgba(53, 59, 70, 0.3)',
+        'input-overlay': '0 0.25rem 0.75rem 0 rgba(0, 0, 0, 0.15)',
       },
       spacing: {
         '18': '4.5rem', // 72px
