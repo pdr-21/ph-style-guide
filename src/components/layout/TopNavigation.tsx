@@ -14,7 +14,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
   const environments: Environment[] = ['App', 'Components', 'Style Guide'];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white border-b border-n-75 z-50">
       <div className="flex items-center justify-between h-18 px-6">
         {/* Left Section - Logo and Tenant Name */}
         <div className="flex items-center space-x-4">
@@ -27,7 +27,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
           </div>
           
           {/* Tenant Name */}
-          <h1 className="text-xl font-semibold text-gray-800">
+          <h1 className="text-xl font-semibold text-n-500">
             Phenom CRM
           </h1>
         </div>
@@ -36,11 +36,11 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
         <div className="flex items-center space-x-4">
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
             <input 
               type="text" 
               placeholder="Search" 
-              className="pl-10 pr-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600 outline-none text-sm"
+              className="pl-10 pr-4 py-2 w-80 border border-n-75 rounded-lg focus:ring-2 focus:ring-b-200 focus:border-b-200 outline-none text-sm"
             />
           </div>
 
@@ -49,24 +49,24 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
             <select 
               value={currentEnvironment}
               onChange={(e) => onEnvironmentChange(e.target.value as Environment)}
-              className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-primary-600 focus:border-primary-600 outline-none text-sm font-medium cursor-pointer"
+              className="appearance-none bg-white border border-n-75 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-b-200 focus:border-b-200 outline-none text-sm font-medium cursor-pointer"
             >
               {environments.map((env) => (
                 <option key={env} value={env}>{env}</option>
               ))}
             </select>
-            <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
+            <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4 pointer-events-none" />
           </div>
 
           {/* Settings Icon - Only visible in App environment */}
           {currentEnvironment === 'App' && (
-            <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <Settings className="w-5 h-5 text-gray-600" />
+            <button className="p-2 hover:bg-n-50 rounded-lg transition-colors">
+              <Settings className="w-5 h-5 text-n-300" />
             </button>
           )}
 
           {/* Profile Container */}
-          <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-b-300 rounded-full flex items-center justify-center">
             <span className="text-white text-sm font-medium">JD</span>
           </div>
         </div>
