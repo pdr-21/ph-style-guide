@@ -131,8 +131,8 @@ export default {
         'rounded': '9999px',
       },
       boxShadow: {
-        'focus-normal': '0 0 0 2px #4D3EE0, 0 0 0 3px #AEB5C2',
-        'focus-medium': '0 0 0 2px #4D3EE0, 0 0 0 8px #CAC1F2',
+        'focus-normal': '0 0 0 2px #4D3EE0, 0 0 0 3px rgba(174, 181, 194, 0.3)',
+        'focus-medium': '0 0 0 2px #4D3EE0, 0 0 0 8px rgba(202, 193, 242, 0.4)',
       },
       spacing: {
         '18': '4.5rem', // 72px

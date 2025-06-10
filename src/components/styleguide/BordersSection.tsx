@@ -37,7 +37,7 @@ const BordersSection: React.FC = () => {
             
             <div className="bg-gray-50 p-6 rounded-lg mb-4">
               <div className="text-sm text-gray-700 mb-2">
-                <strong>CSS:</strong> <span className="font-mono">box-shadow: 0 0 0 2px #4D3EE0, 0 0 0 3px #AEB5C2;</span>
+                <strong>CSS:</strong> <span className="font-mono">box-shadow: 0 0 0 2px #4D3EE0, 0 0 0 3px rgba(174, 181, 194, 0.3);</span>
               </div>
               <div className="text-sm text-gray-700">
                 <strong>Tailwind:</strong> <span className="font-mono">shadow-focus-normal</span>
@@ -50,7 +50,7 @@ const BordersSection: React.FC = () => {
                 <input 
                   type="text" 
                   placeholder="Focus me with Tab key"
-                  className="w-full max-w-md px-3 py-2 border border-n-100 rounded-md focus:shadow-focus-normal focus:border-transparent outline-none text-sm transition-all"
+                  className="w-full max-w-md px-3 py-2 border border-gray-300 rounded-md focus:shadow-focus-normal focus:border-b-200 outline-none text-sm transition-all duration-200"
                 />
               </div>
               
@@ -59,13 +59,13 @@ const BordersSection: React.FC = () => {
                 <textarea 
                   placeholder="Focus me with Tab key"
                   rows={3}
-                  className="w-full max-w-md px-3 py-2 border border-n-100 rounded-md focus:shadow-focus-normal focus:border-transparent outline-none text-sm transition-all resize-none"
+                  className="w-full max-w-md px-3 py-2 border border-gray-300 rounded-md focus:shadow-focus-normal focus:border-b-200 outline-none text-sm transition-all duration-200 resize-none"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Small Button Example</label>
-                <button className="px-4 py-2 bg-b-200 text-white rounded-md focus:shadow-focus-normal outline-none text-sm font-medium hover:bg-b-300 transition-all">
+                <button className="px-4 py-2 bg-b-200 text-white rounded-md focus:shadow-focus-normal outline-none text-sm font-medium hover:bg-b-300 transition-all duration-200">
                   Focus me with Tab key
                 </button>
               </div>
@@ -82,7 +82,7 @@ const BordersSection: React.FC = () => {
             
             <div className="bg-gray-50 p-6 rounded-lg mb-4">
               <div className="text-sm text-gray-700 mb-2">
-                <strong>CSS:</strong> <span className="font-mono">box-shadow: 0 0 0 2px #4D3EE0, 0 0 0 8px #CAC1F2;</span>
+                <strong>CSS:</strong> <span className="font-mono">box-shadow: 0 0 0 2px #4D3EE0, 0 0 0 8px rgba(202, 193, 242, 0.4);</span>
               </div>
               <div className="text-sm text-gray-700">
                 <strong>Tailwind:</strong> <span className="font-mono">shadow-focus-medium</span>
@@ -92,7 +92,7 @@ const BordersSection: React.FC = () => {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Dropdown Example</label>
-                <select className="w-full max-w-md px-3 py-2 border border-n-100 rounded-md focus:shadow-focus-medium focus:border-transparent outline-none text-sm transition-all bg-white">
+                <select className="w-full max-w-md px-3 py-2 border border-gray-300 rounded-md focus:shadow-focus-medium focus:border-b-200 outline-none text-sm transition-all duration-200 bg-white">
                   <option>Focus me with Tab key</option>
                   <option>Option 1</option>
                   <option>Option 2</option>
@@ -101,7 +101,7 @@ const BordersSection: React.FC = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Large Button Example</label>
-                <button className="px-6 py-3 bg-p-300 text-white rounded-lg focus:shadow-focus-medium outline-none text-base font-medium hover:bg-p-400 transition-all">
+                <button className="px-6 py-3 bg-p-300 text-white rounded-lg focus:shadow-focus-medium outline-none text-base font-medium hover:bg-p-400 transition-all duration-200">
                   Focus me with Tab key
                 </button>
               </div>
@@ -110,7 +110,7 @@ const BordersSection: React.FC = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Card Component Example</label>
                 <div 
                   tabIndex={0}
-                  className="w-full max-w-md p-4 bg-white border border-n-75 rounded-lg focus:shadow-focus-medium outline-none transition-all cursor-pointer hover:border-n-100"
+                  className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg focus:shadow-focus-medium outline-none transition-all duration-200 cursor-pointer hover:border-gray-300"
                 >
                   <div className="text-sm font-medium text-gray-800">Interactive Card</div>
                   <div className="text-xs text-gray-600 mt-1">Focus me with Tab key</div>
@@ -133,29 +133,29 @@ const BordersSection: React.FC = () => {
               <input 
                 type="text" 
                 placeholder="Input field"
-                className="w-full px-3 py-2 border border-n-100 rounded-md focus:shadow-focus-normal focus:border-transparent outline-none text-sm transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:shadow-focus-normal focus:border-b-200 outline-none text-sm transition-all duration-200"
               />
-              <button className="w-full px-4 py-2 bg-b-200 text-white rounded-md focus:shadow-focus-normal outline-none text-sm font-medium hover:bg-b-300 transition-all">
+              <button className="w-full px-4 py-2 bg-b-200 text-white rounded-md focus:shadow-focus-normal outline-none text-sm font-medium hover:bg-b-300 transition-all duration-200">
                 Small Button
               </button>
               <input 
                 type="checkbox" 
-                className="w-4 h-4 text-b-200 border-n-100 rounded focus:shadow-focus-normal focus:border-transparent outline-none transition-all"
+                className="w-4 h-4 text-b-200 border-gray-300 rounded focus:shadow-focus-normal focus:border-b-200 outline-none transition-all duration-200"
               />
             </div>
             
             <div className="space-y-4">
               <h4 className="text-sm font-medium text-gray-700">Medium Focus Elements</h4>
-              <select className="w-full px-3 py-2 border border-n-100 rounded-md focus:shadow-focus-medium focus:border-transparent outline-none text-sm transition-all bg-white">
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:shadow-focus-medium focus:border-b-200 outline-none text-sm transition-all duration-200 bg-white">
                 <option>Dropdown</option>
                 <option>Option 1</option>
               </select>
-              <button className="w-full px-6 py-3 bg-p-300 text-white rounded-lg focus:shadow-focus-medium outline-none text-base font-medium hover:bg-p-400 transition-all">
+              <button className="w-full px-6 py-3 bg-p-300 text-white rounded-lg focus:shadow-focus-medium outline-none text-base font-medium hover:bg-p-400 transition-all duration-200">
                 Large Button
               </button>
               <div 
                 tabIndex={0}
-                className="w-full p-3 bg-white border border-n-75 rounded-lg focus:shadow-focus-medium outline-none transition-all cursor-pointer hover:border-n-100"
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg focus:shadow-focus-medium outline-none transition-all duration-200 cursor-pointer hover:border-gray-300"
               >
                 <div className="text-sm font-medium text-gray-800">Focusable Card</div>
               </div>
