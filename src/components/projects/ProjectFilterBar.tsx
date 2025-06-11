@@ -83,7 +83,7 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
     <div className="space-y-6">
       {/* Header Section */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-n-500">Projects</h1>
+        <h1 className="text-2xl font-semibold text-n-500">Initiatives</h1>
         <div className="flex items-center gap-3">
           <Button className="bg-p-300 hover:bg-p-400 text-white">
             <Plus className="w-4 h-4 mr-2" />

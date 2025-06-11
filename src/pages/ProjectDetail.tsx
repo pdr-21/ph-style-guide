@@ -77,7 +77,7 @@ const ProjectDetail: React.FC = () => {
             to="/projects" 
             className="text-b-200 hover:text-b-300 transition-colors font-medium"
           >
-            Projects
+            Initiatives
           </Link>
           <ChevronRight className="w-4 h-4 text-n-200" />
           <span className="text-n-300 font-medium">{project.title}</span>

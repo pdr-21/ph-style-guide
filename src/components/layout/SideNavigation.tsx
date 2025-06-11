@@ -30,7 +30,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
   const appNavigationItems: NavigationItem[] = [
     { id: 'dashboard', icon: Home, label: 'Dashboard', path: '/' },
     { id: 'contacts', icon: Users, label: 'Contacts', path: '/contacts' },
-    { id: 'projects', icon: FolderOpen, label: 'Projects', path: '/projects' },
+    { id: 'projects', icon: FolderOpen, label: 'Initiatives', path: '/projects' },
     { id: 'calendar', icon: Calendar, label: 'Calendar', path: '/calendar' },
     { id: 'reports', icon: BarChart3, label: 'Reports', path: '/reports' },
     { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
