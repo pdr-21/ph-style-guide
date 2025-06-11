@@ -25,7 +25,19 @@ const ProjectDetail: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchProject = async () => {
-    if (!id) return;
+    if (!id) {
+      setError('No project ID provided');
+      setLoading(false);
+      return;
+    }
+
+    // Validate that the ID is a valid number
+    const projectId = parseInt(id);
+    if (isNaN(projectId) || projectId <= 0) {
+      setError('Invalid project ID');
+      setLoading(false);
+      return;
+    }
 
     try {
       setLoading(true);
@@ -33,7 +45,7 @@ const ProjectDetail: React.FC = () => {
       const { data, error } = await supabase
         .from('projects')
         .select('*')
-        .eq('id', parseInt(id))
+        .eq('id', projectId)
         .single();
 
       if (error) {
