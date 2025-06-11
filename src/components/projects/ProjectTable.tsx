@@ -34,7 +34,7 @@ const ProjectTable: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden">
+    <div className="bg-white border border-n-75 rounded-lg overflow-hidden">
       <table className="w-full">
         <thead className="bg-n-40 border-b border-n-75">
           <tr>
