@@ -68,12 +68,14 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
     { 
       id: 'all-projects', 
       label: 'All projects', 
-      count: totalProjects 
+      count: totalProjects,
+      filterValue: 'all-projects'
     },
     ...projectTypeCounts.map(typeCount => ({
       id: `type-${typeCount.project_type?.toLowerCase().replace(/\s+/g, '-')}`,
       label: typeCount.project_type || 'Other',
-      count: typeCount.count
+      count: typeCount.count,
+      filterValue: typeCount.project_type || 'Other' // Pass the actual project_type value
     }))
   ];
 
@@ -95,7 +97,7 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
 
       {/* Tab Navigation */}
       <div className="border-b border-n-75 -mx-8 px-8">
-        <div className="flex items-center gap-8 overflow-x-auto">
+        <div className="flex items-center gap-8 overflow-x-auto pb-0">
           {loading ? (
             <div className="pb-4 px-1 text-sm text-n-300">Loading filters...</div>
           ) : (
@@ -103,16 +105,16 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => onFilterChange(tab.id)}
+                  onClick={() => onFilterChange(tab.filterValue)} // Use filterValue instead of id
                   className={`pb-4 px-1 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center ${
-                    activeFilter === tab.id
+                    activeFilter === tab.filterValue
                       ? 'text-b-200 border-b-2 border-b-200'
                       : 'text-n-300 hover:text-n-400'
                   }`}
                 >
                   {tab.label}
                   {tab.count !== null && tab.count > 0 && (
-                    <span className="ml-2 text-xs bg-n-50 text-n-300 px-2 py-0.5 rounded-full min-w-[1.5rem] text-center">
+                    <span className="ml-2 text-xs bg-n-50 text-n-300 px-2 py-1 rounded-full min-w-[1.5rem] text-center leading-none">
                       {tab.count}
                     </span>
                   )}

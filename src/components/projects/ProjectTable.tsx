@@ -38,15 +38,13 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-project
       let query = supabase
         .from('projects')
         .select('id, title, project_type, start_date, target_end_date, focus_position, ai_agents, supervisors', { count: 'exact' })
+        .order('id', { ascending: false }) // Reverse order - newest first
         .range(offset, offset + itemsPerPage - 1);
 
       // Apply filter based on activeFilter
       if (activeFilter !== 'all-projects') {
-        // Extract project type from filter ID (format: "type-project-type-name")
-        const projectType = activeFilter.replace('type-', '').replace(/-/g, ' ');
-        // Capitalize first letter of each word
-        const formattedType = projectType.replace(/\b\w/g, l => l.toUpperCase());
-        query = query.eq('project_type', formattedType);
+        // The activeFilter now contains the actual project_type value
+        query = query.eq('project_type', activeFilter);
       }
 
       const { data, error, count } = await query;
