@@ -2,13 +2,15 @@ import React from 'react';
 
 const Projects: React.FC = () => {
   return (
-    <div className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
+    <div>
+      <div className="border-b border-n-75 pb-4 px-8">
         <h1 className="text-2xl font-semibold text-gray-800">Projects</h1>
         <p className="text-gray-600 mt-1">Manage your projects</p>
       </div>
       
-      {/* Content will be added later */}
+      <div className="pt-8 px-8">
+        {/* Content will be added later */}
+      </div>
     </div>
   );
 };

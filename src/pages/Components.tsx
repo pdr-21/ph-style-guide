@@ -15,7 +15,7 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <InputPreview />;
       default:
         return (
-          <div className="min-h-screen flex items-center justify-center">
+          <div className="min-h-[calc(100vh-12rem)] flex items-center justify-center">
             <div className="text-center">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">Component Preview</h2>
               <p className="text-gray-600">Select a component from the sidebar to preview it</p>
@@ -26,8 +26,15 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
   };
 
   return (
-    <div className="w-full">
-      {renderComponentPreview()}
+    <div>
+      <div className="border-b border-n-75 pb-4 px-8">
+        <h1 className="text-2xl font-semibold text-gray-800">Components</h1>
+        <p className="text-gray-600 mt-1">Component library and previews</p>
+      </div>
+      
+      <div className="pt-8 px-8">
+        {renderComponentPreview()}
+      </div>
     </div>
   );
 };

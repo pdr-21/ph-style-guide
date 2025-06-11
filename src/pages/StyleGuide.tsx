@@ -12,18 +12,20 @@ interface StyleGuideProps {
 
 const StyleGuide: React.FC<StyleGuideProps> = ({ activeSection }) => {
   return (
-    <div className="space-y-8">
-      <div className="border-b border-gray-200 pb-4">
+    <div>
+      <div className="border-b border-n-75 pb-4 px-8">
         <h1 className="text-2xl font-semibold text-gray-800">Style Guide</h1>
         <p className="text-gray-600 mt-1">Design system and style guidelines</p>
       </div>
       
-      {activeSection === 'colors' && <ColorsSection />}
-      {activeSection === 'typography' && <TypographySection />}
-      {activeSection === 'spacing' && <SpacingSection />}
-      {activeSection === 'corner-radius' && <CornerRadiusSection />}
-      {activeSection === 'borders' && <BordersSection />}
-      {activeSection === 'shadows' && <ShadowsSection />}
+      <div className="pt-8 px-8">
+        {activeSection === 'colors' && <ColorsSection />}
+        {activeSection === 'typography' && <TypographySection />}
+        {activeSection === 'spacing' && <SpacingSection />}
+        {activeSection === 'corner-radius' && <CornerRadiusSection />}
+        {activeSection === 'borders' && <BordersSection />}
+        {activeSection === 'shadows' && <ShadowsSection />}
+      </div>
     </div>
   );
 };
