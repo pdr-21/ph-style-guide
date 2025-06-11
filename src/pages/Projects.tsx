@@ -8,11 +8,11 @@ const Projects: React.FC = () => {
   return (
     <div>
       <div className="border-b border-n-75 pb-6 pt-6 px-8">
-        <InitiativeFilterBar onFilterChange={setActiveFilter} activeFilter={activeFilter} />
+        <ProjectFilterBar onFilterChange={setActiveFilter} activeFilter={activeFilter} />
       </div>
       
       <div className="pt-8 px-8">
-        <InitiativeTable activeFilter={activeFilter} />
+        <ProjectTable activeFilter={activeFilter} />
       </div>
     </div>
   );

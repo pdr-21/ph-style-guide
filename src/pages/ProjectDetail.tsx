@@ -74,10 +74,10 @@ const ProjectDetail: React.FC = () => {
       <div className="border-b border-n-75 pb-4 pt-6 px-8">
         <div className="flex items-center gap-2 text-sm mb-4">
           <Link 
-            to="/initiatives" 
+            to="/projects" 
             className="text-b-200 hover:text-b-300 transition-colors font-medium"
           >
-            Initiatives
+            Projects
           </Link>
           <ChevronRight className="w-4 h-4 text-n-200" />
           <span className="text-n-300 font-medium">{project.title}</span>

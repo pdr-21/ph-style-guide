@@ -177,7 +177,6 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-project
     return (
       <div className="bg-white border border-n-75 rounded-lg p-8 text-center">
         <div className="text-n-300">No projects found.</div>
-        <div className="text-n-300">No initiatives found.</div>
       </div>
     );
   }
