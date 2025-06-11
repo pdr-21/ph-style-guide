@@ -94,17 +94,17 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
       </div>
 
       {/* Tab Navigation */}
-      <div className="border-b border-n-75">
+      <div className="border-b border-n-75 -mx-8 px-8">
         <div className="flex items-center gap-8 overflow-x-auto">
           {loading ? (
-            <div className="pb-3 px-1 text-sm text-n-300">Loading filters...</div>
+            <div className="pb-4 px-1 text-sm text-n-300">Loading filters...</div>
           ) : (
             <>
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => onFilterChange(tab.id)}
-                  className={`pb-3 px-1 text-sm font-medium transition-colors relative whitespace-nowrap ${
+                  className={`pb-4 px-1 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center ${
                     activeFilter === tab.id
                       ? 'text-b-200 border-b-2 border-b-200'
                       : 'text-n-300 hover:text-n-400'
@@ -112,13 +112,13 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
                 >
                   {tab.label}
                   {tab.count !== null && tab.count > 0 && (
-                    <span className="ml-2 text-xs bg-n-50 text-n-300 px-2 py-1 rounded-full">
+                    <span className="ml-2 text-xs bg-n-50 text-n-300 px-2 py-0.5 rounded-full min-w-[1.5rem] text-center">
                       {tab.count}
                     </span>
                   )}
                 </button>
               ))}
-              <button className="pb-3 px-1 text-n-300 hover:text-n-400 text-sm font-medium">
+              <button className="pb-4 px-1 text-n-300 hover:text-n-400 text-sm font-medium">
                 <Plus className="w-4 h-4" />
               </button>
             </>
