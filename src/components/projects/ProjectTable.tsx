@@ -63,6 +63,31 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-project
     }
   };
 
+  // Set up real-time subscription for new projects
+  useEffect(() => {
+    const channel = supabase
+      .channel('projects-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'projects'
+        },
+        (payload) => {
+          console.log('New project inserted:', payload.new);
+          // Re-fetch projects to ensure pagination and counts are accurate
+          fetchProjects();
+        }
+      )
+      .subscribe();
+
+    // Cleanup subscription on component unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [currentPage, activeFilter]); // Re-subscribe when page or filter changes
+
   useEffect(() => {
     setCurrentPage(1); // Reset to first page when filter changes
     fetchProjects();
