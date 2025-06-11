@@ -1,37 +1,90 @@
-import React from 'react';
-import { ChevronDown, FileText } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
+import { supabase } from '../../lib/supabaseClient';
 
-interface Project {
-  id: string;
-  name: string;
-  projectId: string;
-  status: 'Open' | 'Closed' | 'In Progress';
-  workflow: string;
-  leads: number;
-  hasAttachments: boolean;
+interface ProjectData {
+  id: number;
+  title: string;
+  project_type: string | null;
+  start_date: string | null;
+  target_end_date: string | null;
+  focus_position: string | null;
+  ai_agents: any[] | null;
+  supervisors: any[] | null;
 }
 
 const ProjectTable: React.FC = () => {
-  const projects: Project[] = [
-    {
-      id: '1',
-      name: 'Cheyenne Vaccaro',
-      projectId: 'PR-101678',
-      status: 'Open',
-      workflow: 'Work',
-      leads: 101,
-      hasAttachments: true,
-    },
-    {
-      id: '2',
-      name: 'Abram Bergson',
-      projectId: 'PR-101678',
-      status: 'Open',
-      workflow: 'Work',
-      leads: 101,
-      hasAttachments: true,
-    },
-  ];
+  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchProjects = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('projects')
+        .select('id, title, project_type, start_date, target_end_date, focus_position, ai_agents, supervisors');
+
+      if (error) {
+        throw error;
+      }
+
+      setProjects(data || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return '-';
+    return new Date(dateString).toLocaleDateString();
+  };
+
+  const formatAgentsOrSupervisors = (items: any[] | null) => {
+    if (!items || items.length === 0) return { display: '-', tooltip: '' };
+    
+    const count = items.length;
+    const names = items.map(item => {
+      if (typeof item === 'string') return item;
+      if (typeof item === 'object' && item.name) return item.name;
+      return 'Unknown';
+    });
+    
+    return {
+      display: `${count} ${count === 1 ? 'Item' : 'Items'}`,
+      tooltip: names.join(', ')
+    };
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-white border border-n-75 rounded-lg p-8 text-center">
+        <div className="text-n-300">Loading projects...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white border border-n-75 rounded-lg p-8 text-center">
+        <div className="text-r-400">Error: {error}</div>
+      </div>
+    );
+  }
+
+  if (projects.length === 0) {
+    return (
+      <div className="bg-white border border-n-75 rounded-lg p-8 text-center">
+        <div className="text-n-300">No projects found.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white border border-n-75 rounded-lg overflow-hidden">
@@ -46,60 +99,76 @@ const ProjectTable: React.FC = () => {
             </th>
             <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
               <div className="flex items-center gap-2">
-                Project name
+                Project Name
                 <ChevronDown className="w-4 h-4 text-b-200" />
               </div>
             </th>
             <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
-              Project ID
+              Project Type
             </th>
             <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
-              Project status
+              Start Date
             </th>
             <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
-              Workflow
+              Target End Date
             </th>
             <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
-              Leads
+              Focus Position
             </th>
             <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
-              Attachments
+              AI Agents
+            </th>
+            <th className="px-4 py-3 text-left text-sm font-medium text-n-400">
+              Supervisors
             </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-n-75">
-          {projects.map((project) => (
-            <tr key={project.id} className="hover:bg-n-40 transition-colors">
-              <td className="px-4 py-4">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 text-b-200 border-n-200 rounded focus:ring-b-200 focus:ring-2"
-                />
-              </td>
-              <td className="px-4 py-4 text-sm font-medium text-n-500">
-                {project.name}
-              </td>
-              <td className="px-4 py-4 text-sm text-n-400">
-                {project.projectId}
-              </td>
-              <td className="px-4 py-4">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-g-100 text-g-400">
-                  {project.status}
-                </span>
-              </td>
-              <td className="px-4 py-4 text-sm text-n-400">
-                {project.workflow}
-              </td>
-              <td className="px-4 py-4 text-sm text-b-200 font-medium">
-                {project.leads}
-              </td>
-              <td className="px-4 py-4">
-                {project.hasAttachments && (
-                  <FileText className="w-4 h-4 text-n-300" />
-                )}
-              </td>
-            </tr>
-          ))}
+          {projects.map((project) => {
+            const aiAgentsInfo = formatAgentsOrSupervisors(project.ai_agents);
+            const supervisorsInfo = formatAgentsOrSupervisors(project.supervisors);
+
+            return (
+              <tr key={project.id} className="hover:bg-n-40 transition-colors">
+                <td className="px-4 py-4">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-b-200 border-n-200 rounded focus:ring-b-200 focus:ring-2"
+                  />
+                </td>
+                <td className="px-4 py-4 text-sm font-medium text-n-500">
+                  {project.title}
+                </td>
+                <td className="px-4 py-4 text-sm text-n-400">
+                  {project.project_type || '-'}
+                </td>
+                <td className="px-4 py-4 text-sm text-n-400">
+                  {formatDate(project.start_date)}
+                </td>
+                <td className="px-4 py-4 text-sm text-n-400">
+                  {formatDate(project.target_end_date)}
+                </td>
+                <td 
+                  className="px-4 py-4 text-sm text-n-400 max-w-48 truncate overflow-hidden whitespace-nowrap"
+                  title={project.focus_position || ''}
+                >
+                  {project.focus_position || '-'}
+                </td>
+                <td 
+                  className="px-4 py-4 text-sm text-b-200 font-medium cursor-help"
+                  title={aiAgentsInfo.tooltip}
+                >
+                  {aiAgentsInfo.display}
+                </td>
+                <td 
+                  className="px-4 py-4 text-sm text-p-300 font-medium cursor-help"
+                  title={supervisorsInfo.tooltip}
+                >
+                  {supervisorsInfo.display}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
