@@ -6,6 +6,8 @@ import { Button } from '../ui/button';
 
 interface ProjectTableProps {
   activeFilter?: string;
+  refreshKey: number;
+  triggerRefresh: () => void;
 }
 
 interface ProjectData {
@@ -19,7 +21,7 @@ interface ProjectData {
   supervisors: any[] | null;
 }
 
-const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-projects' }) => {
+const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-projects', refreshKey, triggerRefresh }) => {
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,8 +78,8 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-project
         },
         (payload) => {
           console.log('New project inserted:', payload.new);
-          // Re-fetch projects to ensure pagination and counts are accurate
-          fetchProjects();
+          // Trigger refresh instead of directly calling fetchProjects
+          triggerRefresh();
         }
       )
       .subscribe();
@@ -86,16 +88,16 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-project
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [currentPage, activeFilter]); // Re-subscribe when page or filter changes
+  }, [triggerRefresh]);
+
+  // Re-fetch projects when refreshKey changes
+  useEffect(() => {
+    fetchProjects();
+  }, [refreshKey, currentPage, activeFilter]);
 
   useEffect(() => {
     setCurrentPage(1); // Reset to first page when filter changes
-    fetchProjects();
   }, [activeFilter]);
-  
-  useEffect(() => {
-    fetchProjects();
-  }, [currentPage]);
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '-';

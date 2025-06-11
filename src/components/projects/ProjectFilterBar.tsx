@@ -11,9 +11,10 @@ interface ProjectTypeCount {
 interface ProjectFilterBarProps {
   onFilterChange: (filter: string) => void;
   activeFilter: string;
+  refreshKey: number;
 }
 
-const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, activeFilter }) => {
+const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, activeFilter, refreshKey }) => {
   const [projectTypeCounts, setProjectTypeCounts] = useState<ProjectTypeCount[]>([]);
   const [totalProjects, setTotalProjects] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -61,7 +62,7 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
 
   useEffect(() => {
     fetchProjectTypeCounts();
-  }, []);
+  }, [refreshKey]); // Re-fetch when refreshKey changes
 
   // Create tabs array with "All projects" first, then project types
   const tabs = [
