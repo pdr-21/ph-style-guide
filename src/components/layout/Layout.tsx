@@ -9,9 +9,10 @@ interface LayoutProps {
   onViewChange: (view: Environment, subView?: string) => void;
   activeStyleGuideSection: string;
   activeComponentSection: string;
+  activeAppSection: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, activeStyleGuideSection, activeComponentSection }) => {
+const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, activeStyleGuideSection, activeComponentSection, activeAppSection }) => {
 
   return (
     <div className="min-h-screen bg-white">
@@ -28,6 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, ac
           onEnvironmentChange={onViewChange}
           activeStyleGuideSection={activeStyleGuideSection}
           activeComponentSection={activeComponentSection}
+          activeAppSection={activeAppSection}
         />
         
         {/* Main Content Area */}

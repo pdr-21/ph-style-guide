@@ -7,7 +7,8 @@ import {
   Settings, 
   BarChart3,
   Mail,
-  Phone
+  Phone,
+  FolderOpen
 } from 'lucide-react';
 import { NavigationItem, Environment } from '../../types';
 
@@ -16,15 +17,17 @@ interface SideNavigationProps {
   onEnvironmentChange: (view: Environment, subView?: string) => void;
   activeStyleGuideSection: string;
   activeComponentSection: string;
+  activeAppSection?: string;
 }
 
-const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection, activeComponentSection }) => {
+const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection, activeComponentSection, activeAppSection }) => {
   const [activeItem, setActiveItem] = useState('dashboard');
 
   // App navigation items (icons only)
   const appNavigationItems: NavigationItem[] = [
     { id: 'dashboard', icon: Home, label: 'Dashboard', path: '/' },
     { id: 'contacts', icon: Users, label: 'Contacts', path: '/contacts' },
+    { id: 'projects', icon: FolderOpen, label: 'Projects', path: '/projects' },
     { id: 'calendar', icon: Calendar, label: 'Calendar', path: '/calendar' },
     { id: 'reports', icon: BarChart3, label: 'Reports', path: '/reports' },
     { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
@@ -58,12 +61,12 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
         <ul className="space-y-2">
           {appNavigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeItem === item.id;
+            const isActive = activeAppSection === item.id;
             
             return (
               <li key={item.id} className="px-2 py-1">
                 <button
-                  onClick={() => setActiveItem(item.id)}
+                  onClick={() => onEnvironmentChange('App', item.id)}
                   className="w-full flex items-center justify-center transition-colors group relative"
                   title={item.label}
                 >
