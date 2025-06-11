@@ -1,16 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import { Search, Filter, Settings, MoreHorizontal, Plus } from 'lucide-react';
+import { supabase } from '../../lib/supabaseClient';
 
-const ProjectFilterBar: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('all-projects');
+interface ProjectTypeCount {
+  project_type: string | null;
+  count: number;
+}
 
+interface ProjectFilterBarProps {
+  onFilterChange: (filter: string) => void;
+  activeFilter: string;
+}
+
+const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, activeFilter }) => {
+  const [projectTypeCounts, setProjectTypeCounts] = useState<ProjectTypeCount[]>([]);
+  const [totalProjects, setTotalProjects] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProjectTypeCounts = async () => {
+    try {
+      setLoading(true);
+      
+      // Get total count of all projects
+      const { count: total, error: totalError } = await supabase
+        .from('projects')
+        .select('*', { count: 'exact', head: true });
+
+      if (totalError) throw totalError;
+      setTotalProjects(total || 0);
+
+      // Get count by project type
+      const { data, error } = await supabase
+        .from('projects')
+        .select('project_type')
+        .not('project_type', 'is', null);
+
+      if (error) throw error;
+
+      // Count occurrences of each project type
+      const typeCounts: { [key: string]: number } = {};
+      data?.forEach(project => {
+        const type = project.project_type || 'Other';
+        typeCounts[type] = (typeCounts[type] || 0) + 1;
+      });
+
+      // Convert to array format
+      const typeCountsArray = Object.entries(typeCounts).map(([type, count]) => ({
+        project_type: type,
+        count
+      }));
+
+      setProjectTypeCounts(typeCountsArray);
+    } catch (err) {
+      console.error('Error fetching project type counts:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjectTypeCounts();
+  }, []);
+
+  // Create tabs array with "All projects" first, then project types
   const tabs = [
-    { id: 'all-projects', label: 'All projects', count: 71 },
-    { id: 'my-open-projects', label: 'My open projects', count: 45 },
-    { id: 'all-open-projects', label: 'All open projects', count: 45 },
-    { id: 'recent-jobs', label: 'Recent jobs', count: null },
+    { 
+      id: 'all-projects', 
+      label: 'All projects', 
+      count: totalProjects 
+    },
+    ...projectTypeCounts.map(typeCount => ({
+      id: `type-${typeCount.project_type?.toLowerCase().replace(/\s+/g, '-')}`,
+      label: typeCount.project_type || 'Other',
+      count: typeCount.count
+    }))
   ];
 
   return (
@@ -31,28 +95,34 @@ const ProjectFilterBar: React.FC = () => {
 
       {/* Tab Navigation */}
       <div className="border-b border-n-75">
-        <div className="flex items-center gap-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`pb-3 px-1 text-sm font-medium transition-colors relative ${
-                activeTab === tab.id
-                  ? 'text-b-200 border-b-2 border-b-200'
-                  : 'text-n-300 hover:text-n-400'
-              }`}
-            >
-              {tab.label}
-              {tab.count && (
-                <span className="ml-2 text-xs bg-n-50 text-n-300 px-2 py-1 rounded-full">
-                  {tab.count}
-                </span>
-              )}
-            </button>
-          ))}
-          <button className="pb-3 px-1 text-n-300 hover:text-n-400 text-sm font-medium">
-            <Plus className="w-4 h-4" />
-          </button>
+        <div className="flex items-center gap-8 overflow-x-auto">
+          {loading ? (
+            <div className="pb-3 px-1 text-sm text-n-300">Loading filters...</div>
+          ) : (
+            <>
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => onFilterChange(tab.id)}
+                  className={`pb-3 px-1 text-sm font-medium transition-colors relative whitespace-nowrap ${
+                    activeFilter === tab.id
+                      ? 'text-b-200 border-b-2 border-b-200'
+                      : 'text-n-300 hover:text-n-400'
+                  }`}
+                >
+                  {tab.label}
+                  {tab.count !== null && tab.count > 0 && (
+                    <span className="ml-2 text-xs bg-n-50 text-n-300 px-2 py-1 rounded-full">
+                      {tab.count}
+                    </span>
+                  )}
+                </button>
+              ))}
+              <button className="pb-3 px-1 text-n-300 hover:text-n-400 text-sm font-medium">
+                <Plus className="w-4 h-4" />
+              </button>
+            </>
+          )}
         </div>
       </div>
 

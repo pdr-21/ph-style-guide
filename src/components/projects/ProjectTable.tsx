@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 
+interface ProjectTableProps {
+  activeFilter?: string;
+}
+
 interface ProjectData {
   id: number;
   title: string;
@@ -13,7 +17,7 @@ interface ProjectData {
   supervisors: any[] | null;
 }
 
-const ProjectTable: React.FC = () => {
+const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-projects' }) => {
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,9 +25,21 @@ const ProjectTable: React.FC = () => {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
+      
+      let query = supabase
         .from('projects')
         .select('id, title, project_type, start_date, target_end_date, focus_position, ai_agents, supervisors');
+
+      // Apply filter based on activeFilter
+      if (activeFilter !== 'all-projects') {
+        // Extract project type from filter ID (format: "type-project-type-name")
+        const projectType = activeFilter.replace('type-', '').replace(/-/g, ' ');
+        // Capitalize first letter of each word
+        const formattedType = projectType.replace(/\b\w/g, l => l.toUpperCase());
+        query = query.eq('project_type', formattedType);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         throw error;
@@ -39,7 +55,7 @@ const ProjectTable: React.FC = () => {
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [activeFilter]);
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '-';
