@@ -67,7 +67,7 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({ onFilterChange, act
   const tabs = [
     { 
       id: 'all-projects', 
-      label: 'All projects', 
+      label: 'All Initiatives', 
       count: totalProjects,
       filterValue: 'all-projects'
     },
