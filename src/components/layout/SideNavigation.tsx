@@ -30,7 +30,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
   const appNavigationItems: NavigationItem[] = [
     { id: 'dashboard', icon: Home, label: 'Dashboard', path: '/' },
     { id: 'contacts', icon: Users, label: 'Contacts', path: '/contacts' },
-    { id: 'projects', icon: FolderOpen, label: 'Projects', path: '/projects' },
+    { id: 'initiatives', icon: FolderOpen, label: 'Initiatives', path: '/initiatives' },
     { id: 'calendar', icon: Calendar, label: 'Calendar', path: '/calendar' },
     { id: 'reports', icon: BarChart3, label: 'Reports', path: '/reports' },
     { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
@@ -66,7 +66,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
             const Icon = item.icon;
             const isActive = currentView === 'App' && (
               (item.id === 'dashboard' && location.pathname === '/dashboard') ||
-              (item.id === 'projects' && (location.pathname === '/projects' || location.pathname.startsWith('/projects/')))
+              (item.id === 'initiatives' && (location.pathname === '/initiatives' || location.pathname.startsWith('/initiatives/')))
             );
             
             return (
@@ -76,8 +76,8 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
                     onEnvironmentChange('App', item.id);
                     if (item.id === 'dashboard') {
                       navigate('/dashboard');
-                    } else if (item.id === 'projects') {
-                      navigate('/projects');
+                    } else if (item.id === 'initiatives') {
+                      navigate('/initiatives');
                     }
                   }}
                   className="w-full flex items-center justify-center transition-colors group relative"
