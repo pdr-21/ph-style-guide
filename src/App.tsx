@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
 import Components from './pages/Components';
 import StyleGuide from './pages/StyleGuide';
 import { Environment } from './types';
@@ -26,14 +28,15 @@ function App() {
   const renderContent = () => {
     switch (currentView) {
       case 'App':
-        switch (activeAppSection) {
-          case 'dashboard':
-            return <Dashboard />;
-          case 'projects':
-            return <Projects />;
-          default:
-            return <Dashboard />;
-        }
+        return (
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
+        );
       case 'Components':
         return <Components activeComponentSection={activeComponentSection} />;
       case 'Style Guide':
@@ -44,15 +47,17 @@ function App() {
   };
 
   return (
-    <Layout 
-      currentView={currentView} 
-      onViewChange={handleViewChange}
-      activeStyleGuideSection={activeStyleGuideSection}
-      activeComponentSection={activeComponentSection}
-      activeAppSection={activeAppSection}
-    >
-      {renderContent()}
-    </Layout>
+    <Router>
+      <Layout 
+        currentView={currentView} 
+        onViewChange={handleViewChange}
+        activeStyleGuideSection={activeStyleGuideSection}
+        activeComponentSection={activeComponentSection}
+        activeAppSection={activeAppSection}
+      >
+        {renderContent()}
+      </Layout>
+    </Router>
   );
 }
 

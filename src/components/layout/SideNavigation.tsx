@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Home, 
   Users, 
@@ -22,6 +23,8 @@ interface SideNavigationProps {
 
 const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection, activeComponentSection, activeAppSection }) => {
   const [activeItem, setActiveItem] = useState('dashboard');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // App navigation items (icons only)
   const appNavigationItems: NavigationItem[] = [
@@ -61,12 +64,22 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
         <ul className="space-y-2">
           {appNavigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeAppSection === item.id;
+            const isActive = currentView === 'App' && (
+              (item.id === 'dashboard' && location.pathname === '/dashboard') ||
+              (item.id === 'projects' && (location.pathname === '/projects' || location.pathname.startsWith('/projects/')))
+            );
             
             return (
               <li key={item.id} className="px-2 py-1">
                 <button
-                  onClick={() => onEnvironmentChange('App', item.id)}
+                  onClick={() => {
+                    onEnvironmentChange('App', item.id);
+                    if (item.id === 'dashboard') {
+                      navigate('/dashboard');
+                    } else if (item.id === 'projects') {
+                      navigate('/projects');
+                    }
+                  }}
                   className="w-full flex items-center justify-center transition-colors group relative"
                   title={item.label}
                 >

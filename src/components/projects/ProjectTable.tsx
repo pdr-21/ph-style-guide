@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 import { Button } from '../ui/button';
@@ -210,7 +211,12 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ activeFilter = 'all-project
                     />
                   </td>
                   <td className="px-4 py-4 text-sm font-medium text-n-500">
-                    {project.title}
+                    <Link 
+                      to={`/projects/${project.id}`}
+                      className="hover:text-b-200 transition-colors cursor-pointer"
+                    >
+                      {project.title}
+                    </Link>
                   </td>
                   <td className="px-4 py-4 text-sm text-n-400">
                     {project.project_type || '-'}
