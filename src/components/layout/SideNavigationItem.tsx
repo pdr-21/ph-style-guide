@@ -19,7 +19,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = ({
     const Icon = item.icon;
     
     return (
-      <li className="py-1">
+      <li className="flex justify-center py-1">
         <Tooltip content={item.label} side="right" disabled={isActive}>
           <button
             onClick={onClick}
