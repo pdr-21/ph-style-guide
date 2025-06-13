@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
 const inputVariants = cva(
-  "flex w-full rounded-lg border bg-white px-3 py-3 text-sm font-poppins font-normal transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-n-200 focus-visible:outline-none focus-visible:shadow-focus-normal disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-n-40",
+  "flex w-full rounded-xl border bg-white px-3 py-3 text-sm font-poppins font-normal transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-n-200 focus-visible:outline-none focus-visible:shadow-focus-normal disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-n-40",
   {
     variants: {
       variant: {
@@ -14,7 +14,7 @@ const inputVariants = cva(
       },
       size: {
         default: "h-12",
-        sm: "h-10 px-3 text-xs",
+        sm: "h-10 rounded-lg px-3 text-xs",
         lg: "h-14 px-4 text-base",
       },
     },
