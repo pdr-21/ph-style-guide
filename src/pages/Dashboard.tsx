@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
           {/* Gradient container */}
           <div className="flex flex-col gap-5 bg-gradient-to-bl from-b-40 to-white rounded-2xl p-8 mb-6">
             {/* Summary header with icon */}
-            <div claddName="flex flex-col gap-7">
+            <div claddName="flex flex-col gap-3">
               <div className="flex items-center">
                 <SparkleIcon className="mr-3" />
                 <span className="text-sm font-poppins font-medium text-b-300">
