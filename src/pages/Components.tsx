@@ -1,7 +1,9 @@
 import React from 'react';
 import ButtonPreview from '../components/component_previews/ButtonPreview';
 import InputPreview from '../components/component_previews/InputPreview';
-import DropdownPreview from '../components/component_previews/DropdownPreview';
+import SideNavigationItemPreview from '../components/component_previews/SideNavigationItemPreview';
+import SideNavigationPreview from '../components/component_previews/SideNavigationPreview';
+import TopNavigationPreview from '../components/component_previews/TopNavigationPreview';
 
 interface ComponentsProps {
   activeComponentSection: string;
@@ -14,8 +16,12 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <ButtonPreview />;
       case 'inputs':
         return <InputPreview />;
-      case 'dropdowns':
-        return <DropdownPreview />;
+      case 'side-nav-item':
+        return <SideNavigationItemPreview />;
+      case 'side-nav':
+        return <SideNavigationPreview />;
+      case 'top-nav':
+        return <TopNavigationPreview />;
       default:
         return (
           <div className="min-h-screen flex items-center justify-center">
@@ -29,7 +35,7 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-gr-25">
       {renderComponentPreview()}
     </div>
   );

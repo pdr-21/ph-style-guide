@@ -53,9 +53,9 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
   const componentItems: NavigationItem[] = [
     { id: 'buttons', label: 'Buttons', path: '/components/buttons' },
     { id: 'inputs', label: 'Inputs', path: '/components/inputs' },
-    { id: 'dropdowns', label: 'Dropdowns', path: '/components/dropdowns' },
-    { id: 'modals', label: 'Modals', path: '/components/modals' },
-    { id: 'cards', label: 'Cards', path: '/components/cards' },
+    { id: 'side-nav-item', label: 'Side Nav Item', path: '/components/side-nav-item' },
+    { id: 'side-nav', label: 'Side Navigation', path: '/components/side-nav' },
+    { id: 'top-nav', label: 'Top Navigation', path: '/components/top-nav' },
   ];
 
   if (currentView === 'App') {
