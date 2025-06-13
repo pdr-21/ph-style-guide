@@ -25,7 +25,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
   );
 
   return (
-    <div className={`inline-flex bg-n-50 rounded-xl border border-n-100 p-1 ${className}`}>
+    <div className={`inline-flex bg-n-40 rounded-xl border border-n-100 p-1 ${className}`}>
       {options.map((option, index) => (
         <ToggleOption
           key={option.id}
