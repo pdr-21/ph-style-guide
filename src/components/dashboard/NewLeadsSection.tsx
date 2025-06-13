@@ -10,6 +10,7 @@ const NewLeadsSection: React.FC = () => {
   const [agentPosition, setAgentPosition] = useState({ top: 0, left: 0 });
   const agentRef = useRef<HTMLSpanElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const profileCardRef = useRef<HTMLDivElement>(null);
 
   // Sample lead data - this will be replaced with real data later
   const leads = [
@@ -56,15 +57,30 @@ const NewLeadsSection: React.FC = () => {
       const sectionRect = sectionRef.current.getBoundingClientRect();
       
       // Calculate position relative to the section container
+      // Position it directly below the agent text with a small gap
       setAgentPosition({
-        top: agentRect.bottom - sectionRect.top + 8, // 8px gap below the text
+        top: agentRect.bottom - sectionRect.top + 8, // 8px gap (0.5rem)
         left: agentRect.left - sectionRect.left + agentRect.width / 2
       });
       setShowAgentProfile(true);
     }
   };
 
-  const handleAgentMouseLeave = () => {
+  const handleAgentMouseLeave = (event: React.MouseEvent) => {
+    // Check if we're moving to the profile card
+    const relatedTarget = event.relatedTarget as HTMLElement;
+    if (profileCardRef.current && profileCardRef.current.contains(relatedTarget)) {
+      return; // Don't hide if moving to profile card
+    }
+    setShowAgentProfile(false);
+  };
+
+  const handleProfileCardMouseLeave = (event: React.MouseEvent) => {
+    // Check if we're moving back to the agent text
+    const relatedTarget = event.relatedTarget as HTMLElement;
+    if (agentRef.current && agentRef.current.contains(relatedTarget)) {
+      return; // Don't hide if moving back to agent text
+    }
     setShowAgentProfile(false);
   };
 
@@ -121,15 +137,20 @@ const NewLeadsSection: React.FC = () => {
       </div>
 
       {/* Sourcing Agent Profile Card */}
-      <SourcingAgentProfileCard
-        agentName={agentData.agentName}
-        agentImageUrl={agentData.agentImageUrl}
-        leadsFound={agentData.leadsFound}
-        successRate={agentData.successRate}
-        avgResponseTime={agentData.avgResponseTime}
-        isVisible={showAgentProfile}
-        position={agentPosition}
-      />
+      <div
+        ref={profileCardRef}
+        onMouseLeave={handleProfileCardMouseLeave}
+      >
+        <SourcingAgentProfileCard
+          agentName={agentData.agentName}
+          agentImageUrl={agentData.agentImageUrl}
+          leadsFound={agentData.leadsFound}
+          successRate={agentData.successRate}
+          avgResponseTime={agentData.avgResponseTime}
+          isVisible={showAgentProfile}
+          position={agentPosition}
+        />
+      </div>
     </div>
   );
 };

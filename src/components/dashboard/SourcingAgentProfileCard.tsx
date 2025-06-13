@@ -28,8 +28,8 @@ const SourcingAgentProfileCard: React.FC<SourcingAgentProfileCardProps> = ({
     <Card 
       className="absolute z-50 bg-white border border-n-100 rounded-xl shadow-lg p-4 w-64"
       style={{
-        top: position.top,
-        left: position.left,
+        top: `${position.top}px`,
+        left: `${position.left}px`,
         transform: 'translateX(-50%)'
       }}
     >
