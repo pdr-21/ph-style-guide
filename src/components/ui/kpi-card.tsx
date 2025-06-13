@@ -63,13 +63,13 @@ const KPICard = React.forwardRef<HTMLDivElement, KPICardProps>(
         {...props}
       >
         {/* Title */}
-        <div className="text-sm font-poppins font-medium text-n-300 mb-2">
+        <div className="text-sm font-poppins font-regular text-n-300 mb-2">
           {title}
         </div>
 
         {/* Main Value and Trend */}
         <div className="flex items-center justify-between mb-4">
-          <div className="text-2xl font-poppins font-semibold text-n-500">
+          <div className="text-2xl font-poppins font-medium text-n-500">
             {currentValue}
           </div>
           <Badge 
