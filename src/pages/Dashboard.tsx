@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="p-8">
       {/* Main grid layout - 70/30 split */}
-      <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 mx-auto">
         {/* Left column - 70% */}
         <div className="lg:col-span-7 flex flex-col gap-8">
           {/* Gradient container */}
