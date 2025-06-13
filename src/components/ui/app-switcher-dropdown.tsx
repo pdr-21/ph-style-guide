@@ -34,23 +34,17 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
       isEnvironment: false
     },
     {
-      id: 'crm',
+      id: 'app',
       label: 'CRM',
       icon: LayoutDashboard,
-      isEnvironment: false
+      isEnvironment: true,
+      environment: 'App'
     },
     {
       id: 'hiring-manager',
       label: 'Hiring Manager',
       icon: ClipboardList,
       isEnvironment: false
-    },
-    {
-      id: 'app',
-      label: 'App',
-      icon: Home,
-      isEnvironment: true,
-      environment: 'App'
     },
     {
       id: 'components',
@@ -144,7 +138,7 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
       <div className="my-4 border-t border-n-75"></div>
 
       {/* Environment Grid */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="flex justify-center gap-3">
         {appItems.slice(3).map((item) => {
           const Icon = item.icon;
           const isActive = item.environment === currentEnvironment;
