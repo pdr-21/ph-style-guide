@@ -2,7 +2,7 @@ import * as React from "react"
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "./card"
 import { Badge } from "./badge"
 import { ResponsiveContainer, AreaChart, XAxis, YAxis, Tooltip, Area } from "recharts"
-import { Info, ArrowUpRight, ArrowDownRight, Minus, LucideIcon } from "lucide-react"
+import { Info, ArrowUpRight, ArrowDownRight, Minus, DivideIcon as LucideIcon } from "lucide-react"
 import { cn } from "../../lib/utils"
 
 export interface KPICardProps extends React.HTMLAttributes<HTMLDivElement> {
