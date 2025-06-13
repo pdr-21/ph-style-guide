@@ -116,17 +116,35 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
       <div className="grid grid-cols-3 gap-3 mb-4">
         {appItems.slice(0, 3).map((item) => {
           const Icon = item.icon;
+          const isActive = item.isEnvironment && item.environment === currentEnvironment;
+          
           return (
             <button
               key={item.id}
               onClick={() => handleItemClick(item)}
-              className="flex flex-col items-center p-3 rounded-lg hover:bg-n-40 transition-colors group focus:outline-none focus:ring-2 focus:ring-b-200"
+              className={cn(
+                "flex flex-col items-center p-3 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-b-200",
+                isActive 
+                  ? "bg-b-40 hover:bg-b-50" 
+                  : "hover:bg-n-40"
+              )}
               role="menuitem"
             >
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors">
-                <Icon className="w-5 h-5 text-n-400" />
+              <div className={cn(
+                "w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors",
+                isActive 
+                  ? "bg-b-40 text-b-300" 
+                  : ""
+              )}>
+                <Icon className={cn(
+                  "w-5 h-5",
+                  isActive ? "text-b-300" : "text-n-400"
+                )} />
               </div>
-              <span className="text-xs font-poppins font-medium text-n-500 text-center leading-tight">
+              <span className={cn(
+                "text-xs font-poppins font-medium text-center leading-tight",
+                isActive ? "text-b-300" : "text-n-500"
+              )}>
                 {item.label}
               </span>
             </button>
