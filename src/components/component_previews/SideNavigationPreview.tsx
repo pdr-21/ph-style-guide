@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
-import SideNavigation from '../layout/SideNavigation';
-import { Environment } from '../../types';
+import { 
+  Home, 
+  Users, 
+  Calendar, 
+  FileText, 
+  Settings, 
+  BarChart3,
+  Mail,
+  Phone
+} from 'lucide-react';
+import SideNavigationItem from '../layout/SideNavigationItem';
+import { Environment, NavigationItem } from '../../types';
 
 const SideNavigationPreview: React.FC = () => {
   const [currentView, setCurrentView] = useState<Environment>('App');
   const [activeStyleGuideSection, setActiveStyleGuideSection] = useState('colors');
   const [activeComponentSection, setActiveComponentSection] = useState('buttons');
+  const [activeItem, setActiveItem] = useState('dashboard');
 
   const handleEnvironmentChange = (view: Environment, subView?: string) => {
     setCurrentView(view);
@@ -16,9 +27,100 @@ const SideNavigationPreview: React.FC = () => {
     }
   };
 
+  // App navigation items (icons only)
+  const appNavigationItems: NavigationItem[] = [
+    { id: 'dashboard', icon: Home, label: 'Dashboard', path: '/' },
+    { id: 'contacts', icon: Users, label: 'Contacts', path: '/contacts' },
+    { id: 'calendar', icon: Calendar, label: 'Calendar', path: '/calendar' },
+    { id: 'reports', icon: BarChart3, label: 'Reports', path: '/reports' },
+    { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
+    { id: 'email', icon: Mail, label: 'Email', path: '/email' },
+    { id: 'calls', icon: Phone, label: 'Calls', path: '/calls' },
+    { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
+  ];
+
+  // Style Guide navigation items (text only)
+  const styleGuideItems: NavigationItem[] = [
+    { id: 'colors', label: 'Colors', path: '/style-guide/colors' },
+    { id: 'typography', label: 'Typography', path: '/style-guide/typography' },
+    { id: 'spacing', label: 'Spacing', path: '/style-guide/spacing' },
+    { id: 'corner-radius', label: 'Corner Radius', path: '/style-guide/corner-radius' },
+    { id: 'borders', label: 'Borders', path: '/style-guide/borders' },
+    { id: 'shadows', label: 'Shadows', path: '/style-guide/shadows' },
+  ];
+
+  // Components navigation items (text only)
+  const componentItems: NavigationItem[] = [
+    { id: 'buttons', label: 'Buttons', path: '/components/buttons' },
+    { id: 'inputs', label: 'Inputs', path: '/components/inputs' },
+    { id: 'side-nav-item', label: 'Side Nav Item', path: '/components/side-nav-item' },
+    { id: 'side-nav', label: 'Side Navigation', path: '/components/side-nav' },
+    { id: 'top-nav', label: 'Top Navigation', path: '/components/top-nav' },
+  ];
+
+  const renderSideNavigation = () => {
+    if (currentView === 'App') {
+      return (
+        <aside className="w-16 h-96 bg-gr-25 border-r border-n-75 rounded-lg">
+          <nav className="py-4">
+            <ul className="space-y-2">
+              {appNavigationItems.map((item) => (
+                <SideNavigationItem
+                  key={item.id}
+                  item={item}
+                  isActive={activeItem === item.id}
+                  onClick={() => setActiveItem(item.id)}
+                  type="icon"
+                />
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      );
+    } else if (currentView === 'Style Guide') {
+      return (
+        <aside className="w-48 h-96 bg-gr-25 border-r border-n-75 rounded-lg">
+          <nav className="py-4">
+            <ul className="space-y-1">
+              {styleGuideItems.map((item) => (
+                <SideNavigationItem
+                  key={item.id}
+                  item={item}
+                  isActive={activeStyleGuideSection === item.id}
+                  onClick={() => handleEnvironmentChange('Style Guide', item.id)}
+                  type="text"
+                />
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      );
+    } else if (currentView === 'Components') {
+      return (
+        <aside className="w-48 h-96 bg-gr-25 border-r border-n-75 rounded-lg">
+          <nav className="py-4">
+            <ul className="space-y-1">
+              {componentItems.map((item) => (
+                <SideNavigationItem
+                  key={item.id}
+                  item={item}
+                  isActive={activeComponentSection === item.id}
+                  onClick={() => handleEnvironmentChange('Components', item.id)}
+                  type="text"
+                />
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      );
+    }
+
+    return null;
+  };
+
   return (
-    <div className="min-h-screen bg-gr-25">
-      <div className="w-full max-w-7xl mx-auto p-8 space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-8">
+      <div className="w-full max-w-6xl space-y-12">
         {/* Environment Controls */}
         <div className="bg-white p-6 rounded-lg border border-n-100">
           <h2 className="text-lg font-medium text-gray-700 mb-4">Environment Controls</h2>
@@ -100,19 +202,12 @@ const SideNavigationPreview: React.FC = () => {
             </p>
           </div>
           
-          <div className="flex h-96 relative">
+          <div className="flex p-8 bg-gray-50">
             {/* Side Navigation */}
-            <div className="relative">
-              <SideNavigation
-                currentView={currentView}
-                onEnvironmentChange={handleEnvironmentChange}
-                activeStyleGuideSection={activeStyleGuideSection}
-                activeComponentSection={activeComponentSection}
-              />
-            </div>
+            {renderSideNavigation()}
             
             {/* Simulated Content Area */}
-            <div className={`flex-1 p-8 bg-gray-50 ${currentView === 'App' ? 'ml-16' : 'ml-48'} transition-all duration-200`}>
+            <div className="flex-1 ml-8 p-8 bg-white rounded-lg border border-n-100">
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-n-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
