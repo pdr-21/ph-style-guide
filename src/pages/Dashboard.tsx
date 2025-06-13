@@ -2,6 +2,7 @@ import React from 'react';
 import ChatInput from '../components/dashboard/ChatInput';
 import QuickCommandsGrid from '../components/dashboard/QuickCommandsGrid';
 import KPIGrid from '../components/dashboard/KPIGrid';
+import MyJobsSection from '../components/dashboard/MyJobsSection';
 import SparkleIcon from '../components/icons/SparkleIcon';
 
 const Dashboard: React.FC = () => {
@@ -42,6 +43,9 @@ const Dashboard: React.FC = () => {
           
           {/* KPI Grid */}
           <KPIGrid />
+          
+          {/* My Jobs Section */}
+          <MyJobsSection />
         </div>
 
         {/* Right column - 30% */}
