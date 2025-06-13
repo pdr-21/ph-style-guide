@@ -2,6 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { cn } from "../../lib/utils"
+import { DropdownMenu, type DropdownOption } from "./dropdown-menu"
 
 const dropdownVariants = cva(
   "flex w-full items-center justify-between rounded-lg border bg-white px-3 py-3 text-sm font-poppins font-normal transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:shadow-focus-normal disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-n-40",
@@ -22,43 +23,6 @@ const dropdownVariants = cva(
     defaultVariants: {
       variant: "default",
       size: "default",
-    },
-  }
-)
-
-const dropdownMenuVariants = cva(
-  "absolute z-50 w-full mt-1 bg-white border border-n-100 rounded-lg shadow-lg max-h-60 overflow-auto",
-  {
-    variants: {
-      size: {
-        default: "text-sm",
-        sm: "text-xs",
-        lg: "text-base",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-    },
-  }
-)
-
-const dropdownItemVariants = cva(
-  "w-full px-3 py-2 text-left font-poppins font-normal transition-colors cursor-pointer hover:bg-n-40 focus:bg-n-40 focus:outline-none",
-  {
-    variants: {
-      size: {
-        default: "py-2 px-3",
-        sm: "py-1.5 px-3",
-        lg: "py-3 px-4",
-      },
-      selected: {
-        true: "bg-b-40 text-b-300 hover:bg-b-50",
-        false: "text-n-500",
-      },
-    },
-    defaultVariants: {
-      size: "default",
-      selected: false,
     },
   }
 )
@@ -95,11 +59,6 @@ const helperTextVariants = cva(
     },
   }
 )
-
-export interface DropdownOption {
-  label: string
-  value: string
-}
 
 export interface DropdownProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>,
@@ -252,32 +211,16 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           </div>
 
           {isOpen && (
-            <div
+            <DropdownMenu
               ref={menuRef}
-              className={cn(dropdownMenuVariants({ size }))}
-              role="listbox"
-              aria-label={label || "Options"}
-            >
-              {options.map((option, index) => (
-                <div
-                  key={option.value}
-                  className={cn(
-                    dropdownItemVariants({ 
-                      size, 
-                      selected: option.value === value 
-                    }),
-                    focusedIndex === index && "bg-n-50"
-                  )}
-                  onClick={() => handleSelect(option.value)}
-                  onMouseEnter={() => setFocusedIndex(index)}
-                  role="option"
-                  aria-selected={option.value === value}
-                  tabIndex={-1}
-                >
-                  {option.label}
-                </div>
-              ))}
-            </div>
+              size={size}
+              options={options}
+              selectedValue={value}
+              focusedIndex={focusedIndex}
+              onSelect={handleSelect}
+              onClose={() => setIsOpen(false)}
+              label={label}
+            />
           )}
         </div>
 
@@ -309,4 +252,5 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
 Dropdown.displayName = "Dropdown"
 
-export { Dropdown, dropdownVariants, dropdownMenuVariants, dropdownItemVariants }
+export { Dropdown, dropdownVariants }
+export type { DropdownOption }

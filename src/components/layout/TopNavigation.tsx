@@ -1,6 +1,7 @@
 import React from 'react';
-import { Search, Settings, ChevronDown } from 'lucide-react';
+import { Search, Settings, ChevronDown, ChevronUp } from 'lucide-react';
 import { Environment } from '../../types';
+import { DropdownMenu, type DropdownOption } from '../ui/dropdown-menu';
 
 interface TopNavigationProps {
   currentEnvironment: Environment;
@@ -12,6 +13,31 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
   onEnvironmentChange 
 }) => {
   const environments: Environment[] = ['App', 'Components', 'Style Guide'];
+  const [isEnvironmentDropdownOpen, setIsEnvironmentDropdownOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  // Convert environments to dropdown options
+  const environmentOptions: DropdownOption[] = environments.map(env => ({
+    label: env,
+    value: env
+  }));
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsEnvironmentDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleEnvironmentSelect = (environment: string) => {
+    onEnvironmentChange(environment as Environment);
+    setIsEnvironmentDropdownOpen(false);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-n-75 z-50">
@@ -45,17 +71,29 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
           </div>
 
           {/* Environment Dropdown */}
-          <div className="relative">
-            <select 
-              value={currentEnvironment}
-              onChange={(e) => onEnvironmentChange(e.target.value as Environment)}
-              className="appearance-none bg-white border border-n-75 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-b-200 focus:border-b-200 outline-none text-sm font-medium cursor-pointer"
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsEnvironmentDropdownOpen(!isEnvironmentDropdownOpen)}
+              className="flex items-center justify-between bg-white border border-n-75 rounded-lg px-4 py-2 pr-2 focus:ring-2 focus:ring-b-200 focus:border-b-200 outline-none text-sm font-medium cursor-pointer hover:border-n-200 transition-colors min-w-[140px]"
             >
-              {environments.map((env) => (
-                <option key={env} value={env}>{env}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4 pointer-events-none" />
+              <span className="text-n-500">{currentEnvironment}</span>
+              {isEnvironmentDropdownOpen ? (
+                <ChevronUp className="w-4 h-4 text-n-300 ml-2" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-n-300 ml-2" />
+              )}
+            </button>
+
+            {isEnvironmentDropdownOpen && (
+              <DropdownMenu
+                options={environmentOptions}
+                selectedValue={currentEnvironment}
+                onSelect={handleEnvironmentSelect}
+                onClose={() => setIsEnvironmentDropdownOpen(false)}
+                label="Environment"
+                className="min-w-[140px]"
+              />
+            )}
           </div>
 
           {/* Settings Icon - Only visible in App environment */}
