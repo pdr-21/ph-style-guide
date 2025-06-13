@@ -1,4 +1,5 @@
 export type Environment = 'App' | 'Components' | 'Style Guide';
+export type NavigationItemType = 'icon' | 'text';
 
 export interface User {
   name: string;
@@ -7,7 +8,7 @@ export interface User {
 
 export interface NavigationItem {
   id: string;
-  icon: any;
+  icon?: any;
   label: string;
   path: string;
   isActive?: boolean;

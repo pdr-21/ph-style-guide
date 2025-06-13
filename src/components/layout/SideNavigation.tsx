@@ -10,6 +10,7 @@ import {
   Phone
 } from 'lucide-react';
 import { NavigationItem, Environment } from '../../types';
+import SideNavigationItem from './SideNavigationItem';
 
 interface SideNavigationProps {
   currentView: Environment;
@@ -18,7 +19,12 @@ interface SideNavigationProps {
   activeComponentSection: string;
 }
 
-const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironmentChange, activeStyleGuideSection, activeComponentSection }) => {
+const SideNavigation: React.FC<SideNavigationProps> = ({ 
+  currentView, 
+  onEnvironmentChange, 
+  activeStyleGuideSection, 
+  activeComponentSection 
+}) => {
   const [activeItem, setActiveItem] = useState('dashboard');
 
   // App navigation items (icons only)
@@ -34,98 +40,81 @@ const SideNavigation: React.FC<SideNavigationProps> = ({ currentView, onEnvironm
   ];
 
   // Style Guide navigation items (text only)
-  const styleGuideItems = [
-    { id: 'colors', label: 'Colors' },
-    { id: 'typography', label: 'Typography' },
-    { id: 'spacing', label: 'Spacing' },
-    { id: 'corner-radius', label: 'Corner Radius' },
-    { id: 'borders', label: 'Borders' },
-    { id: 'shadows', label: 'Shadows' },
+  const styleGuideItems: NavigationItem[] = [
+    { id: 'colors', label: 'Colors', path: '/style-guide/colors' },
+    { id: 'typography', label: 'Typography', path: '/style-guide/typography' },
+    { id: 'spacing', label: 'Spacing', path: '/style-guide/spacing' },
+    { id: 'corner-radius', label: 'Corner Radius', path: '/style-guide/corner-radius' },
+    { id: 'borders', label: 'Borders', path: '/style-guide/borders' },
+    { id: 'shadows', label: 'Shadows', path: '/style-guide/shadows' },
   ];
 
   // Components navigation items (text only)
-  const componentItems = [
-    { id: 'buttons', label: 'Buttons' },
-    { id: 'inputs', label: 'Inputs' },
-    { id: 'dropdowns', label: 'Dropdowns' },
-    { id: 'modals', label: 'Modals' },
-    { id: 'cards', label: 'Cards' },
+  const componentItems: NavigationItem[] = [
+    { id: 'buttons', label: 'Buttons', path: '/components/buttons' },
+    { id: 'inputs', label: 'Inputs', path: '/components/inputs' },
+    { id: 'dropdowns', label: 'Dropdowns', path: '/components/dropdowns' },
+    { id: 'modals', label: 'Modals', path: '/components/modals' },
+    { id: 'cards', label: 'Cards', path: '/components/cards' },
   ];
 
-  const renderAppNavigation = () => (
-    <aside className="fixed left-0 top-18 w-16 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
-      <nav className="py-4">
-        <ul className="space-y-2">
-          {appNavigationItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeItem === item.id;
-            
-            return (
-              <li key={item.id} className="px-2 py-1">
-                <button
-                  onClick={() => setActiveItem(item.id)}
-                  className="w-full flex items-center justify-center transition-colors group relative"
-                  title={item.label}
-                >
-                  <div className={`w-10 h-10 flex items-center justify-center rounded-xl transition-colors ${
-                    isActive 
-                      ? 'bg-b-40 text-b-300' 
-                      : 'text-n-300 hover:text-n-500 hover:bg-n-50'
-                  }`}>
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className={`absolute left-full ml-2 px-2 py-1 bg-n-500 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 ${
-                    isActive ? 'group-hover:opacity-0' : ''
-                  }`}>
-                    {item.label}
-                  </div>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </aside>
-  );
-
-  const renderTextNavigation = (items: any[], activeItemState: string, handleItemClick: (id: string) => void) => (
-    <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
-      <nav className="py-4">
-        <ul className="space-y-1">
-          {items.map((item) => {
-            const isActive = activeItemState === item.id;
-            
-            return (
-              <li key={item.id} className="px-2 py-1">
-                <button
-                  onClick={() => handleItemClick(item.id)}
-                  className={`w-full px-2 py-2 text-left text-sm font-medium transition-colors rounded-xl ${
-                    isActive 
-                      ? 'bg-b-40 text-b-300' 
-                      : 'text-n-400 hover:text-n-500 hover:bg-n-50'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </aside>
-  );
-
   if (currentView === 'App') {
-    return renderAppNavigation();
+    return (
+      <aside className="fixed left-0 top-18 w-16 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
+        <nav className="py-4">
+          <ul className="space-y-2">
+            {appNavigationItems.map((item) => (
+              <SideNavigationItem
+                key={item.id}
+                item={item}
+                isActive={activeItem === item.id}
+                onClick={() => setActiveItem(item.id)}
+                type="icon"
+              />
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    );
   } else if (currentView === 'Style Guide') {
-    return renderTextNavigation(styleGuideItems, activeStyleGuideSection, (id) => onEnvironmentChange('Style Guide', id));
+    return (
+      <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
+        <nav className="py-4">
+          <ul className="space-y-1">
+            {styleGuideItems.map((item) => (
+              <SideNavigationItem
+                key={item.id}
+                item={item}
+                isActive={activeStyleGuideSection === item.id}
+                onClick={() => onEnvironmentChange('Style Guide', item.id)}
+                type="text"
+              />
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    );
   } else if (currentView === 'Components') {
-    return renderTextNavigation(componentItems, activeComponentSection, (id) => onEnvironmentChange('Components', id));
+    return (
+      <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
+        <nav className="py-4">
+          <ul className="space-y-1">
+            {componentItems.map((item) => (
+              <SideNavigationItem
+                key={item.id}
+                item={item}
+                isActive={activeComponentSection === item.id}
+                onClick={() => onEnvironmentChange('Components', item.id)}
+                type="text"
+              />
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    );
   }
 
-  return renderAppNavigation();
+  return null;
 };
 
 export default SideNavigation;
