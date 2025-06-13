@@ -11,6 +11,44 @@ interface ComponentsProps {
 }
 
 const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
+  // Get dynamic title and description based on active section
+  const getPageInfo = () => {
+    switch (activeComponentSection) {
+      case 'buttons':
+        return {
+          title: 'Button Component',
+          description: 'ShadCN button component integrated with our design system'
+        };
+      case 'inputs':
+        return {
+          title: 'Input Component', 
+          description: 'ShadCN input component integrated with our design system'
+        };
+      case 'side-nav-item':
+        return {
+          title: 'Side Navigation Item Component',
+          description: 'Individual navigation items used in the side navigation'
+        };
+      case 'side-nav':
+        return {
+          title: 'Side Navigation Component',
+          description: 'Complete side navigation component with environment switching'
+        };
+      case 'top-nav':
+        return {
+          title: 'Top Navigation Component',
+          description: 'Complete top navigation component with environment switching and app switcher'
+        };
+      default:
+        return {
+          title: 'Components',
+          description: 'Component library and preview environment'
+        };
+    }
+  };
+
+  const { title, description } = getPageInfo();
+
   const renderComponentPreview = () => {
     switch (activeComponentSection) {
       case 'buttons':
@@ -25,7 +63,7 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <TopNavigationPreview />;
       default:
         return (
-          <div className="min-h-screen flex items-center justify-center p-8">
+          <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">Component Preview</h2>
               <p className="text-gray-600">Select a component from the sidebar to preview it</p>
@@ -36,10 +74,10 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
   };
 
   return (
-    <div className="w-full bg-gr-25 p-8">
+    <div className="w-full bg-gr-25">
       <PageHeader 
-        title="Components" 
-        description="Component library and preview environment" 
+        title={title}
+        description={description}
       />
       {renderComponentPreview()}
     </div>

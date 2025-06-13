@@ -12,11 +12,54 @@ interface StyleGuideProps {
 }
 
 const StyleGuide: React.FC<StyleGuideProps> = ({ activeSection }) => {
+  // Get dynamic title and description based on active section
+  const getPageInfo = () => {
+    switch (activeSection) {
+      case 'colors':
+        return {
+          title: 'Colors',
+          description: 'Color palette and usage guidelines for the design system'
+        };
+      case 'typography':
+        return {
+          title: 'Typography',
+          description: 'Font styles, sizes, and text hierarchy guidelines'
+        };
+      case 'spacing':
+        return {
+          title: 'Spacing',
+          description: 'Spacing scale and layout guidelines for consistent design'
+        };
+      case 'corner-radius':
+        return {
+          title: 'Corner Radius',
+          description: 'Border radius values and usage guidelines'
+        };
+      case 'borders':
+        return {
+          title: 'Borders & Focus Rings',
+          description: 'Border styles and focus ring guidelines for accessibility'
+        };
+      case 'shadows':
+        return {
+          title: 'Shadows',
+          description: 'Shadow styles and elevation guidelines for depth and hierarchy'
+        };
+      default:
+        return {
+          title: 'Style Guide',
+          description: 'Design system and style guidelines'
+        };
+    }
+  };
+
+  const { title, description } = getPageInfo();
+
   return (
     <div>
       <PageHeader 
-        title="Style Guide" 
-        description="Design system and style guidelines" 
+        title={title}
+        description={description}
       />
       
       <div className="p-8">
