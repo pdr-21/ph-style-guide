@@ -1,10 +1,11 @@
 import React from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
-import { Bot, TrendingUp, Target, Clock } from 'lucide-react';
+import { TrendingUp, Target, Clock } from 'lucide-react';
 
 interface SourcingAgentProfileCardProps {
   agentName: string;
+  agentImageUrl: string;
   leadsFound: number;
   successRate: number;
   avgResponseTime: string;
@@ -14,6 +15,7 @@ interface SourcingAgentProfileCardProps {
 
 const SourcingAgentProfileCard: React.FC<SourcingAgentProfileCardProps> = ({
   agentName,
+  agentImageUrl,
   leadsFound,
   successRate,
   avgResponseTime,
@@ -26,16 +28,18 @@ const SourcingAgentProfileCard: React.FC<SourcingAgentProfileCardProps> = ({
     <Card 
       className="absolute z-50 bg-white border border-n-100 rounded-xl shadow-lg p-4 w-64"
       style={{
-        top: position.top + 25,
+        top: position.top,
         left: position.left,
         transform: 'translateX(-50%)'
       }}
     >
       {/* Agent Header */}
       <div className="flex items-center space-x-3 mb-4">
-        <div className="w-10 h-10 bg-b-40 rounded-full flex items-center justify-center">
-          <Bot className="w-5 h-5 text-b-300" />
-        </div>
+        <img 
+          src={agentImageUrl} 
+          alt={agentName}
+          className="w-10 h-10 rounded-full object-cover"
+        />
         <div>
           <h3 className="text-sm font-poppins font-semibold text-n-500">
             {agentName}

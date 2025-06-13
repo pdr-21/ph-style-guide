@@ -3,11 +3,13 @@ import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import LeadCard from './LeadCard';
 import SourcingAgentProfileCard from './SourcingAgentProfileCard';
+import { getAgentImageByIndex } from '../../lib/agentImages';
 
 const NewLeadsSection: React.FC = () => {
   const [showAgentProfile, setShowAgentProfile] = useState(false);
   const [agentPosition, setAgentPosition] = useState({ top: 0, left: 0 });
   const agentRef = useRef<HTMLSpanElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   // Sample lead data - this will be replaced with real data later
   const leads = [
@@ -42,17 +44,21 @@ const NewLeadsSection: React.FC = () => {
   // Agent profile data
   const agentData = {
     agentName: 'Sourcing Agent',
+    agentImageUrl: getAgentImageByIndex(0), // Use first agent image
     leadsFound: 2847,
     successRate: 94.2,
     avgResponseTime: '2.3h'
   };
 
   const handleAgentMouseEnter = () => {
-    if (agentRef.current) {
-      const rect = agentRef.current.getBoundingClientRect();
+    if (agentRef.current && sectionRef.current) {
+      const agentRect = agentRef.current.getBoundingClientRect();
+      const sectionRect = sectionRef.current.getBoundingClientRect();
+      
+      // Calculate position relative to the section container
       setAgentPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + rect.width / 2
+        top: agentRect.bottom - sectionRect.top + 8, // 8px gap below the text
+        left: agentRect.left - sectionRect.left + agentRect.width / 2
       });
       setShowAgentProfile(true);
     }
@@ -63,7 +69,7 @@ const NewLeadsSection: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div ref={sectionRef} className="space-y-6 relative">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -117,6 +123,7 @@ const NewLeadsSection: React.FC = () => {
       {/* Sourcing Agent Profile Card */}
       <SourcingAgentProfileCard
         agentName={agentData.agentName}
+        agentImageUrl={agentData.agentImageUrl}
         leadsFound={agentData.leadsFound}
         successRate={agentData.successRate}
         avgResponseTime={agentData.avgResponseTime}

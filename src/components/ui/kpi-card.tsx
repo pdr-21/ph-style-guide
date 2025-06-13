@@ -59,7 +59,7 @@ const KPICard = React.forwardRef<HTMLDivElement, KPICardProps>(
     return (
       <Card 
         ref={ref} 
-        className={cn("bg-white rounded-xl shadow-sm p-4 flex flex-col", className)} 
+        className={cn("bg-white rounded-xl p-4 flex flex-col hover:shadow-md transition-shadow duration-200", className)} 
         {...props}
       >
         {/* Title */}
