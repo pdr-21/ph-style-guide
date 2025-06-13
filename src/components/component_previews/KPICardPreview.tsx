@@ -63,10 +63,8 @@ const KPICardPreview: React.FC = () => {
                 currentValue="$45,231"
                 trendValue="+20.1%"
                 trendType="positive"
-                icon={DollarSign}
                 chartData={salesChartData}
                 chartKey="value"
-                infoIcon={true}
               />
               
               <KPICard
@@ -74,7 +72,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="2,350"
                 trendValue="+15.3%"
                 trendType="positive"
-                icon={Users}
                 chartData={usersChartData}
                 chartKey="value"
               />
@@ -84,10 +81,8 @@ const KPICardPreview: React.FC = () => {
                 currentValue="4.2%"
                 trendValue="-2.4%"
                 trendType="negative"
-                icon={TrendingUp}
                 chartData={conversionChartData}
                 chartKey="value"
-                infoIcon={true}
               />
               
               <KPICard
@@ -95,7 +90,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="3m 24s"
                 trendValue="0%"
                 trendType="neutral"
-                icon={Clock}
                 chartData={salesChartData}
                 chartKey="value"
               />
@@ -111,7 +105,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="156"
                 trendValue="+12%"
                 trendType="positive"
-                icon={ShoppingCart}
               >
                 <div className="space-y-1 text-xs text-n-300">
                   <div className="flex justify-between">
@@ -134,8 +127,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="23"
                 trendValue="-8.2%"
                 trendType="positive"
-                icon={MessageSquare}
-                infoIcon={true}
               >
                 <div className="space-y-1 text-xs text-n-300">
                   <div className="flex justify-between">
@@ -158,7 +149,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="8/12"
                 trendValue="+25%"
                 trendType="positive"
-                icon={Target}
               >
                 <div className="space-y-1 text-xs text-n-300">
                   <div className="flex justify-between">
@@ -181,8 +171,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="42"
                 trendValue="0%"
                 trendType="neutral"
-                icon={Workflow}
-                infoIcon={true}
               >
                 <div className="space-y-1 text-xs text-n-300">
                   <div className="flex justify-between">
@@ -211,7 +199,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="1,234"
                 trendValue="+5.4%"
                 trendType="positive"
-                icon={ShoppingCart}
               />
               
               <KPICard
@@ -219,8 +206,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="98.5K"
                 trendValue="-1.2%"
                 trendType="negative"
-                icon={Activity}
-                infoIcon={true}
               />
               
               <KPICard
@@ -228,7 +213,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="24.8%"
                 trendValue="0%"
                 trendType="neutral"
-                icon={BarChart3}
               />
               
               <KPICard
@@ -236,8 +220,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="2.1M"
                 trendValue="+18.7%"
                 trendType="positive"
-                icon={Activity}
-                infoIcon={true}
               />
             </div>
           </div>
@@ -251,7 +233,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="$12,450"
                 trendValue="+15.3%"
                 trendType="positive"
-                icon={TrendingUp}
                 chartData={salesChartData}
                 chartKey="value"
               />
@@ -261,7 +242,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="892"
                 trendValue="-8.7%"
                 trendType="negative"
-                icon={Users}
                 chartData={usersChartData}
                 chartKey="value"
               />
@@ -271,7 +251,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="45.2%"
                 trendValue="0%"
                 trendType="neutral"
-                icon={BarChart3}
                 chartData={conversionChartData}
                 chartKey="value"
               />
@@ -291,10 +270,8 @@ const KPICardPreview: React.FC = () => {
                 currentValue="$28,450"
                 trendValue="+12.5%"
                 trendType="positive"
-                icon={DollarSign}
                 chartData={salesChartData}
                 chartKey="value"
-                infoIcon={true}
               />
               
               <KPICard
@@ -302,7 +279,6 @@ const KPICardPreview: React.FC = () => {
                 currentValue="1,847"
                 trendValue="+8.3%"
                 trendType="positive"
-                icon={Users}
                 chartData={usersChartData}
                 chartKey="value"
               />
