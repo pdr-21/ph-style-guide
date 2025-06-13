@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, ac
         />
         
         {/* Main Content Area */}
-        <main className={`flex-1 mt-18 p-8 ${currentView === 'App' ? 'ml-16' : 'ml-48'}`}>
+        <main className={`flex-1 mt-18 ${currentView === 'App' ? 'ml-16' : 'ml-48'}`}>
           {children}
         </main>
       </div>

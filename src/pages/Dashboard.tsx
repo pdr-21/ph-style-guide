@@ -1,14 +1,17 @@
 import React from 'react';
+import PageHeader from '../components/common/PageHeader';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Welcome to your dashboard</p>
-      </div>
+    <div>
+      <PageHeader 
+        title="Dashboard" 
+        description="Welcome to your dashboard" 
+      />
       
-      {/* Content will be added later */}
+      <div className="p-8">
+        {/* Content will be added later */}
+      </div>
     </div>
   );
 };

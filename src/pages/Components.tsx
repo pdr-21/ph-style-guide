@@ -1,4 +1,5 @@
 import React from 'react';
+import PageHeader from '../components/common/PageHeader';
 import ButtonPreview from '../components/component_previews/ButtonPreview';
 import InputPreview from '../components/component_previews/InputPreview';
 import SideNavigationItemPreview from '../components/component_previews/SideNavigationItemPreview';
@@ -24,7 +25,7 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <TopNavigationPreview />;
       default:
         return (
-          <div className="min-h-screen flex items-center justify-center">
+          <div className="min-h-screen flex items-center justify-center p-8">
             <div className="text-center">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">Component Preview</h2>
               <p className="text-gray-600">Select a component from the sidebar to preview it</p>
@@ -35,7 +36,11 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
   };
 
   return (
-    <div className="w-full bg-gr-25">
+    <div className="w-full bg-gr-25 p-8">
+      <PageHeader 
+        title="Components" 
+        description="Component library and preview environment" 
+      />
       {renderComponentPreview()}
     </div>
   );
