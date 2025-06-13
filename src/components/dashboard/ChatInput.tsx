@@ -18,7 +18,7 @@ const ChatInput: React.FC = () => {
             placeholder="How can I help you?"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className="w-full text-lg font-poppins font-normal text-n-500 placeholder:text-n-200 bg-transparent border-none outline-none resize-none"
+            className="w-full text-sm font-poppins font-normal text-n-500 placeholder:text-n-200 bg-transparent border-none outline-none resize-none"
           />
         </div>
 
