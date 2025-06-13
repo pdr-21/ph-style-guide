@@ -89,7 +89,7 @@ const InputPreview: React.FC = () => {
                     helperText="Helper text"
                     className="pr-10"
                   />
-                  <Check className="absolute right-3 top-[42px] transform -translate-y-1/2 text-g-300 w-4 h-4" />
+                  <Check className="absolute right-3 top-1/2 transform -translate-y-1/2 text-g-300 w-4 h-4" />
                 </div>
               </div>
 
@@ -147,7 +147,7 @@ const InputPreview: React.FC = () => {
                     helperText="Helper text"
                     className="pr-10"
                   />
-                  <Check className="absolute right-3 top-[42px] transform -translate-y-1/2 text-g-300 w-4 h-4" />
+                  <Check className="absolute right-3 top-1/2 transform -translate-y-1/2 text-g-300 w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -272,7 +272,7 @@ const InputPreview: React.FC = () => {
                     helperText="Search through our database"
                     className="pl-10"
                   />
-                  <Search className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
                 
                 <div className="relative">
@@ -283,7 +283,7 @@ const InputPreview: React.FC = () => {
                     helperText="We'll never share your email"
                     className="pl-10"
                   />
-                  <Mail className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
                 
                 <div className="relative">
@@ -294,7 +294,7 @@ const InputPreview: React.FC = () => {
                     helperText="Enter your full name"
                     className="pl-10"
                   />
-                  <User className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
               </div>
               
@@ -307,11 +307,11 @@ const InputPreview: React.FC = () => {
                     helperText="Must be at least 8 characters"
                     className="pl-10 pr-10"
                   />
-                  <Lock className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-[42px] transform -translate-y-1/2 text-n-200 hover:text-n-400 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-n-200 hover:text-n-400 transition-colors"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -325,7 +325,7 @@ const InputPreview: React.FC = () => {
                     helperText="Include country code"
                     className="pl-10"
                   />
-                  <Phone className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
                 
                 <div className="relative">
@@ -337,7 +337,7 @@ const InputPreview: React.FC = () => {
                     className="pl-10"
                     step="0.01"
                   />
-                  <DollarSign className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -382,7 +382,7 @@ const InputPreview: React.FC = () => {
                     defaultValue="john_doe"
                     className="pr-10"
                   />
-                  <Check className="absolute right-3 top-[42px] transform -translate-y-1/2 text-g-300 w-4 h-4" />
+                  <Check className="absolute right-3 top-1/2 transform -translate-y-1/2 text-g-300 w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -404,7 +404,7 @@ const InputPreview: React.FC = () => {
                       helperText="We'll never share your email"
                       className="pl-10"
                     />
-                    <Mail className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                   
                   <div className="relative">
@@ -415,7 +415,7 @@ const InputPreview: React.FC = () => {
                       helperText="Must be at least 8 characters"
                       className="pl-10"
                     />
-                    <Lock className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                 </div>
               </div>
@@ -432,7 +432,7 @@ const InputPreview: React.FC = () => {
                       helperText="First and last name"
                       className="pl-10"
                     />
-                    <User className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                   
                   <div className="relative">
@@ -443,7 +443,7 @@ const InputPreview: React.FC = () => {
                       helperText="Include country code"
                       className="pl-10"
                     />
-                    <Phone className="absolute left-3 top-[42px] transform -translate-y-1/2 text-n-200 w-4 h-4" />
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-n-200 w-4 h-4" />
                   </div>
                 </div>
               </div>
