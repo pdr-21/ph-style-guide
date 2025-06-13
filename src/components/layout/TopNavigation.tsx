@@ -28,8 +28,8 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
           </div>
           
           {/* Tenant Name */}
-          <h1 className="text-xl font-semibold text-n-500">
-            Phenom CRM
+          <h1 className="text-lg font-semibold text-n-500">
+            Phenomenal
           </h1>
         </div>
 
