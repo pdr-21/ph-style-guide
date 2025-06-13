@@ -28,7 +28,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
           </div>
           
           {/* Tenant Name */}
-          <h1 className="text-lg font-semibold text-n-500">
+          <h1 className="text-md font-semibold text-n-500">
             Phenomenal
           </h1>
         </div>
