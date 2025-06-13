@@ -31,30 +31,59 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
 
   // Update indicator position and width when active option changes
   useEffect(() => {
-    const activeIndex = options.findIndex(option => option.id === activeOptionId);
-    
-    if (activeIndex !== -1 && optionRefs.current[activeIndex]?.current && containerRef.current) {
-      const activeButton = optionRefs.current[activeIndex].current;
-      const container = containerRef.current;
+    const updateIndicator = () => {
+      const activeIndex = options.findIndex(option => option.id === activeOptionId);
       
-      const containerRect = container.getBoundingClientRect();
-      const buttonRect = activeButton.getBoundingClientRect();
+      if (activeIndex !== -1 && optionRefs.current[activeIndex]?.current && containerRef.current) {
+        const activeButton = optionRefs.current[activeIndex].current;
+        const container = containerRef.current;
+        
+        const containerRect = container.getBoundingClientRect();
+        const buttonRect = activeButton.getBoundingClientRect();
+        
+        const left = buttonRect.left - containerRect.left;
+        const width = buttonRect.width;
+        
+        setIndicatorStyle({ left, width });
+      }
+    };
+
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(updateIndicator, 10);
+    return () => clearTimeout(timer);
+  }, [activeOptionId, options]);
+
+  // Also update on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const activeIndex = options.findIndex(option => option.id === activeOptionId);
       
-      const left = buttonRect.left - containerRect.left;
-      const width = buttonRect.width;
-      
-      setIndicatorStyle({ left, width });
-    }
+      if (activeIndex !== -1 && optionRefs.current[activeIndex]?.current && containerRef.current) {
+        const activeButton = optionRefs.current[activeIndex].current;
+        const container = containerRef.current;
+        
+        const containerRect = container.getBoundingClientRect();
+        const buttonRect = activeButton.getBoundingClientRect();
+        
+        const left = buttonRect.left - containerRect.left;
+        const width = buttonRect.width;
+        
+        setIndicatorStyle({ left, width });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [activeOptionId, options]);
 
   return (
     <div 
       ref={containerRef}
-      className={`relative bg-n-50 rounded-lg p-1 ${className}`}
+      className={`relative inline-flex bg-n-50 rounded-xl border border-n-100 p-1 ${className}`}
     >
-      {/* Moving indicator */}
+      {/* Moving indicator background */}
       <div
-        className="absolute top-1 bottom-1 bg-b-200 rounded-md transition-all duration-300 ease-in-out"
+        className="absolute top-1 bottom-1 bg-b-200 rounded-lg transition-all duration-300 ease-in-out shadow-sm"
         style={{
           left: `${indicatorStyle.left}px`,
           width: `${indicatorStyle.width}px`,
@@ -62,18 +91,16 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
       />
       
       {/* Options */}
-      <div className="relative flex">
-        {options.map((option, index) => (
-          <ToggleOption
-            key={option.id}
-            label={option.label}
-            icon={option.icon}
-            isActive={option.id === activeOptionId}
-            onClick={() => onOptionChange(option.id)}
-            optionRef={optionRefs.current[index]}
-          />
-        ))}
-      </div>
+      {options.map((option, index) => (
+        <ToggleOption
+          key={option.id}
+          label={option.label}
+          icon={option.icon}
+          isActive={option.id === activeOptionId}
+          onClick={() => onOptionChange(option.id)}
+          optionRef={optionRefs.current[index]}
+        />
+      ))}
     </div>
   );
 };
