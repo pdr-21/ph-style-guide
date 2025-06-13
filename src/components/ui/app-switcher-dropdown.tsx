@@ -68,7 +68,24 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
     }
   ];
 
-  // Close dropdown when clicking outside
+  // Close dropdown when mouse leaves the dropdown area
+  useEffect(() => {
+    const handleMouseLeave = () => {
+      onClose();
+    };
+
+    if (isOpen && dropdownRef.current) {
+      dropdownRef.current.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    return () => {
+      if (dropdownRef.current) {
+        dropdownRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, [isOpen, onClose]);
+
+  // Also close on click outside as backup
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -97,37 +114,23 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full right-0 mt-2 w-80 bg-white border border-n-100 rounded-xl shadow-app-switcher z-50 p-6"
+      className="absolute top-full right-0 mt-2 w-72 bg-white border border-n-100 rounded-xl shadow-app-switcher z-50 p-4"
       role="menu"
       aria-label="App Switcher"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-sm font-poppins font-semibold text-n-500">Apps</h3>
-        <button
-          onClick={onClose}
-          className="p-1 hover:bg-n-50 rounded-md transition-colors"
-          aria-label="Close app switcher"
-        >
-          <svg className="w-4 h-4 text-n-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
       {/* Apps Grid */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-3 mb-4">
         {appItems.slice(0, 3).map((item) => {
           const Icon = item.icon;
           return (
             <button
               key={item.id}
               onClick={() => handleItemClick(item)}
-              className="flex flex-col items-center p-4 rounded-lg hover:bg-n-40 transition-colors group focus:outline-none focus:ring-2 focus:ring-b-200"
+              className="flex flex-col items-center p-3 rounded-lg hover:bg-n-40 transition-colors group focus:outline-none focus:ring-2 focus:ring-b-200"
               role="menuitem"
             >
-              <div className="w-12 h-12 bg-n-50 rounded-xl flex items-center justify-center mb-3 group-hover:bg-n-75 transition-colors">
-                <Icon className="w-6 h-6 text-n-400" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors">
+                <Icon className="w-5 h-5 text-n-400" />
               </div>
               <span className="text-xs font-poppins font-medium text-n-500 text-center leading-tight">
                 {item.label}
@@ -138,10 +141,10 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
       </div>
 
       {/* Separator */}
-      <div className="my-6 border-t border-n-75"></div>
+      <div className="my-4 border-t border-n-75"></div>
 
       {/* Environment Grid */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-3">
         {appItems.slice(3).map((item) => {
           const Icon = item.icon;
           const isActive = item.environment === currentEnvironment;
@@ -151,7 +154,7 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
               key={item.id}
               onClick={() => handleItemClick(item)}
               className={cn(
-                "flex flex-col items-center p-4 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-b-200",
+                "flex flex-col items-center p-3 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-b-200",
                 isActive 
                   ? "bg-b-40 hover:bg-b-50" 
                   : "hover:bg-n-40"
@@ -159,13 +162,13 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
               role="menuitem"
             >
               <div className={cn(
-                "w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors",
+                "w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors",
                 isActive 
-                  ? "bg-b-100 group-hover:bg-b-75" 
-                  : "bg-n-50 group-hover:bg-n-75"
+                  ? "bg-b-40 text-b-300" 
+                  : ""
               )}>
                 <Icon className={cn(
-                  "w-6 h-6",
+                  "w-5 h-5",
                   isActive ? "text-b-300" : "text-n-400"
                 )} />
               </div>
