@@ -10,11 +10,6 @@ const TopNavigationPreview: React.FC = () => {
       <div className="w-full space-y-8">
         {/* Header Info */}
         <div className="p-8 pb-0">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-2">Top Navigation Component</h1>
-            <p className="text-gray-600">Complete top navigation component with environment switching and app switcher</p>
-          </div>
-
           {/* Environment Controls */}
           <div className="bg-white p-6 rounded-lg border border-n-100 mb-8">
             <h2 className="text-lg font-medium text-gray-700 mb-4">Environment Controls</h2>

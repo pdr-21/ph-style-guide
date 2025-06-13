@@ -22,11 +22,6 @@ const InputPreview: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-8">
       <div className="w-full max-w-6xl space-y-12">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-2">Input Component</h1>
-          <p className="text-gray-600">ShadCN input component integrated with our design system</p>
-        </div>
-
         {/* Basic States */}
         <div className="space-y-8">
           <div>

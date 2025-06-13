@@ -19,11 +19,6 @@ const SideNavigationPreview: React.FC = () => {
   return (
     <div className="min-h-screen bg-gr-25">
       <div className="w-full max-w-7xl mx-auto p-8 space-y-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-2">Side Navigation Component</h1>
-          <p className="text-gray-600">Complete side navigation component with environment switching</p>
-        </div>
-
         {/* Environment Controls */}
         <div className="bg-white p-6 rounded-lg border border-n-100">
           <h2 className="text-lg font-medium text-gray-700 mb-4">Environment Controls</h2>
