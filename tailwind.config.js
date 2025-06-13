@@ -133,6 +133,7 @@ export default {
       boxShadow: {
         'focus-normal': '0 0 0 2px #4D3EE0, 0 0 0 3px rgba(174, 181, 194, 0.3)',
         'focus-medium': '0 0 0 2px #4D3EE0, 0 0 0 8px rgba(202, 193, 242, 0.4)',
+        'app-switcher': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
       },
       spacing: {
         '18': '4.5rem', // 72px

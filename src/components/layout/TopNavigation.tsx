@@ -1,7 +1,7 @@
 import React from 'react';
-import { Search, Settings, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Settings, LayoutGrid } from 'lucide-react';
 import { Environment } from '../../types';
-import { DropdownMenu, type DropdownOption } from '../ui/dropdown-menu';
+import AppSwitcherDropdown from '../ui/app-switcher-dropdown';
 
 interface TopNavigationProps {
   currentEnvironment: Environment;
@@ -12,32 +12,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
   currentEnvironment, 
   onEnvironmentChange 
 }) => {
-  const environments: Environment[] = ['App', 'Components', 'Style Guide'];
-  const [isEnvironmentDropdownOpen, setIsEnvironmentDropdownOpen] = React.useState(false);
-  const dropdownRef = React.useRef<HTMLDivElement>(null);
-
-  // Convert environments to dropdown options
-  const environmentOptions: DropdownOption[] = environments.map(env => ({
-    label: env,
-    value: env
-  }));
-
-  // Close dropdown when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsEnvironmentDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleEnvironmentSelect = (environment: string) => {
-    onEnvironmentChange(environment as Environment);
-    setIsEnvironmentDropdownOpen(false);
-  };
+  const [isAppSwitcherOpen, setIsAppSwitcherOpen] = React.useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-n-75 z-50">
@@ -70,30 +45,22 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
             />
           </div>
 
-          {/* Environment Dropdown */}
-          <div className="relative" ref={dropdownRef}>
+          {/* App Switcher */}
+          <div className="relative">
             <button
-              onClick={() => setIsEnvironmentDropdownOpen(!isEnvironmentDropdownOpen)}
-              className="flex items-center justify-between bg-white border border-n-75 rounded-lg px-4 py-2 pr-2 focus:ring-2 focus:ring-b-200 focus:border-b-200 outline-none text-sm font-medium cursor-pointer hover:border-n-200 transition-colors min-w-[140px]"
+              onClick={() => setIsAppSwitcherOpen(!isAppSwitcherOpen)}
+              className="p-2 hover:bg-n-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-b-200"
+              aria-label="App switcher"
             >
-              <span className="text-n-500">{currentEnvironment}</span>
-              {isEnvironmentDropdownOpen ? (
-                <ChevronUp className="w-4 h-4 text-n-300 ml-2" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-n-300 ml-2" />
-              )}
+              <LayoutGrid className="w-5 h-5 text-n-300" />
             </button>
 
-            {isEnvironmentDropdownOpen && (
-              <DropdownMenu
-                options={environmentOptions}
-                selectedValue={currentEnvironment}
-                onSelect={handleEnvironmentSelect}
-                onClose={() => setIsEnvironmentDropdownOpen(false)}
-                label="Environment"
-                className="min-w-[140px]"
-              />
-            )}
+            <AppSwitcherDropdown
+              currentEnvironment={currentEnvironment}
+              onEnvironmentChange={onEnvironmentChange}
+              onClose={() => setIsAppSwitcherOpen(false)}
+              isOpen={isAppSwitcherOpen}
+            />
           </div>
 
           {/* Settings Icon - Only visible in App environment */}
