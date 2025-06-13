@@ -60,7 +60,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
 
   if (currentView === 'App') {
     return (
-      <aside className="fixed left-0 top-18 w-16 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
+      <aside className="fixed left-0 top-18 w-16 h-[calc(100vh-72px)] bg-gr-25 border-r border-n-75 z-40">
         <nav className="py-4">
           <ul className="space-y-2">
             {appNavigationItems.map((item) => (
@@ -78,7 +78,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     );
   } else if (currentView === 'Style Guide') {
     return (
-      <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
+      <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-72px)] bg-gr-25 border-r border-n-75 z-40">
         <nav className="py-4">
           <ul className="space-y-1">
             {styleGuideItems.map((item) => (
@@ -96,7 +96,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     );
   } else if (currentView === 'Components') {
     return (
-      <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-4.5rem)] bg-gr-25 border-r border-n-75 z-40">
+      <aside className="fixed left-0 top-18 w-48 h-[calc(100vh-72px)] bg-gr-25 border-r border-n-75 z-40">
         <nav className="py-4">
           <ul className="space-y-1">
             {componentItems.map((item) => (
