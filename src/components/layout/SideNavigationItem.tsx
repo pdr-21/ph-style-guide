@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationItem, NavigationItemType } from '../../types';
+import { Tooltip } from '../ui/tooltip';
 
 interface SideNavigationItemProps {
   item: NavigationItem;
@@ -19,26 +20,21 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = ({
     
     return (
       <li className="px-2 py-1">
-        <button
-          onClick={onClick}
-          className="w-full flex items-center justify-center transition-colors group relative"
-          title={item.label}
-        >
-          <div className={`w-10 h-10 flex items-center justify-center rounded-xl transition-colors ${
-            isActive 
-              ? 'bg-b-40 text-b-300' 
-              : 'text-n-300 hover:text-n-500 hover:bg-n-50'
-          }`}>
-            <Icon className="w-5 h-5" />
-          </div>
-          
-          {/* Tooltip */}
-          <div className={`absolute left-full ml-2 px-2 py-1 bg-n-500 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 ${
-            isActive ? 'group-hover:opacity-0' : ''
-          }`}>
-            {item.label}
-          </div>
-        </button>
+        <Tooltip content={item.label} side="right" disabled={isActive}>
+          <button
+            onClick={onClick}
+            className="w-full flex items-center justify-center transition-colors"
+            title={item.label}
+          >
+            <div className={`w-10 h-10 flex items-center justify-center rounded-xl transition-colors ${
+              isActive 
+                ? 'bg-b-40 text-b-300' 
+                : 'text-n-300 hover:text-n-500 hover:bg-n-50'
+            }`}>
+              <Icon className="w-5 h-5" />
+            </div>
+          </button>
+        </Tooltip>
       </li>
     );
   }
