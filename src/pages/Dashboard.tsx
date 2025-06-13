@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
               </div>
               
               {/* Greeting */}
-              <h1 className="text-3xl font-poppins font-semibold text-n-500">
+              <h1 className="text-2xl font-poppins font-semibold text-n-500">
                 {getGreeting()}, John
               </h1>
 
