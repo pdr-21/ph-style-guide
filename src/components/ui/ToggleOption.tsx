@@ -22,7 +22,7 @@ const ToggleOption: React.FC<ToggleOptionProps> = ({
       className={`px-4 py-2 text-xs font-poppins font-medium transition-all duration-200 rounded-lg whitespace-nowrap ${
         isActive 
           ? 'bg-white border border-b-200 text-b-200 shadow-sm' 
-          : 'text-n-400 hover:text-n-500 hover:bg-n-100'
+          : 'border border-transparent text-n-400 hover:text-n-500 hover:bg-n-100'
       }`}
     >
       <div className="flex items-center justify-center">
