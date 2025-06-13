@@ -63,7 +63,7 @@ const KPICard = React.forwardRef<HTMLDivElement, KPICardProps>(
         {...props}
       >
         {/* Title */}
-        <div className="text-sm font-poppins font-medium text-n-300 mb-4">
+        <div className="text-sm font-poppins font-medium text-n-300 mb-2">
           {title}
         </div>
 
