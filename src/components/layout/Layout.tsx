@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import TopNavigation from './TopNavigation';
 import SideNavigation from './SideNavigation';
-import { Environment } from '../../types';
+import { Environment, AppPage } from '../../types';
 
 interface LayoutProps {
   children: React.ReactNode;
   currentView: Environment;
   onViewChange: (view: Environment, subView?: string) => void;
+  activeAppPage: AppPage;
   activeStyleGuideSection: string;
   activeComponentSection: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, activeStyleGuideSection, activeComponentSection }) => {
+const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, activeAppPage, activeStyleGuideSection, activeComponentSection }) => {
 
   return (
     <div className="min-h-screen bg-white">
@@ -26,6 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange, ac
         <SideNavigation 
           currentView={currentView} 
           onEnvironmentChange={onViewChange}
+          activeAppPage={activeAppPage}
           activeStyleGuideSection={activeStyleGuideSection}
           activeComponentSection={activeComponentSection}
         />

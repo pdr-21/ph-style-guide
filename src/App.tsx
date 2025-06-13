@@ -3,6 +3,13 @@ import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
 import Components from './pages/Components';
 import StyleGuide from './pages/StyleGuide';
+import ContactsPage from './pages/ContactsPage';
+import CalendarPage from './pages/CalendarPage';
+import ReportsPage from './pages/ReportsPage';
+import DocumentsPage from './pages/DocumentsPage';
+import EmailPage from './pages/EmailPage';
+import CallsPage from './pages/CallsPage';
+import SettingsPage from './pages/SettingsPage';
 import { Environment, AppPage } from './types';
 
 function App() {
@@ -29,56 +36,6 @@ function App() {
       setActiveComponentSection(subView);
     }
   };
-
-  // Placeholder components for app pages
-  const ContactsPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Contacts</h1>
-      <p className="text-gray-600">Contacts page content will be implemented here.</p>
-    </div>
-  );
-
-  const CalendarPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Calendar</h1>
-      <p className="text-gray-600">Calendar page content will be implemented here.</p>
-    </div>
-  );
-
-  const ReportsPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Reports</h1>
-      <p className="text-gray-600">Reports page content will be implemented here.</p>
-    </div>
-  );
-
-  const DocumentsPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Documents</h1>
-      <p className="text-gray-600">Documents page content will be implemented here.</p>
-    </div>
-  );
-
-  const EmailPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Email</h1>
-      <p className="text-gray-600">Email page content will be implemented here.</p>
-    </div>
-  );
-
-  const CallsPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Calls</h1>
-      <p className="text-gray-600">Calls page content will be implemented here.</p>
-    </div>
-  );
-
-  const SettingsPage = () => (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Settings</h1>
-      <p className="text-gray-600">Settings page content will be implemented here.</p>
-    </div>
-  );
 
   const renderContent = () => {
     switch (currentView) {

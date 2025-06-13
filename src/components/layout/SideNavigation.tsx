@@ -9,12 +9,13 @@ import {
   Mail,
   Phone
 } from 'lucide-react';
-import { NavigationItem, Environment } from '../../types';
+import { NavigationItem, Environment, AppPage } from '../../types';
 import SideNavigationItem from './SideNavigationItem';
 
 interface SideNavigationProps {
   currentView: Environment;
   onEnvironmentChange: (view: Environment, subView?: string) => void;
+  activeAppPage: AppPage;
   activeStyleGuideSection: string;
   activeComponentSection: string;
 }
@@ -22,10 +23,10 @@ interface SideNavigationProps {
 const SideNavigation: React.FC<SideNavigationProps> = ({ 
   currentView, 
   onEnvironmentChange, 
+  activeAppPage,
   activeStyleGuideSection, 
   activeComponentSection 
 }) => {
-  const [activeItem, setActiveItem] = useState('dashboard');
 
   // App navigation items (icons only)
   const appNavigationItems: NavigationItem[] = [
@@ -67,8 +68,8 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
               <SideNavigationItem
                 key={item.id}
                 item={item}
-                isActive={activeItem === item.id}
-                onClick={() => setActiveItem(item.id)}
+                isActive={activeAppPage === item.id}
+                onClick={() => onEnvironmentChange('App', item.id)}
                 type="icon"
               />
             ))}
