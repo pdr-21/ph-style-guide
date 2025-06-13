@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
-import { Paperclip, Mic, ArrowRight } from 'lucide-react';
+import { Paperclip, Mic, ArrowRight, Edit3 } from 'lucide-react';
+import ToggleSwitch from '../ui/ToggleSwitch';
+import SparkleIcon from '../icons/SparkleIcon';
 
 const ChatInput: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
-  const [activeTab, setActiveTab] = useState('Automatic');
+  const [activeTab, setActiveTab] = useState('automatic');
 
-  const tabs = ['Automatic', 'Goals', 'Problems'];
+  // Define toggle options with icons
+  const toggleOptions = [
+    {
+      id: 'automatic',
+      label: 'Automatic',
+      icon: SparkleIcon
+    },
+    {
+      id: 'goals',
+      label: 'Goals',
+      icon: Edit3
+    },
+    {
+      id: 'problems',
+      label: 'Problems'
+    }
+  ];
 
   return (
     <div className="w-full">
@@ -22,24 +40,15 @@ const ChatInput: React.FC = () => {
           />
         </div>
 
-        {/* Bottom section with tabs and actions */}
+        {/* Bottom section with toggle and actions */}
         <div className="flex items-center justify-between">
-          {/* Tabs */}
-          <div className="flex items-center space-x-2">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-lg text-sm font-poppins font-medium transition-colors ${
-                  activeTab === tab
-                    ? 'bg-b-200 text-white'
-                    : 'bg-n-50 text-n-400 hover:bg-n-100 hover:text-n-500'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+          {/* Toggle Switch */}
+          <ToggleSwitch
+            options={toggleOptions}
+            activeOptionId={activeTab}
+            onOptionChange={setActiveTab}
+            className="h-8"
+          />
 
           {/* Action buttons */}
           <div className="flex items-center space-x-3">
