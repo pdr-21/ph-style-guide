@@ -4,7 +4,6 @@ import ButtonPreview from '../components/component_previews/ButtonPreview';
 import InputPreview from '../components/component_previews/InputPreview';
 import DropdownPreview from '../components/component_previews/DropdownPreview';
 import ToggleSwitchPreview from '../components/component_previews/ToggleSwitchPreview';
-import KPICardPreview from '../components/component_previews/KPICardPreview';
 import SideNavigationItemPreview from '../components/component_previews/SideNavigationItemPreview';
 import SideNavigationPreview from '../components/component_previews/SideNavigationPreview';
 import TopNavigationPreview from '../components/component_previews/TopNavigationPreview';
@@ -36,11 +35,6 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return {
           title: 'Toggle Switch Component',
           description: 'Custom toggle switch component with smooth animations'
-        };
-      case 'kpi-card':
-        return {
-          title: 'KPI Card Component',
-          description: 'Flexible KPI card component for displaying key performance indicators'
         };
       case 'side-nav-item':
         return {
@@ -77,8 +71,6 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <DropdownPreview />;
       case 'toggle-switch':
         return <ToggleSwitchPreview />;
-      case 'kpi-card':
-        return <KPICardPreview />;
       case 'side-nav-item':
         return <SideNavigationItemPreview />;
       case 'side-nav':
