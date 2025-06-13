@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
       {/* Main grid layout - 70/30 split */}
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 max-w-7xl mx-auto">
         {/* Left column - 70% */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-7 flex flex-col gap-8">
           {/* Gradient container */}
           <div className="flex flex-col gap-6 bg-gradient-to-bl from-b-40 to-white rounded-2xl p-6 mb-6">
             {/* Summary header with icon */}
