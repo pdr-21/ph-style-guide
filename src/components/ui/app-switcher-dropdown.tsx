@@ -114,7 +114,7 @@ const AppSwitcherDropdown: React.FC<AppSwitcherDropdownProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full right-0 mt-2 w-80 bg-white border border-n-100 rounded-xl shadow-app-switcher z-50 p-4"
+      className="absolute top-full right-0 mt-2 w-96 bg-white border border-n-100 rounded-xl shadow-app-switcher z-50 p-4"
       role="menu"
       aria-label="App Switcher"
     >
