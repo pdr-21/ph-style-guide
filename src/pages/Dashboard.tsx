@@ -1,9 +1,9 @@
 import React from 'react';
 import ChatInput from '../components/dashboard/ChatInput';
-import QuickCommandsGrid from '../components/dashboard/QuickCommandsGrid';
 import KPIGrid from '../components/dashboard/KPIGrid';
 import MyJobsSection from '../components/dashboard/MyJobsSection';
 import NewLeadsSection from '../components/dashboard/NewLeadsSection';
+import UpcomingMeetingsSection from '../components/dashboard/UpcomingMeetingsSection';
 import SparkleIcon from '../components/icons/SparkleIcon';
 
 const Dashboard: React.FC = () => {
@@ -54,13 +54,8 @@ const Dashboard: React.FC = () => {
 
         {/* Right column - 30% */}
         <div className="lg:col-span-3">
-          {/* Header */}
-          <h2 className="text-xl font-poppins font-semibold text-n-500 mb-6">
-            Look deeper in your data
-          </h2>
-
-          {/* Quick Commands Grid */}
-          <QuickCommandsGrid />
+          {/* Upcoming Meetings Section */}
+          <UpcomingMeetingsSection />
         </div>
       </div>
     </div>
