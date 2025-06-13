@@ -19,9 +19,9 @@ const Dashboard: React.FC = () => {
         {/* Left column - 70% */}
         <div className="lg:col-span-7">
           {/* Gradient container */}
-          <div className="bg-gradient-to-bl from-b-40 to-white rounded-2xl p-8 mb-6">
+          <div className="bg-gradient-to-bl from-b-40 to-white rounded-2xl p-8 mb-6 gap-4">
             {/* Summary header with icon */}
-            <div className="flex items-center mb-6">
+            <div className="flex items-center">
               <SparkleIcon className="mr-3" />
               <span className="text-sm font-poppins font-medium text-b-300">
                 Summary provided by X+
@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Greeting */}
-            <h1 className="text-3xl font-poppins font-semibold text-n-500 mb-8">
+            <h1 className="text-3xl font-poppins font-semibold text-n-500">
               {getGreeting()}, John
             </h1>
 
