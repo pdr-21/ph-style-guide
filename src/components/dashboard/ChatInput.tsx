@@ -10,7 +10,7 @@ const ChatInput: React.FC = () => {
   return (
     <div className="w-full">
       {/* Input container */}
-      <div className="bg-white rounded-2xl border border-n-100 p-6 shadow-sm">
+      <div className="bg-white rounded-2xl border border-n-100 p-4 shadow-sm">
         {/* Input field */}
         <div className="mb-4">
           <input
