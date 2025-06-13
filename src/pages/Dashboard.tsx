@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
         {/* Left column - 70% */}
         <div className="lg:col-span-7 flex flex-col gap-8">
           {/* Gradient container */}
-          <div className="flex flex-col gap-6 bg-gradient-to-bl from-b-40 to-white rounded-2xl p-6 mb-6">
+          <div className="flex flex-col gap-6 bg-gradient-to-bl from-b-40 to-white rounded-2xl p-6">
             {/* Summary header with icon */}
             <div className="flex flex-col gap-1">
               <div className="flex items-center">
