@@ -21,18 +21,21 @@ const Dashboard: React.FC = () => {
           {/* Gradient container */}
           <div className="flex flex-col gap-5 bg-gradient-to-bl from-b-40 to-white rounded-2xl p-8 mb-6">
             {/* Summary header with icon */}
-            <div className="flex items-center">
-              <SparkleIcon className="mr-3" />
-              <span className="text-sm font-poppins font-medium text-b-300">
-                Summary provided by X+
-              </span>
-            </div>
+            <div claddName="flex flex-col gap-2">
+              <div className="flex items-center">
+                <SparkleIcon className="mr-3" />
+                <span className="text-sm font-poppins font-medium text-b-300">
+                  Summary provided by X+
+                </span>
+              </div>
 
             {/* Greeting */}
-            <h1 className="text-3xl font-poppins font-semibold text-n-500">
-              {getGreeting()}, John
-            </h1>
+              <h1 className="text-3xl font-poppins font-semibold text-n-500">
+                {getGreeting()}, John
+              </h1>
 
+            </div>
+          
             {/* Chat Input Component */}
             <ChatInput />
           </div>
