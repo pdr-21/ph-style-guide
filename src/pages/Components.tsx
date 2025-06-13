@@ -2,6 +2,8 @@ import React from 'react';
 import PageHeader from '../components/common/PageHeader';
 import ButtonPreview from '../components/component_previews/ButtonPreview';
 import InputPreview from '../components/component_previews/InputPreview';
+import DropdownPreview from '../components/component_previews/DropdownPreview';
+import ToggleSwitchPreview from '../components/component_previews/ToggleSwitchPreview';
 import SideNavigationItemPreview from '../components/component_previews/SideNavigationItemPreview';
 import SideNavigationPreview from '../components/component_previews/SideNavigationPreview';
 import TopNavigationPreview from '../components/component_previews/TopNavigationPreview';
@@ -23,6 +25,16 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return {
           title: 'Input Component', 
           description: 'ShadCN input component integrated with our design system'
+        };
+      case 'dropdowns':
+        return {
+          title: 'Dropdown Component',
+          description: 'Custom dropdown component integrated with our design system'
+        };
+      case 'toggle-switch':
+        return {
+          title: 'Toggle Switch Component',
+          description: 'Custom toggle switch component with smooth animations'
         };
       case 'side-nav-item':
         return {
@@ -55,6 +67,10 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <ButtonPreview />;
       case 'inputs':
         return <InputPreview />;
+      case 'dropdowns':
+        return <DropdownPreview />;
+      case 'toggle-switch':
+        return <ToggleSwitchPreview />;
       case 'side-nav-item':
         return <SideNavigationItemPreview />;
       case 'side-nav':
