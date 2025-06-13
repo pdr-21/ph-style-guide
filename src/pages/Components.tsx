@@ -3,6 +3,7 @@ import PageHeader from '../components/common/PageHeader';
 import ButtonPreview from '../components/component_previews/ButtonPreview';
 import InputPreview from '../components/component_previews/InputPreview';
 import DropdownPreview from '../components/component_previews/DropdownPreview';
+import KPICardPreview from '../components/component_previews/KPICardPreview';
 import ToggleSwitchPreview from '../components/component_previews/ToggleSwitchPreview';
 import SideNavigationItemPreview from '../components/component_previews/SideNavigationItemPreview';
 import SideNavigationPreview from '../components/component_previews/SideNavigationPreview';
@@ -30,6 +31,11 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return {
           title: 'Dropdown Component',
           description: 'Custom dropdown component integrated with our design system'
+        };
+      case 'kpi-cards':
+        return {
+          title: 'KPI Card Component',
+          description: 'Key Performance Indicator cards with charts and trend indicators'
         };
       case 'toggle-switch':
         return {
@@ -69,6 +75,8 @@ const Components: React.FC<ComponentsProps> = ({ activeComponentSection }) => {
         return <InputPreview />;
       case 'dropdowns':
         return <DropdownPreview />;
+      case 'kpi-cards':
+        return <KPICardPreview />;
       case 'toggle-switch':
         return <ToggleSwitchPreview />;
       case 'side-nav-item':

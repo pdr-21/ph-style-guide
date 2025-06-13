@@ -55,6 +55,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     { id: 'buttons', label: 'Buttons', path: '/components/buttons' },
     { id: 'inputs', label: 'Inputs', path: '/components/inputs' },
     { id: 'dropdowns', label: 'Dropdowns', path: '/components/dropdowns' },
+    { id: 'kpi-cards', label: 'KPI Cards', path: '/components/kpi-cards' },
     { id: 'toggle-switch', label: 'Toggle Switch', path: '/components/toggle-switch' },
     { id: 'side-nav-item', label: 'Side Nav Item', path: '/components/side-nav-item' },
     { id: 'side-nav', label: 'Side Navigation', path: '/components/side-nav' },
