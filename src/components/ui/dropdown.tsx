@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils"
 import { DropdownMenu, type DropdownOption } from "./dropdown-menu"
 
 const dropdownVariants = cva(
-  "flex w-full items-center justify-between rounded-lg border bg-white px-3 py-3 text-sm font-poppins font-normal transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:shadow-focus-normal disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-n-40",
+  "flex w-full items-center justify-between rounded-xl border bg-white px-3 py-3 text-sm font-poppins font-normal transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:shadow-focus-normal disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-n-40",
   {
     variants: {
       variant: {
@@ -16,7 +16,7 @@ const dropdownVariants = cva(
       },
       size: {
         default: "h-12",
-        sm: "h-10 px-3 text-xs",
+        sm: "h-10 rounded-lg px-3 text-xs",
         lg: "h-14 px-4 text-base",
       },
     },
