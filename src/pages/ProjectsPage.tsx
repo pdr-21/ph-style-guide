@@ -147,16 +147,9 @@ const ProjectsPage: React.FC = () => {
           <div className="flex flex-col gap-6 bg-gradient-to-bl from-b-40 to-white rounded-2xl p-6">
             {/* Summary header with icon */}
             <div className="flex flex-col gap-1">
-              <div className="flex items-center">
-                <SparkleIcon className="mr-3" />
-                <span className="text-sm font-poppins font-medium text-b-300">
-                  Project insights provided by X+
-                </span>
-              </div>
-              
               {/* Greeting */}
               <h1 className="text-2xl font-poppins font-semibold text-n-500">
-                {getGreeting()}, John
+                Let's get your projects moving
               </h1>
             </div>
             {/* Chat Input Component without toggle switch */}
