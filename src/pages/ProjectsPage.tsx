@@ -3,6 +3,8 @@ import ChatInput from '../components/dashboard/ChatInput';
 import KPIGrid from '../components/dashboard/KPIGrid';
 import SparkleIcon from '../components/icons/SparkleIcon';
 import InitiativesTable from '../components/projects/InitiativesTable';
+import EscalatedTasksSection from '../components/projects/EscalatedTasksSection';
+import GoDeeperSection from '../components/projects/GoDeeperSection';
 
 const ProjectsPage: React.FC = () => {
   // Get current time for greeting
@@ -166,24 +168,9 @@ const ProjectsPage: React.FC = () => {
         </div>
 
         {/* Right column - 30% */}
-        <div className="lg:col-span-3">
-          {/* Empty container with matching background */}
-          <div className="bg-gr-25 rounded-xl p-6 h-full min-h-[400px]">
-            {/* Placeholder content */}
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-n-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                  <div className="w-8 h-8 bg-n-200 rounded"></div>
-                </div>
-                <h3 className="text-lg font-medium text-gray-700 mb-2">
-                  Project Sidebar
-                </h3>
-                <p className="text-sm text-gray-600">
-                  Additional project content will be added here
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="lg:col-span-3 flex flex-col gap-4">
+          <EscalatedTasksSection />
+          <GoDeeperSection />
         </div>
       </div>
 
