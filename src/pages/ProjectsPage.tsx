@@ -185,6 +185,36 @@ const ProjectsPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Initiatives Section - Full Width */}
+      <div className="mt-8">
+        {/* Title and Description */}
+        <div className="mb-6">
+          <h2 className="text-xl font-poppins font-semibold text-n-500 mb-2">
+            Initiatives
+          </h2>
+          <p className="text-sm font-poppins font-normal text-n-300">
+            List of all initiatives within your team.
+          </p>
+        </div>
+
+        {/* Table Container - Placeholder */}
+        <div className="bg-white rounded-xl border border-n-100 p-6">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-n-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                <div className="w-8 h-8 bg-n-200 rounded"></div>
+              </div>
+              <h3 className="text-lg font-medium text-gray-700 mb-2">
+                Initiatives Table
+              </h3>
+              <p className="text-sm text-gray-600">
+                The initiatives table will be implemented here
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
