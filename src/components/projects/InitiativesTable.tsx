@@ -81,7 +81,23 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           status: 'completed',
           progressPercentage: 100,
           assignedAgentId: 'agent1',
-          sourcedCandidates: ['John Smith - Senior React Developer', 'Sarah Chen - Full Stack Engineer', 'Mike Johnson - Backend Specialist', 'Lisa Wang - DevOps Engineer']
+          sourcedCandidates: ['John Smith - Senior React Developer', 'Sarah Chen - Full Stack Engineer', 'Mike Johnson - Backend Specialist', 'Lisa Wang - DevOps Engineer'],
+          attachedFiles: [
+            {
+              id: 'milestone-file1',
+              name: 'Candidate Profiles.pdf',
+              type: 'pdf',
+              size: '3.2 MB',
+              url: '#'
+            },
+            {
+              id: 'milestone-file2',
+              name: 'Sourcing Report.xlsx',
+              type: 'excel',
+              size: '1.1 MB',
+              url: '#'
+            }
+          ]
         },
         {
           id: 'milestone2',
@@ -90,7 +106,16 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-11-01',
           status: 'in-progress',
           progressPercentage: 75,
-          assignedAgentId: 'agent2'
+          assignedAgentId: 'agent2',
+          attachedFiles: [
+            {
+              id: 'milestone-file3',
+              name: 'Screening Guidelines.docx',
+              type: 'word',
+              size: '654 KB',
+              url: '#'
+            }
+          ]
         },
         {
           id: 'milestone3',
@@ -99,7 +124,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-11-20',
           status: 'not-started',
           progressPercentage: 0,
-          assignedAgentId: 'agent1'
+          assignedAgentId: 'agent1',
+          attachedFiles: []
         },
         {
           id: 'milestone4',
@@ -108,7 +134,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-12-10',
           status: 'not-started',
           progressPercentage: 0,
-          assignedAgentId: 'agent2'
+          assignedAgentId: 'agent2',
+          attachedFiles: []
         }
       ],
       attachedFiles: [
@@ -177,7 +204,16 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-09-30',
           status: 'completed',
           progressPercentage: 100,
-          assignedAgentId: 'agent3'
+          assignedAgentId: 'agent3',
+          attachedFiles: [
+            {
+              id: 'milestone-file4',
+              name: 'Process Analysis Report.pdf',
+              type: 'pdf',
+              size: '2.8 MB',
+              url: '#'
+            }
+          ]
         },
         {
           id: 'milestone6',
@@ -186,7 +222,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-10-20',
           status: 'in-progress',
           progressPercentage: 60,
-          assignedAgentId: 'agent3'
+          assignedAgentId: 'agent3',
+          attachedFiles: []
         },
         {
           id: 'milestone7',
@@ -195,7 +232,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-11-15',
           status: 'not-started',
           progressPercentage: 0,
-          assignedAgentId: 'agent3'
+          assignedAgentId: 'agent3',
+          attachedFiles: []
         }
       ],
       attachedFiles: [
@@ -257,7 +295,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-08-15',
           status: 'completed',
           progressPercentage: 100,
-          assignedAgentId: 'agent4'
+          assignedAgentId: 'agent4',
+          attachedFiles: []
         },
         {
           id: 'milestone9',
@@ -266,7 +305,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-09-30',
           status: 'completed',
           progressPercentage: 100,
-          assignedAgentId: 'agent4'
+          assignedAgentId: 'agent4',
+          attachedFiles: []
         },
         {
           id: 'milestone10',
@@ -275,7 +315,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-10-31',
           status: 'completed',
           progressPercentage: 100,
-          assignedAgentId: 'agent4'
+          assignedAgentId: 'agent4',
+          attachedFiles: []
         }
       ],
       attachedFiles: [
@@ -337,7 +378,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-11-10',
           status: 'in-progress',
           progressPercentage: 40,
-          assignedAgentId: 'agent5'
+          assignedAgentId: 'agent5',
+          attachedFiles: []
         },
         {
           id: 'milestone12',
@@ -346,7 +388,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-12-01',
           status: 'not-started',
           progressPercentage: 0,
-          assignedAgentId: 'agent5'
+          assignedAgentId: 'agent5',
+          attachedFiles: []
         },
         {
           id: 'milestone13',
@@ -355,7 +398,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-12-20',
           status: 'not-started',
           progressPercentage: 0,
-          assignedAgentId: 'agent5'
+          assignedAgentId: 'agent5',
+          attachedFiles: []
         }
       ],
       attachedFiles: [
@@ -410,7 +454,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-09-30',
           status: 'completed',
           progressPercentage: 100,
-          assignedAgentId: 'agent6'
+          assignedAgentId: 'agent6',
+          attachedFiles: []
         },
         {
           id: 'milestone15',
@@ -419,7 +464,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2024-11-15',
           status: 'in-progress',
           progressPercentage: 30,
-          assignedAgentId: 'agent6'
+          assignedAgentId: 'agent6',
+          attachedFiles: []
         },
         {
           id: 'milestone16',
@@ -428,7 +474,8 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
           dueDate: '2025-01-31',
           status: 'not-started',
           progressPercentage: 0,
-          assignedAgentId: 'agent6'
+          assignedAgentId: 'agent6',
+          attachedFiles: []
         }
       ],
       attachedFiles: [

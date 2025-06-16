@@ -13,6 +13,7 @@ export interface Milestone {
   progressPercentage: number;
   assignedAgentId: string;
   sourcedCandidates?: string[];
+  attachedFiles?: AttachedFile[];
 }
 
 export interface AttachedFile {
