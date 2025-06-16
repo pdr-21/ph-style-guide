@@ -8,6 +8,7 @@ import NotificationDropdown from '../components/projects/NotificationDropdown';
 import MilestoneTimeline from '../components/projects/MilestoneTimeline';
 import MilestoneList from '../components/projects/MilestoneList';
 import MilestoneDetail from '../components/projects/MilestoneDetail';
+import AgentsList from '../components/projects/AgentsList';
 import type { ProjectTask } from '../components/projects/ProjectTaskList';
 import ProjectActionsList from '../components/projects/ProjectActionsList';
 import type { Initiative } from '../types';
@@ -488,14 +489,9 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
       case 'agents':
         return (
           <div className="space-y-6">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-poppins font-medium text-n-500 mb-2">
-                Agents Content
-              </h3>
-              <p className="text-sm text-n-300">
-                This tab will contain detailed information about AI agents working on this initiative, their performance metrics, and task assignments.
-              </p>
-            </div>
+            <AgentsList 
+              agents={currentInitiative?.aiAgents || []}
+            />
           </div>
         );
       case 'human-in-loop':
