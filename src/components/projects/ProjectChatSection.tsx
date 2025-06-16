@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import ChatInput from '../dashboard/ChatInput';
-import { User, Bot } from 'lucide-react';
+import { User, Bot, ArrowRight } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
@@ -84,18 +83,12 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
               message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''
             }`}
           >
-            {/* Avatar */}
-            <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-              message.sender === 'user' 
-                ? 'bg-b-200 text-white' 
-                : 'bg-n-100 text-n-400'
-            }`}>
-              {message.sender === 'user' ? (
+            {/* Avatar - Only for user messages */}
+            {message.sender === 'user' && (
+              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-b-200 text-white">
                 <User className="w-3 h-3" />
-              ) : (
-                <Bot className="w-3 h-3" />
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Message Bubble */}
             <div className={`max-w-[80%] ${
@@ -118,31 +111,31 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
 
       {/* Chat Input */}
       <div className="border-t border-n-75 pt-3">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Ask about this initiative..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
+        <div className="bg-gr-25 rounded-lg p-3">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Ask about this initiative..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleSendMessage(inputValue);
+                  setInputValue('');
+                }
+              }}
+              className="w-full px-3 py-2 pr-10 text-xs font-poppins font-normal text-n-500 placeholder:text-n-200 bg-gr-25 border-none rounded-lg focus:outline-none resize-none"
+            />
+            <button
+              onClick={() => {
                 handleSendMessage(inputValue);
                 setInputValue('');
-              }
-            }}
-            className="w-full px-3 py-2 text-xs font-poppins font-normal text-n-500 placeholder:text-n-200 bg-white border border-n-100 rounded-lg focus:outline-none focus:border-b-200 focus:shadow-focus-normal transition-all duration-200"
-          />
-          <button
-            onClick={() => {
-              handleSendMessage(inputValue);
-              setInputValue('');
-            }}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 bg-b-200 text-white rounded-md hover:bg-b-300 transition-colors"
-          >
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
-          </button>
+              }}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 bg-p-400 text-white rounded-md hover:bg-p-300 transition-colors"
+            >
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

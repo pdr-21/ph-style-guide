@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import ExpandableSection from '../components/common/ExpandableSection';
@@ -11,10 +11,15 @@ interface ProjectTemplatePageProps {
   onBack: () => void;
 }
 
+type ExpandedSection = 'tasks' | 'chat';
+
 const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({ 
   initiativeId, 
   onBack 
 }) => {
+  // State to manage which section is expanded (only one can be expanded at a time)
+  const [expandedSection, setExpandedSection] = useState<ExpandedSection>('chat');
+
   // Sample tasks data
   const sampleTasks: ProjectTask[] = [
     {
@@ -58,6 +63,11 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
     }
   ];
 
+  // Handle section toggle - ensures only one section is expanded at a time
+  const handleSectionToggle = (section: ExpandedSection) => {
+    setExpandedSection(expandedSection === section ? 'chat' : section);
+  };
+
   return (
     <div className="min-h-[calc(100vh-4.5rem)] bg-gr-25 p-8">
       {/* Back Button */}
@@ -93,20 +103,22 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
 
         {/* Right Container - 30% */}
         <div className="lg:col-span-3 flex flex-col gap-4 h-full">
-          {/* Your Tasks Section - Initially Minimized */}
+          {/* Your Tasks Section */}
           <ExpandableSection
             title="Your tasks"
-            initialExpanded={false}
-            className="flex-shrink-0"
+            isExpanded={expandedSection === 'tasks'}
+            onToggle={() => handleSectionToggle('tasks')}
+            className={expandedSection === 'tasks' ? 'flex-1' : 'flex-shrink-0'}
           >
             <ProjectTaskList tasks={sampleTasks} />
           </ExpandableSection>
 
-          {/* Chat Section - Initially Expanded */}
+          {/* Chat Section */}
           <ExpandableSection
             title="Chat"
-            initialExpanded={true}
-            className="flex-1 min-h-0"
+            isExpanded={expandedSection === 'chat'}
+            onToggle={() => handleSectionToggle('chat')}
+            className={expandedSection === 'chat' ? 'flex-1' : 'flex-shrink-0'}
           >
             <ProjectChatSection />
           </ExpandableSection>

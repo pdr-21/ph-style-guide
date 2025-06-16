@@ -1,31 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface ExpandableSectionProps {
   title: string;
   children: React.ReactNode;
-  initialExpanded?: boolean;
+  isExpanded: boolean;
+  onToggle: () => void;
   className?: string;
 }
 
 const ExpandableSection: React.FC<ExpandableSectionProps> = ({
   title,
   children,
-  initialExpanded = false,
+  isExpanded,
+  onToggle,
   className = ''
 }) => {
-  const [isExpanded, setIsExpanded] = useState(initialExpanded);
-
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
     <div className={cn("bg-white border border-n-75 rounded-xl overflow-hidden", className)}>
       {/* Header */}
       <button
-        onClick={toggleExpanded}
+        onClick={onToggle}
         className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-n-40 transition-colors border-b border-n-75"
       >
         <h3 className="text-sm font-poppins font-medium text-n-500">
@@ -44,7 +40,7 @@ const ExpandableSection: React.FC<ExpandableSectionProps> = ({
       <div 
         className={cn(
           "transition-all duration-300 ease-in-out overflow-hidden",
-          isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
         <div className="p-4">
