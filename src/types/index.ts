@@ -24,6 +24,15 @@ export interface AttachedFile {
   url: string;
 }
 
+export interface ProjectAction {
+  id: string;
+  title: string;
+  description: string;
+  status: 'completed' | 'escalated' | 'not-started';
+  category: string;
+  milestoneId: string;
+}
+
 export interface User {
   name: string;
   initials: string;
@@ -77,4 +86,5 @@ export interface Initiative {
   category: SpotlightFilter;
   milestones: Milestone[];
   attachedFiles: AttachedFile[];
+  actions: ProjectAction[];
 }

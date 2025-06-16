@@ -138,7 +138,73 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
           attachedFiles: []
         }
       ],
-      attachedFiles: []
+      attachedFiles: [],
+      actions: [
+        {
+          id: 'action1',
+          title: 'Review candidate profiles',
+          description: 'Analyze and review sourced candidate profiles for technical fit',
+          status: 'completed',
+          category: 'Review & Analysis',
+          milestoneId: 'milestone1'
+        },
+        {
+          id: 'action2',
+          title: 'Update job requirements',
+          description: 'Refine job requirements based on market feedback',
+          status: 'completed',
+          category: 'Documentation',
+          milestoneId: 'milestone1'
+        },
+        {
+          id: 'action3',
+          title: 'Schedule technical interviews',
+          description: 'Coordinate technical interview sessions with engineering team',
+          status: 'escalated',
+          category: 'Coordination',
+          milestoneId: 'milestone2'
+        },
+        {
+          id: 'action4',
+          title: 'Prepare assessment materials',
+          description: 'Create technical assessment questions and coding challenges',
+          status: 'completed',
+          category: 'Preparation',
+          milestoneId: 'milestone2'
+        },
+        {
+          id: 'action5',
+          title: 'Conduct reference checks',
+          description: 'Perform background and reference verification for top candidates',
+          status: 'not-started',
+          category: 'Verification',
+          milestoneId: 'milestone3'
+        },
+        {
+          id: 'action6',
+          title: 'Prepare final interview questions',
+          description: 'Develop behavioral and cultural fit interview questions',
+          status: 'not-started',
+          category: 'Preparation',
+          milestoneId: 'milestone3'
+        },
+        {
+          id: 'action7',
+          title: 'Draft offer letters',
+          description: 'Prepare competitive offer packages for selected candidates',
+          status: 'not-started',
+          category: 'Documentation',
+          milestoneId: 'milestone4'
+        },
+        {
+          id: 'action8',
+          title: 'Setup onboarding workflow',
+          description: 'Configure automated onboarding process for new hires',
+          status: 'not-started',
+          category: 'Process Setup',
+          milestoneId: 'milestone4'
+        }
+      ]
     },
     {
       id: '2',
@@ -214,7 +280,57 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
           attachedFiles: []
         }
       ],
-      attachedFiles: []
+      attachedFiles: [],
+      actions: [
+        {
+          id: 'action9',
+          title: 'Analyze current process',
+          description: 'Map out existing onboarding workflow and identify bottlenecks',
+          status: 'completed',
+          category: 'Analysis',
+          milestoneId: 'milestone5'
+        },
+        {
+          id: 'action10',
+          title: 'Survey new employees',
+          description: 'Collect feedback from recent hires about onboarding experience',
+          status: 'completed',
+          category: 'Research',
+          milestoneId: 'milestone5'
+        },
+        {
+          id: 'action11',
+          title: 'Configure HRIS integration',
+          description: 'Setup automated data sync between HR systems',
+          status: 'escalated',
+          category: 'Technical Setup',
+          milestoneId: 'milestone6'
+        },
+        {
+          id: 'action12',
+          title: 'Test workflow automation',
+          description: 'Validate automated onboarding workflows with test scenarios',
+          status: 'not-started',
+          category: 'Testing',
+          milestoneId: 'milestone6'
+        },
+        {
+          id: 'action13',
+          title: 'Create training videos',
+          description: 'Develop video content for new employee orientation',
+          status: 'not-started',
+          category: 'Content Creation',
+          milestoneId: 'milestone7'
+        },
+        {
+          id: 'action14',
+          title: 'Design welcome kit',
+          description: 'Create physical and digital welcome materials for new hires',
+          status: 'not-started',
+          category: 'Design',
+          milestoneId: 'milestone7'
+        }
+      ]
     }
   ];
 
