@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Paperclip, Mic, ArrowRight } from 'lucide-react';
 import ToggleSwitch from '../ui/ToggleSwitch';
 
-const ChatInput: React.FC = () => {
+interface ChatInputProps {
+  showToggleSwitch?: boolean;
+}
+
+const ChatInput: React.FC<ChatInputProps> = ({ showToggleSwitch = true }) => {
   const [inputValue, setInputValue] = useState('');
   const [activeMode, setActiveMode] = useState('automatic');
 
@@ -29,15 +33,17 @@ const ChatInput: React.FC = () => {
 
         {/* Bottom section with toggle and actions */}
         <div className="flex items-center justify-between">
-          {/* Toggle Switch */}
-          <ToggleSwitch
-            options={modeOptions}
-            activeOptionId={activeMode}
-            onOptionChange={setActiveMode}
-          />
+          {/* Toggle Switch - conditionally rendered */}
+          {showToggleSwitch && (
+            <ToggleSwitch
+              options={modeOptions}
+              activeOptionId={activeMode}
+              onOptionChange={setActiveMode}
+            />
+          )}
 
           {/* Action buttons */}
-          <div className="flex items-center space-x-3">
+          <div className={`flex items-center space-x-3 ${!showToggleSwitch ? 'ml-auto' : ''}`}>
             <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors">
               <Paperclip className="w-5 h-5" />
             </button>
