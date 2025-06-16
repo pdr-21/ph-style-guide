@@ -5,6 +5,10 @@ import ToggleSwitch from '../ui/ToggleSwitch';
 import { Filter } from 'lucide-react';
 import { Initiative, SpotlightFilter, InitiativeStatus, TaskBreakdown, AI_Agent, Human } from '../../types';
 import { getAgentImageByIndex } from '../../lib/agentImages';
+import TaskDistributionBar from './TaskDistributionBar';
+import AgentAvatarGroup from './AgentAvatarGroup';
+import HumanAvatarGroup from './HumanAvatarGroup';
+import ViewInitiativeButton from './ViewInitiativeButton';
 
 const InitiativesTable: React.FC = () => {
   const [activeSpotlight, setActiveSpotlight] = useState<SpotlightFilter>('All initiatives');
@@ -244,6 +248,11 @@ const InitiativesTable: React.FC = () => {
     });
   };
 
+  // Handle view initiative
+  const handleViewInitiative = (initiativeId: string) => {
+    console.log(`Viewing initiative: ${initiativeId}`);
+    // TODO: Navigate to initiative detail page
+  };
   return (
     <div className="space-y-6">
       {/* Title and Description */}
@@ -340,63 +349,25 @@ const InitiativesTable: React.FC = () => {
 
                   {/* Task distribution - Placeholder */}
                   <td className="py-4 px-4">
-                    <div className="w-32 h-4 bg-n-100 rounded-lg flex items-center justify-center">
-                      <span className="text-xs text-n-300">Task Bar</span>
-                    </div>
+                    <TaskDistributionBar taskBreakdown={initiative.taskDistribution} />
                   </td>
 
                   {/* AI Agent distribution - Placeholder */}
                   <td className="py-4 px-4">
-                    <div className="flex -space-x-2">
-                      {initiative.aiAgents.slice(0, 3).map((agent, index) => (
-                        <div
-                          key={agent.id}
-                          className="w-8 h-8 rounded-full bg-n-100 border-2 border-white flex items-center justify-center overflow-hidden"
-                        >
-                          <img
-                            src={getAgentImageByIndex(agent.imageIndex)}
-                            alt={agent.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                      {initiative.aiAgents.length > 3 && (
-                        <div className="w-8 h-8 rounded-full bg-n-200 border-2 border-white flex items-center justify-center">
-                          <span className="text-xs font-poppins font-medium text-n-500">
-                            +{initiative.aiAgents.length - 3}
-                          </span>
-                        </div>
-                      )}
-                    </div>
+                    <AgentAvatarGroup agents={initiative.aiAgents} maxVisible={3} />
                   </td>
 
                   {/* Human in the loop - Placeholder */}
                   <td className="py-4 px-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-8 h-8 rounded-full bg-n-100 flex items-center justify-center overflow-hidden">
-                        {initiative.humanInLoop.imageIndex !== undefined ? (
-                          <img
-                            src={getAgentImageByIndex(initiative.humanInLoop.imageIndex)}
-                            alt={initiative.humanInLoop.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <span className="text-xs font-poppins font-medium text-n-400">
-                            {initiative.humanInLoop.initials}
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-sm font-poppins font-normal text-n-400">
-                        {initiative.humanInLoop.name}
-                      </div>
-                    </div>
+                    <HumanAvatarGroup humans={[initiative.humanInLoop]} />
                   </td>
 
                   {/* View button */}
                   <td className="py-4 px-4">
-                    <Button variant="outline" size="sm">
-                      View
-                    </Button>
+                    <ViewInitiativeButton 
+                      initiativeId={initiative.id} 
+                      onView={handleViewInitiative}
+                    />
                   </td>
                 </tr>
               ))}
