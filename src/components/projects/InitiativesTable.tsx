@@ -294,7 +294,7 @@ const InitiativesTable: React.FC = () => {
         </div>
 
         {/* Table */}
-        <div className="overflow-auto">
+        <div className="overflow-visible">
           <table className="w-full">
             <thead>
               <tr className="border-b border-n-75">
