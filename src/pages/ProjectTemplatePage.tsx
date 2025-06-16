@@ -1,6 +1,10 @@
 import React from 'react';
 import { Button } from '../components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import ExpandableSection from '../components/common/ExpandableSection';
+import ProjectTaskList from '../components/projects/ProjectTaskList';
+import ProjectChatSection from '../components/projects/ProjectChatSection';
+import type { ProjectTask } from '../components/projects/ProjectTaskList';
 
 interface ProjectTemplatePageProps {
   initiativeId: string;
@@ -11,6 +15,49 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
   initiativeId, 
   onBack 
 }) => {
+  // Sample tasks data
+  const sampleTasks: ProjectTask[] = [
+    {
+      id: 'task1',
+      title: 'Review candidate profiles for Senior Engineer position',
+      dueDate: '2024-06-20',
+      agent: {
+        id: 'agent1',
+        name: 'Sourcing Agent Alpha',
+        imageIndex: 0,
+        leadsFound: 1247,
+        successRate: 94.2,
+        avgResponseTime: '2.3h'
+      }
+    },
+    {
+      id: 'task2',
+      title: 'Schedule interviews for Product Manager candidates',
+      dueDate: '2024-06-22',
+      agent: {
+        id: 'agent2',
+        name: 'Screening Agent Beta',
+        imageIndex: 1,
+        leadsFound: 892,
+        successRate: 89.7,
+        avgResponseTime: '1.8h'
+      }
+    },
+    {
+      id: 'task3',
+      title: 'Prepare offer letter for selected candidate',
+      dueDate: '2024-06-25',
+      agent: {
+        id: 'agent3',
+        name: 'Onboarding Agent Gamma',
+        imageIndex: 3,
+        leadsFound: 567,
+        successRate: 92.1,
+        avgResponseTime: '3.1h'
+      }
+    }
+  ];
+
   return (
     <div className="min-h-[calc(100vh-4.5rem)] bg-gr-25 p-8">
       {/* Back Button */}
@@ -45,17 +92,24 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
         </div>
 
         {/* Right Container - 30% */}
-        <div className="lg:col-span-3 bg-white border border-n-75 rounded-xl p-6">
-          <div className="h-full flex items-center justify-center">
-            <div className="text-center text-n-300">
-              <h3 className="text-lg font-poppins font-medium mb-2">
-                Right Container
-              </h3>
-              <p className="text-xs">
-                This container will hold supplementary content and actions
-              </p>
-            </div>
-          </div>
+        <div className="lg:col-span-3 flex flex-col gap-4 h-full">
+          {/* Your Tasks Section - Initially Minimized */}
+          <ExpandableSection
+            title="Your tasks"
+            initialExpanded={false}
+            className="flex-shrink-0"
+          >
+            <ProjectTaskList tasks={sampleTasks} />
+          </ExpandableSection>
+
+          {/* Chat Section - Initially Expanded */}
+          <ExpandableSection
+            title="Chat"
+            initialExpanded={true}
+            className="flex-1 min-h-0"
+          >
+            <ProjectChatSection />
+          </ExpandableSection>
         </div>
       </div>
     </div>
