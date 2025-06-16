@@ -29,7 +29,7 @@ const HumanProfileCard: React.FC<HumanProfileCardProps> = ({
     >
       {/* Human Header */}
       <div className="flex items-center space-x-3 mb-4">
-        <div className="w-10 h-10 rounded-full overflow-hidden bg-n-100 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-gr-25 flex items-center justify-center">
           {human.imageIndex !== undefined ? (
             <img 
               src={getAgentImageByIndex(human.imageIndex)} 

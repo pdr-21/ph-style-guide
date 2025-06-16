@@ -60,7 +60,7 @@ const AgentAvatarGroup: React.FC<AgentAvatarGroupProps> = ({
       {visibleAgents.map((agent) => (
         <div
           key={agent.id}
-          className="w-8 h-8 rounded-full bg-n-100 border-2 border-white flex items-center justify-center overflow-hidden cursor-pointer hover:z-10 transition-transform hover:scale-110"
+          className="w-8 h-8 rounded-full bg-gr-25 border-2 border-white flex items-center justify-center overflow-hidden cursor-pointer hover:z-10 transition-transform hover:scale-110"
           onMouseEnter={(e) => handleAgentMouseEnter(agent, e)}
           onMouseLeave={handleAgentMouseLeave}
           title={agent.name}
