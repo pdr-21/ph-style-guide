@@ -11,8 +11,6 @@ import MilestoneDetail from '../components/projects/MilestoneDetail';
 import AgentsList from '../components/projects/AgentsList';
 import type { ProjectTask } from '../components/projects/ProjectTaskList';
 import ProjectActionsList from '../components/projects/ProjectActionsList';
-import HumansList from '../components/projects/HumansList';
-import EscalatedTasksList from '../components/projects/EscalatedTasksList';
 import type { Initiative } from '../types';
 
 interface ProjectTemplatePageProps {
@@ -499,15 +497,27 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
       case 'human-in-loop':
         return (
           <div className="space-y-6">
-            <HumansList 
-              humans={currentInitiative ? [currentInitiative.humanInLoop] : []}
-            />
+            <div className="text-center py-12">
+              <h3 className="text-lg font-poppins font-medium text-n-500 mb-2">
+                Human in the Loop Content
+              </h3>
+              <p className="text-sm text-n-300">
+                This tab will contain information about human oversight, approvals needed, and human-AI collaboration details.
+              </p>
+            </div>
           </div>
         );
       case 'escalations':
         return (
           <div className="space-y-6">
-            <EscalatedTasksList />
+            <div className="text-center py-12">
+              <h3 className="text-lg font-poppins font-medium text-n-500 mb-2">
+                Escalations Content
+              </h3>
+              <p className="text-sm text-n-300">
+                This tab will contain escalated tasks, issues requiring attention, and resolution workflows.
+              </p>
+            </div>
           </div>
         );
       default:

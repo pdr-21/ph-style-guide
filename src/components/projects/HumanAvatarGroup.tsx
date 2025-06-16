@@ -73,7 +73,6 @@ const HumanAvatarGroup: React.FC<HumanAvatarGroupProps> = ({
         >
           <HumanProfileCard
             human={hoveredHuman}
-            tasks={[]}
             isVisible={true}
             position={humanPosition}
           />
