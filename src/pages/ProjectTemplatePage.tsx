@@ -11,6 +11,9 @@ import MilestoneDetail from '../components/projects/MilestoneDetail';
 import AgentsList from '../components/projects/AgentsList';
 import type { ProjectTask } from '../components/projects/ProjectTaskList';
 import ProjectActionsList from '../components/projects/ProjectActionsList';
+import HumanResponsibleCard from '../components/projects/HumanResponsibleCard';
+import EscalatedTasksList from '../components/projects/EscalatedTasksList';
+import type { EscalatedTask } from '../components/projects/EscalatedTaskCard';
 import type { Initiative } from '../types';
 
 interface ProjectTemplatePageProps {
@@ -422,6 +425,61 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
     }
   ];
 
+  // Sample escalated tasks data
+  const sampleEscalatedTasks: EscalatedTask[] = [
+    {
+      id: 'escalated-1',
+      title: 'Technical interview scheduling conflicts',
+      description: 'Multiple candidates have conflicting availability with engineering team members for technical interviews.',
+      agent: {
+        id: 'agent2',
+        name: 'Screening Agent Beta',
+        imageIndex: 1,
+        leadsFound: 892,
+        successRate: 89.7,
+        avgResponseTime: '1.8h'
+      },
+      dueDate: '2024-06-22',
+      escalatedDate: '2024-06-18',
+      priority: 'high',
+      reason: 'Unable to resolve scheduling conflicts automatically. Manual intervention required to coordinate with hiring managers.'
+    },
+    {
+      id: 'escalated-2',
+      title: 'Candidate background verification delays',
+      description: 'Background check process is taking longer than expected for top candidates, potentially delaying offer timeline.',
+      agent: {
+        id: 'agent1',
+        name: 'Sourcing Agent Alpha',
+        imageIndex: 0,
+        leadsFound: 1247,
+        successRate: 94.2,
+        avgResponseTime: '2.3h'
+      },
+      dueDate: '2024-06-25',
+      escalatedDate: '2024-06-19',
+      priority: 'medium',
+      reason: 'Third-party verification service experiencing delays. Alternative verification methods may be needed.'
+    },
+    {
+      id: 'escalated-3',
+      title: 'Salary negotiation outside parameters',
+      description: 'Top candidate is requesting compensation above approved budget range for the position.',
+      agent: {
+        id: 'agent3',
+        name: 'Onboarding Agent Gamma',
+        imageIndex: 3,
+        leadsFound: 567,
+        successRate: 92.1,
+        avgResponseTime: '3.1h'
+      },
+      dueDate: '2024-06-28',
+      escalatedDate: '2024-06-20',
+      priority: 'high',
+      reason: 'Candidate expectations exceed budget parameters. Requires approval for budget adjustment or alternative compensation structure.'
+    }
+  ];
+
   // Handle section toggle - ensures only one section is expanded at a time
   const handleSectionToggle = (section: ExpandedSection) => {
     setExpandedSection(expandedSection === section ? 'chat' : section);
@@ -497,27 +555,15 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
       case 'human-in-loop':
         return (
           <div className="space-y-6">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-poppins font-medium text-n-500 mb-2">
-                Human in the Loop Content
-              </h3>
-              <p className="text-sm text-n-300">
-                This tab will contain information about human oversight, approvals needed, and human-AI collaboration details.
-              </p>
-            </div>
+            {currentInitiative && (
+              <HumanResponsibleCard human={currentInitiative.humanInLoop} />
+            )}
           </div>
         );
       case 'escalations':
         return (
           <div className="space-y-6">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-poppins font-medium text-n-500 mb-2">
-                Escalations Content
-              </h3>
-              <p className="text-sm text-n-300">
-                This tab will contain escalated tasks, issues requiring attention, and resolution workflows.
-              </p>
-            </div>
+            <EscalatedTasksList tasks={sampleEscalatedTasks} />
           </div>
         );
       default:
