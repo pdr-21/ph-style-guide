@@ -10,6 +10,7 @@ import DocumentsPage from './pages/DocumentsPage';
 import EmailPage from './pages/EmailPage';
 import CallsPage from './pages/CallsPage';
 import SettingsPage from './pages/SettingsPage';
+import ProjectsPage from './pages/ProjectsPage';
 import { Environment, AppPage } from './types';
 
 function App() {
@@ -56,8 +57,7 @@ function App() {
           case 'calls':
             return <CallsPage />;
           case 'projects':
-            // Placeholder for external link - will be handled later
-            return <Dashboard />; // Temporarily show dashboard
+            return <ProjectsPage />;
           case 'settings':
             return <SettingsPage />;
           default:
