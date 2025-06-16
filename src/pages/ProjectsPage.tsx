@@ -1,7 +1,6 @@
 import React from 'react';
 import ChatInput from '../components/dashboard/ChatInput';
 import KPIGrid from '../components/dashboard/KPIGrid';
-import InitiativesTable from '../components/projects/InitiativesTable';
 import SparkleIcon from '../components/icons/SparkleIcon';
 
 const ProjectsPage: React.FC = () => {
@@ -185,11 +184,6 @@ const ProjectsPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Full-width Initiatives Table Section */}
-      <div className="mt-8">
-        <InitiativesTable />
       </div>
     </div>
   );
