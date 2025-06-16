@@ -17,10 +17,8 @@ const ViewInitiativeButton: React.FC<ViewInitiativeButtonProps> = ({
     if (onView) {
       onView(initiativeId);
     } else {
-      // Default behavior - navigate to project template page
-      // This will be replaced with dynamic routing later
-      window.location.hash = '#project-template';
-      window.location.reload();
+      // Default behavior - could navigate to initiative detail page
+      console.log(`Viewing initiative: ${initiativeId}`);
     }
   };
 

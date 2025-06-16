@@ -11,7 +11,6 @@ import EmailPage from './pages/EmailPage';
 import CallsPage from './pages/CallsPage';
 import SettingsPage from './pages/SettingsPage';
 import ProjectsPage from './pages/ProjectsPage';
-import ProjectTemplatePage from './pages/ProjectTemplatePage';
 import { Environment, AppPage } from './types';
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
     setCurrentView(view);
     if (view === 'App' && subView) {
       // Check if subView is a valid AppPage
-      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'projects', 'settings', 'project-template'];
+      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'projects', 'settings'];
       if (validAppPages.includes(subView as AppPage)) {
         setActiveAppPage(subView as AppPage);
       } else {
@@ -61,8 +60,6 @@ function App() {
             return <ProjectsPage />;
           case 'settings':
             return <SettingsPage />;
-          case 'project-template':
-            return <ProjectTemplatePage />;
           default:
             return <Dashboard />;
         }
