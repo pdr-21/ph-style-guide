@@ -1,6 +1,6 @@
 export type Environment = 'App' | 'Components' | 'Style Guide';
 export type NavigationItemType = 'icon' | 'text';
-export type AppPage = 'dashboard' | 'contacts' | 'calendar' | 'reports' | 'documents' | 'email' | 'calls' | 'projects' | 'settings';
+export type AppPage = 'dashboard' | 'contacts' | 'calendar' | 'reports' | 'documents' | 'email' | 'calls' | 'projects' | 'settings' | 'project-template';
 export type InitiativeStatus = 'Not Started' | 'In Progress' | 'Completed' | 'Paused' | 'Escalated' | 'Awaiting Human Input';
 export type SpotlightFilter = 'All initiatives' | 'My initiatives' | 'Paused' | 'Escalations' | 'Hiring' | 'Onboarding';
 
