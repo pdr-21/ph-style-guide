@@ -5,8 +5,11 @@ import SparkleIcon from '../components/icons/SparkleIcon';
 import InitiativesTable from '../components/projects/InitiativesTable';
 import EscalatedTasksSection from '../components/projects/EscalatedTasksSection';
 import GoDeeperSection from '../components/projects/GoDeeperSection';
+import ProjectTemplatePage from './ProjectTemplatePage';
 
 const ProjectsPage: React.FC = () => {
+  const [selectedInitiativeId, setSelectedInitiativeId] = React.useState<string | null>(null);
+
   // Get current time for greeting
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -137,6 +140,26 @@ const ProjectsPage: React.FC = () => {
     }
   ];
 
+  // Handle viewing an initiative
+  const handleViewInitiative = (initiativeId: string) => {
+    setSelectedInitiativeId(initiativeId);
+  };
+
+  // Handle going back to projects list
+  const handleBackToProjects = () => {
+    setSelectedInitiativeId(null);
+  };
+
+  // If an initiative is selected, show the template page
+  if (selectedInitiativeId) {
+    return (
+      <ProjectTemplatePage 
+        initiativeId={selectedInitiativeId}
+        onBack={handleBackToProjects}
+      />
+    );
+  }
+
   return (
     <div className="p-8">
       {/* Main grid layout - 70/30 split */}
@@ -169,7 +192,7 @@ const ProjectsPage: React.FC = () => {
 
       {/* Initiatives Section - Full Width */}
       <div className="mt-8">
-        <InitiativesTable />
+        <InitiativesTable onView={handleViewInitiative} />
       </div>
     </div>
   );

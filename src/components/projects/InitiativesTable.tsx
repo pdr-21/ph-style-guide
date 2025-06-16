@@ -10,7 +10,11 @@ import AgentAvatarGroup from './AgentAvatarGroup';
 import HumanAvatarGroup from './HumanAvatarGroup';
 import ViewInitiativeButton from './ViewInitiativeButton';
 
-const InitiativesTable: React.FC = () => {
+interface InitiativesTableProps {
+  onView?: (initiativeId: string) => void;
+}
+
+const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
   const [activeSpotlight, setActiveSpotlight] = useState<SpotlightFilter>('All initiatives');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -250,8 +254,11 @@ const InitiativesTable: React.FC = () => {
 
   // Handle view initiative
   const handleViewInitiative = (initiativeId: string) => {
-    console.log(`Viewing initiative: ${initiativeId}`);
-    // TODO: Navigate to initiative detail page
+    if (onView) {
+      onView(initiativeId);
+    } else {
+      console.log(`Viewing initiative: ${initiativeId}`);
+    }
   };
   return (
     <div className="space-y-6">
