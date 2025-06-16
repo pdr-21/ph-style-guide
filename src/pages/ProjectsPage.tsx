@@ -111,7 +111,7 @@ const ProjectsPage: React.FC = () => {
       )
     },
     {
-      title: "Recruiter Productivity",
+      title: "Agent Productivity",
       currentValue: "8.5",
       trendValue: "+1.2",
       trendType: "positive" as const,
