@@ -40,10 +40,10 @@ const ExpandableSection: React.FC<ExpandableSectionProps> = ({
       <div 
         className={cn(
           "transition-all duration-300 ease-in-out overflow-hidden",
-          isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          isExpanded ? "flex-1 opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <div className="p-4">
+        <div className="p-4 h-full">
           {children}
         </div>
       </div>
