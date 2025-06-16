@@ -447,7 +447,7 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
   const daysRemaining = getDaysRemaining(currentInitiative.endDate);
 
   return (
-    <div className="bg-gr-25 p-8">
+    <div className="h-fit bg-gr-25 p-8">
       {/* Back Button */}
       <div className="mb-6">
         <Button 
