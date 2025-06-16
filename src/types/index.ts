@@ -4,6 +4,25 @@ export type AppPage = 'dashboard' | 'contacts' | 'calendar' | 'reports' | 'docum
 export type InitiativeStatus = 'Not Started' | 'In Progress' | 'Completed' | 'Paused' | 'Escalated' | 'Awaiting Human Input';
 export type SpotlightFilter = 'All initiatives' | 'My initiatives' | 'Paused' | 'Escalations' | 'Hiring' | 'Onboarding';
 
+export interface Milestone {
+  id: string;
+  name: string;
+  description: string;
+  dueDate: string;
+  status: 'completed' | 'in-progress' | 'not-started';
+  progressPercentage: number;
+  assignedAgentId: string;
+  sourcedCandidates?: string[];
+}
+
+export interface AttachedFile {
+  id: string;
+  name: string;
+  type: string;
+  size: string;
+  url: string;
+}
+
 export interface User {
   name: string;
   initials: string;
@@ -55,4 +74,6 @@ export interface Initiative {
   aiAgents: AI_Agent[];
   humanInLoop: Human;
   category: SpotlightFilter;
+  milestones: Milestone[];
+  attachedFiles: AttachedFile[];
 }

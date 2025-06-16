@@ -71,7 +71,69 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
         email: 'sarah.johnson@company.com',
         imageIndex: 2
       },
-      category: 'Hiring'
+      category: 'Hiring',
+      milestones: [
+        {
+          id: 'milestone1',
+          name: 'Candidate Sourcing',
+          description: 'Source and identify qualified candidates for senior engineering positions',
+          dueDate: '2024-10-15',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent1',
+          sourcedCandidates: ['John Smith - Senior React Developer', 'Sarah Chen - Full Stack Engineer', 'Mike Johnson - Backend Specialist', 'Lisa Wang - DevOps Engineer']
+        },
+        {
+          id: 'milestone2',
+          name: 'Initial Screening',
+          description: 'Conduct initial screening interviews and technical assessments',
+          dueDate: '2024-11-01',
+          status: 'in-progress',
+          progressPercentage: 75,
+          assignedAgentId: 'agent2'
+        },
+        {
+          id: 'milestone3',
+          name: 'Final Interviews',
+          description: 'Schedule and conduct final interviews with hiring managers',
+          dueDate: '2024-11-20',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent1'
+        },
+        {
+          id: 'milestone4',
+          name: 'Offer & Onboarding',
+          description: 'Extend offers and coordinate onboarding process',
+          dueDate: '2024-12-10',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent2'
+        }
+      ],
+      attachedFiles: [
+        {
+          id: 'file1',
+          name: 'Job Requirements.pdf',
+          type: 'pdf',
+          size: '2.4 MB',
+          url: '#'
+        },
+        {
+          id: 'file2',
+          name: 'Candidate Pipeline.xlsx',
+          type: 'excel',
+          size: '1.8 MB',
+          url: '#'
+        },
+        {
+          id: 'file3',
+          name: 'Interview Guidelines.docx',
+          type: 'word',
+          size: '856 KB',
+          url: '#'
+        }
+      ]
     },
     {
       id: '2',
@@ -106,7 +168,52 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
         email: 'michael.chen@company.com',
         imageIndex: 4
       },
-      category: 'Onboarding'
+      category: 'Onboarding',
+      milestones: [
+        {
+          id: 'milestone5',
+          name: 'Process Analysis',
+          description: 'Analyze current onboarding process and identify pain points',
+          dueDate: '2024-09-30',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent3'
+        },
+        {
+          id: 'milestone6',
+          name: 'System Integration',
+          description: 'Integrate new onboarding tools and automate workflows',
+          dueDate: '2024-10-20',
+          status: 'in-progress',
+          progressPercentage: 60,
+          assignedAgentId: 'agent3'
+        },
+        {
+          id: 'milestone7',
+          name: 'Training Materials',
+          description: 'Create comprehensive training materials and documentation',
+          dueDate: '2024-11-15',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent3'
+        }
+      ],
+      attachedFiles: [
+        {
+          id: 'file4',
+          name: 'Current Process Map.pdf',
+          type: 'pdf',
+          size: '3.2 MB',
+          url: '#'
+        },
+        {
+          id: 'file5',
+          name: 'Integration Specs.docx',
+          type: 'word',
+          size: '1.2 MB',
+          url: '#'
+        }
+      ]
     },
     {
       id: '3',
@@ -141,7 +248,52 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
         email: 'emily.rodriguez@company.com',
         imageIndex: 6
       },
-      category: 'Hiring'
+      category: 'Hiring',
+      milestones: [
+        {
+          id: 'milestone8',
+          name: 'Territory Planning',
+          description: 'Define sales territories and target markets',
+          dueDate: '2024-08-15',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent4'
+        },
+        {
+          id: 'milestone9',
+          name: 'Recruitment',
+          description: 'Recruit and hire sales representatives',
+          dueDate: '2024-09-30',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent4'
+        },
+        {
+          id: 'milestone10',
+          name: 'Training & Launch',
+          description: 'Train new hires and launch in new territories',
+          dueDate: '2024-10-31',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent4'
+        }
+      ],
+      attachedFiles: [
+        {
+          id: 'file6',
+          name: 'Territory Map.pdf',
+          type: 'pdf',
+          size: '4.1 MB',
+          url: '#'
+        },
+        {
+          id: 'file7',
+          name: 'Training Manual.pdf',
+          type: 'pdf',
+          size: '6.8 MB',
+          url: '#'
+        }
+      ]
     },
     {
       id: '4',
@@ -176,7 +328,45 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
         email: 'david.kim@company.com',
         imageIndex: 8
       },
-      category: 'Hiring'
+      category: 'Hiring',
+      milestones: [
+        {
+          id: 'milestone11',
+          name: 'Capacity Planning',
+          description: 'Analyze support volume and determine staffing needs',
+          dueDate: '2024-11-10',
+          status: 'in-progress',
+          progressPercentage: 40,
+          assignedAgentId: 'agent5'
+        },
+        {
+          id: 'milestone12',
+          name: 'Rapid Hiring',
+          description: 'Execute accelerated hiring process for support agents',
+          dueDate: '2024-12-01',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent5'
+        },
+        {
+          id: 'milestone13',
+          name: 'Team Integration',
+          description: 'Onboard and integrate new support team members',
+          dueDate: '2024-12-20',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent5'
+        }
+      ],
+      attachedFiles: [
+        {
+          id: 'file8',
+          name: 'Support Metrics.xlsx',
+          type: 'excel',
+          size: '2.1 MB',
+          url: '#'
+        }
+      ]
     },
     {
       id: '5',
@@ -211,7 +401,52 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
         email: 'lisa.wang@company.com',
         imageIndex: 10
       },
-      category: 'Onboarding'
+      category: 'Onboarding',
+      milestones: [
+        {
+          id: 'milestone14',
+          name: 'Talent Assessment',
+          description: 'Identify high-potential employees for leadership development',
+          dueDate: '2024-09-30',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent6'
+        },
+        {
+          id: 'milestone15',
+          name: 'Program Design',
+          description: 'Design comprehensive leadership development curriculum',
+          dueDate: '2024-11-15',
+          status: 'in-progress',
+          progressPercentage: 30,
+          assignedAgentId: 'agent6'
+        },
+        {
+          id: 'milestone16',
+          name: 'Implementation',
+          description: 'Launch and execute leadership development program',
+          dueDate: '2025-01-31',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent6'
+        }
+      ],
+      attachedFiles: [
+        {
+          id: 'file9',
+          name: 'Leadership Assessment.pdf',
+          type: 'pdf',
+          size: '1.9 MB',
+          url: '#'
+        },
+        {
+          id: 'file10',
+          name: 'Program Outline.docx',
+          type: 'word',
+          size: '945 KB',
+          url: '#'
+        }
+      ]
     }
   ];
 
