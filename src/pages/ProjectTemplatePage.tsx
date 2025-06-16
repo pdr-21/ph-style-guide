@@ -5,6 +5,9 @@ import ExpandableSection from '../components/common/ExpandableSection';
 import ProjectTaskList from '../components/projects/ProjectTaskList';
 import ProjectChatSection from '../components/projects/ProjectChatSection';
 import NotificationDropdown from '../components/projects/NotificationDropdown';
+import MilestoneTimeline from '../components/projects/MilestoneTimeline';
+import MilestoneList from '../components/projects/MilestoneList';
+import MilestoneDetail from '../components/projects/MilestoneDetail';
 import type { ProjectTask } from '../components/projects/ProjectTaskList';
 import type { Initiative } from '../types';
 
@@ -23,6 +26,7 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
   // State to manage which section is expanded (only one can be expanded at a time)
   const [expandedSection, setExpandedSection] = useState<ExpandedSection>('chat');
   const [activeTab, setActiveTab] = useState<TabId>('overview');
+  const [selectedMilestoneId, setSelectedMilestoneId] = useState<string>('');
 
   // Dummy initiatives data (imported from InitiativesTable)
   const dummyInitiatives: Initiative[] = [
@@ -67,7 +71,74 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
         email: 'sarah.johnson@company.com',
         imageIndex: 2
       },
-      category: 'Hiring'
+      category: 'Hiring',
+      milestones: [
+        {
+          id: 'milestone1',
+          name: 'Candidate Sourcing',
+          description: 'Source and identify qualified candidates for senior engineering positions',
+          dueDate: '2024-10-15',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent1',
+          sourcedCandidates: ['John Smith - Senior React Developer', 'Sarah Chen - Full Stack Engineer', 'Mike Johnson - Backend Specialist', 'Lisa Wang - DevOps Engineer'],
+          attachedFiles: [
+            {
+              id: 'milestone-file1',
+              name: 'Candidate Profiles.pdf',
+              type: 'pdf',
+              size: '3.2 MB',
+              url: '#'
+            },
+            {
+              id: 'milestone-file2',
+              name: 'Sourcing Report.xlsx',
+              type: 'excel',
+              size: '1.1 MB',
+              url: '#'
+            }
+          ]
+        },
+        {
+          id: 'milestone2',
+          name: 'Initial Screening',
+          description: 'Conduct initial screening interviews and technical assessments',
+          dueDate: '2024-11-01',
+          status: 'in-progress',
+          progressPercentage: 75,
+          assignedAgentId: 'agent2',
+          attachedFiles: [
+            {
+              id: 'milestone-file3',
+              name: 'Screening Guidelines.docx',
+              type: 'word',
+              size: '654 KB',
+              url: '#'
+            }
+          ]
+        },
+        {
+          id: 'milestone3',
+          name: 'Final Interviews',
+          description: 'Schedule and conduct final interviews with hiring managers',
+          dueDate: '2024-11-20',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent1',
+          attachedFiles: []
+        },
+        {
+          id: 'milestone4',
+          name: 'Offer & Onboarding',
+          description: 'Extend offers and coordinate onboarding process',
+          dueDate: '2024-12-10',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent2',
+          attachedFiles: []
+        }
+      ],
+      attachedFiles: []
     },
     {
       id: '2',
@@ -102,12 +173,60 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
         email: 'michael.chen@company.com',
         imageIndex: 4
       },
-      category: 'Onboarding'
+      category: 'Onboarding',
+      milestones: [
+        {
+          id: 'milestone5',
+          name: 'Process Analysis',
+          description: 'Analyze current onboarding process and identify pain points',
+          dueDate: '2024-09-30',
+          status: 'completed',
+          progressPercentage: 100,
+          assignedAgentId: 'agent3',
+          attachedFiles: [
+            {
+              id: 'milestone-file4',
+              name: 'Process Analysis Report.pdf',
+              type: 'pdf',
+              size: '2.8 MB',
+              url: '#'
+            }
+          ]
+        },
+        {
+          id: 'milestone6',
+          name: 'System Integration',
+          description: 'Integrate new onboarding tools and automate workflows',
+          dueDate: '2024-10-20',
+          status: 'in-progress',
+          progressPercentage: 60,
+          assignedAgentId: 'agent3',
+          attachedFiles: []
+        },
+        {
+          id: 'milestone7',
+          name: 'Training Materials',
+          description: 'Create comprehensive training materials and documentation',
+          dueDate: '2024-11-15',
+          status: 'not-started',
+          progressPercentage: 0,
+          assignedAgentId: 'agent3',
+          attachedFiles: []
+        }
+      ],
+      attachedFiles: []
     }
   ];
 
   // Find the current initiative
   const currentInitiative = dummyInitiatives.find(init => init.id === initiativeId);
+
+  // Initialize selected milestone when initiative changes
+  React.useEffect(() => {
+    if (currentInitiative && currentInitiative.milestones.length > 0) {
+      setSelectedMilestoneId(currentInitiative.milestones[0].id);
+    }
+  }, [currentInitiative]);
 
   // Calculate completion percentage
   const getCompletionPercentage = (initiative: Initiative) => {
@@ -190,19 +309,54 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
     setExpandedSection(expandedSection === section ? 'chat' : section);
   };
 
+  // Handle milestone selection
+  const handleSelectMilestone = (milestoneId: string) => {
+    setSelectedMilestoneId(milestoneId);
+  };
+
   // Render tab content
   const renderTabContent = () => {
     switch (activeTab) {
       case 'overview':
+        if (!currentInitiative) return null;
+        
+        const selectedMilestone = currentInitiative.milestones.find(m => m.id === selectedMilestoneId);
+        
         return (
           <div className="space-y-6">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-poppins font-medium text-n-500 mb-2">
-                Overview Content
-              </h3>
-              <p className="text-sm text-n-300">
-                This tab will contain the initiative overview, including key metrics, progress charts, and summary information.
-              </p>
+            {/* Milestone Timeline */}
+            <MilestoneTimeline
+              milestones={currentInitiative.milestones}
+              selectedMilestoneId={selectedMilestoneId}
+              onSelectMilestone={handleSelectMilestone}
+            />
+            
+            {/* Two-column layout */}
+            <div className="flex gap-6">
+              {/* Left column - Milestone List */}
+              <div className="w-80 flex-shrink-0">
+                <MilestoneList
+                  milestones={currentInitiative.milestones}
+                  selectedMilestoneId={selectedMilestoneId}
+                  onSelectMilestone={handleSelectMilestone}
+                />
+              </div>
+              
+              {/* Right column - Milestone Detail */}
+              <div className="flex-1">
+                {selectedMilestone ? (
+                  <MilestoneDetail
+                    milestone={selectedMilestone}
+                    aiAgents={currentInitiative.aiAgents}
+                  />
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-sm text-n-300">
+                      Select a milestone to view details
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         );
