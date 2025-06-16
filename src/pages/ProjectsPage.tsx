@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatInput from '../components/dashboard/ChatInput';
 import KPIGrid from '../components/dashboard/KPIGrid';
+import InitiativesTable from '../components/projects/InitiativesTable';
 import SparkleIcon from '../components/icons/SparkleIcon';
 
 const ProjectsPage: React.FC = () => {
@@ -162,6 +163,9 @@ const ProjectsPage: React.FC = () => {
           
           {/* KPI Grid with project-specific data */}
           <KPIGrid kpis={projectKPIs} />
+          
+          {/* Initiatives Table */}
+          <InitiativesTable />
         </div>
 
         {/* Right column - 30% */}
