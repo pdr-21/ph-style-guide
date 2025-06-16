@@ -22,7 +22,7 @@ function App() {
     setCurrentView(view);
     if (view === 'App' && subView) {
       // Check if subView is a valid AppPage
-      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'settings'];
+      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'projects', 'settings'];
       if (validAppPages.includes(subView as AppPage)) {
         setActiveAppPage(subView as AppPage);
       } else {
@@ -55,6 +55,9 @@ function App() {
             return <EmailPage />;
           case 'calls':
             return <CallsPage />;
+          case 'projects':
+            // Placeholder for external link - will be handled later
+            return <Dashboard />; // Temporarily show dashboard
           case 'settings':
             return <SettingsPage />;
           default:
