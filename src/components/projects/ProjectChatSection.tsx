@@ -73,7 +73,7 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
   };
 
   return (
-    <div className={`flex justify-between flex-col h-full  ${className}`}>
+    <div className={`flex flex-col justify-between h-full ${className}`}>
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto space-y-3 mb-4 max-h-64">
         {messages.map((message) => (
@@ -110,7 +110,7 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
       </div>
 
       {/* Chat Input */}
-      <div className="border-t border-n-75 pt-3">
+      <div className="border-t border-n-75 pt-3 mt-auto">
         <div className="bg-gr-25 rounded-lg p-3">
           <div className="relative">
             <input
