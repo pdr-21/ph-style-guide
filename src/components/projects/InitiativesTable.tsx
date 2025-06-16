@@ -250,8 +250,10 @@ const InitiativesTable: React.FC = () => {
 
   // Handle view initiative
   const handleViewInitiative = (initiativeId: string) => {
-    console.log(`Viewing initiative: ${initiativeId}`);
-    // TODO: Navigate to initiative detail page
+    // Navigate to project template page
+    // This simulates navigation - in a real app this would use React Router
+    window.location.hash = '#project-template';
+    window.location.reload();
   };
   return (
     <div className="space-y-6">
