@@ -85,8 +85,8 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
           >
             {/* Avatar - Only for user messages */}
             {message.sender === 'user' && (
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-b-200 text-white">
-                <User className="w-3 h-3" />
+              <div className="w-6 h-6 bg-n-50 rounded-full flex items-center justify-center flex-shrink-0">
+                <User className="w-3 h-3 text-n-300" />
               </div>
             )}
 

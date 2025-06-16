@@ -48,11 +48,9 @@ const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
                 <div className="flex items-center space-x-2">
                   <User className="w-3 h-3" />
                   <span className="flex items-center space-x-1">
-                    <img
-                      src={getAgentImageByIndex(task.agent.imageIndex)}
-                      alt={task.agent.name}
-                      className="w-4 h-4 rounded-full object-cover"
-                    />
+                    <div className="w-4 h-4 bg-n-50 rounded-full flex items-center justify-center">
+                      <User className="w-2 h-2 text-n-300" />
+                    </div>
                     <span>{task.agent.name}</span>
                   </span>
                 </div>

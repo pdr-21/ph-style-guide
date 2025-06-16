@@ -19,7 +19,7 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
   // Get status styling for milestone markers
   const getStatusStyling = (status: Milestone['status'], isSelected: boolean) => {
     if (isSelected) {
-      return 'bg-b-200 border-b-300 ring-4 ring-b-100';
+      return 'bg-b-200 border-b-300 ring-2 ring-b-100';
     }
     
     switch (status) {
@@ -63,14 +63,14 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
   }
 
   return (
-    <div className={cn("w-full py-6", className)}>
+    <div className={cn("w-full py-8", className)}>
       <div className="relative">
         {/* Timeline Line */}
-        <div className="absolute top-6 left-6 right-6 h-0.5 bg-n-100"></div>
+        <div className="absolute top-3 left-6 right-6 h-0.5 bg-n-100"></div>
         
         {/* Progress Line */}
         <div 
-          className="absolute top-6 left-6 h-0.5 bg-b-200 transition-all duration-500"
+          className="absolute top-3 left-6 h-0.5 bg-b-200 transition-all duration-500"
           style={{
             width: `${Math.max(0, (milestones.findIndex(m => m.id === selectedMilestoneId) / Math.max(1, milestones.length - 1)) * 100)}%`
           }}
@@ -95,18 +95,6 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
                     {getStatusIcon(milestone.status)}
                   </button>
                 </Tooltip>
-
-                {/* Milestone Label (only for selected) */}
-                {isSelected && (
-                  <div className="mt-3 text-center">
-                    <div className="text-xs font-poppins font-medium text-b-300 whitespace-nowrap">
-                      {milestone.name}
-                    </div>
-                    <div className="text-xs font-poppins font-normal text-n-300 mt-1">
-                      {milestone.progressPercentage}% Complete
-                    </div>
-                  </div>
-                )}
               </div>
             );
           })}

@@ -114,11 +114,9 @@ const MilestoneDetail: React.FC<MilestoneDetailProps> = ({
             <span className="text-sm font-poppins font-medium text-n-400">Assigned Agent</span>
           </div>
           <div className="flex items-center space-x-3 p-3 bg-gr-25 rounded-lg">
-            <img
-              src={getAgentImageByIndex(assignedAgent.imageIndex)}
-              alt={assignedAgent.name}
-              className="w-10 h-10 rounded-full object-cover"
-            />
+            <div className="w-10 h-10 bg-n-50 rounded-full flex items-center justify-center">
+              <User className="w-5 h-5 text-n-300" />
+            </div>
             <div>
               <div className="text-sm font-poppins font-medium text-n-500">
                 {assignedAgent.name}
@@ -143,8 +141,8 @@ const MilestoneDetail: React.FC<MilestoneDetailProps> = ({
                 key={index}
                 className="flex items-center space-x-3 p-3 bg-white border border-n-100 rounded-lg hover:border-n-200 transition-colors"
               >
-                <div className="w-8 h-8 bg-b-100 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-b-300" />
+                <div className="w-8 h-8 bg-n-50 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-n-300" />
                 </div>
                 <div className="flex-1">
                   <div className="text-sm font-poppins font-medium text-n-500">
