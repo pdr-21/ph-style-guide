@@ -29,7 +29,7 @@ const AgentProfileCard: React.FC<AgentProfileCardProps> = ({
   const notStartedTasks = tasks.filter(task => task.status === 'not-started').length;
 
   return (
-    <Card className={cn("bg-white rounded-xl border border-n-100 p-6 hover:border-n-200 hover:shadow-sm transition-all duration-200", className)}>
+    <Card className={cn("bg-white rounded-xl border border-n-75 p-6 hover:border-n-200 hover:shadow-sm transition-all duration-200", className)}>
       {/* Agent Header */}
       <div className="flex items-start space-x-4 mb-6">
         {/* Agent Avatar */}
