@@ -22,7 +22,7 @@ const GoDeeperSection: React.FC<GoDeeperSectionProps> = () => {
           <div
             key={prompt.id}
             onClick={() => console.log(`Executing prompt: ${prompt.text}`)}
-            className="bg-white border border-n-100 rounded-xl p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200 cursor-pointer flex items-center justify-between group"
+            className="bg-white border border-n-75 rounded-xl p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200 cursor-pointer flex items-center justify-between group"
           >
             <span className="text-sm font-poppins font-normal text-n-500 flex-1">
               {prompt.text}
