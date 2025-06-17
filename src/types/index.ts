@@ -3,7 +3,7 @@ export type NavigationItemType = 'icon' | 'text';
 export type AppPage = 'dashboard' | 'contacts' | 'calendar' | 'reports' | 'documents' | 'email' | 'calls' | 'chat' | 'projects' | 'settings';
 export type InitiativeStatus = 'Not Started' | 'In Progress' | 'Completed' | 'Paused' | 'Escalated' | 'Awaiting Human Input';
 export type SpotlightFilter = 'All initiatives' | 'My initiatives' | 'Paused' | 'Escalations' | 'Hiring' | 'Onboarding';
-export type SpecialLayoutType = 'none' | 'projectOverview' | 'hiringMetrics';
+export type SpecialLayoutType = 'none' | 'projectOverview' | 'hiringMetrics' | 'projectPlan';
 
 // Base interface for all chat messages
 export interface BaseMessage {
@@ -22,6 +22,7 @@ export interface ChatBubbleMessage extends BaseMessage {
 export interface LayoutDisplayMessage extends BaseMessage {
   type: 'layout';
   layoutType: SpecialLayoutType;
+  projectTitle?: string;
 }
 
 // Union type for all possible chat messages

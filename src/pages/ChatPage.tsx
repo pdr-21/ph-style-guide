@@ -6,9 +6,10 @@ import SuggestionButton from '../components/chat/SuggestionButton';
 
 interface ChatPageProps {
   initialChatMessage?: string;
+  onApproveProject?: (title: string) => void;
 }
 
-const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
+const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage, onApproveProject }) => {
   const chatSectionRef = useRef<any>(null);
   const [isChatHistoryCollapsed, setIsChatHistoryCollapsed] = useState(false);
   const [localChatMessage, setLocalChatMessage] = useState('');
@@ -109,7 +110,10 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
               /* Regular Chat Interface */
               <div className="max-w-[48.875rem] mx-auto h-full flex flex-col">
                 <div className="flex-1 overflow-y-auto">
-                  <ChatMessagesContainer ref={chatSectionRef} />
+                  <ChatMessagesContainer 
+                    ref={chatSectionRef} 
+                    onApproveProject={onApproveProject}
+                  />
                 </div>
                 
                 {/* Chat Input and Suggestions at bottom */}

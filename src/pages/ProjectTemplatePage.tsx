@@ -693,7 +693,7 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
             onToggle={() => handleSectionToggle('chat')}
             className={expandedSection === 'chat' ? 'flex-1' : 'flex-shrink-0'}
           >
-            <ChatMessagesContainer />
+            <ChatMessagesContainer onApproveProject={() => {}} />
           </ExpandableSection>
         </div>
       </div>

@@ -3,14 +3,17 @@ import { ArrowRight } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ProjectOverviewLayout from './layouts/ProjectOverviewLayout';
 import HiringMetricsLayout from './layouts/HiringMetricsLayout';
+import ProjectPlanLayout from './layouts/ProjectPlanLayout';
 import type { ChatMessage as ChatMessageType, ChatBubbleMessage, LayoutDisplayMessage, SpecialLayoutType } from '../../types';
 
 interface ChatMessagesContainerProps {
   className?: string;
+  onApproveProject?: (title: string) => void;
 }
 
 const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({ 
-  className = '' 
+  className = '',
+  onApproveProject
 }, ref) => {
   const [messages, setMessages] = useState<ChatMessageType[]>([
     {
@@ -30,16 +33,25 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     }
   }));
 
-  // Check for special layout keywords
-  const checkForSpecialLayout = (message: string): SpecialLayoutType => {
+  // Check for special layout keywords and extract project title if applicable
+  const checkForSpecialLayout = (message: string): { layoutType: SpecialLayoutType; projectTitle?: string } => {
     const lowerMessage = message.toLowerCase();
+    
+    // Project plan keywords - extract the hiring request
+    const hiringMatch = lowerMessage.match(/(?:i want to hire|hire|need|looking for)\s+(\d+)\s+([a-zA-Z\s]+?)(?:\s+in my team|\s+for|\s+to|\s*$)/);
+    if (hiringMatch) {
+      const count = hiringMatch[1];
+      const role = hiringMatch[2].trim();
+      const projectTitle = `Hire ${count} ${role}${role.endsWith('s') ? '' : 's'}`;
+      return { layoutType: 'projectPlan', projectTitle };
+    }
     
     // Project overview keywords
     if (lowerMessage.includes('show me project overview') || 
         lowerMessage.includes('project overview') ||
         lowerMessage.includes('show project status') ||
         lowerMessage.includes('project dashboard')) {
-      return 'projectOverview';
+      return { layoutType: 'projectOverview' };
     }
     
     // Hiring metrics keywords
@@ -48,10 +60,10 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
         lowerMessage.includes('hiring analytics') ||
         lowerMessage.includes('show hiring data') ||
         lowerMessage.includes('hiring performance')) {
-      return 'hiringMetrics';
+      return { layoutType: 'hiringMetrics' };
     }
     
-    return 'none';
+    return { layoutType: 'none' };
   };
 
   // Simulate AI responses
@@ -83,14 +95,15 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     setMessages(prev => [...prev, userMessage]);
 
     // Check for special layout keywords
-    const detectedLayout = checkForSpecialLayout(message);
+    const { layoutType, projectTitle } = checkForSpecialLayout(message);
     
     // If we detect a special layout keyword, add the layout to messages
-    if (detectedLayout !== 'none') {
+    if (layoutType !== 'none') {
       const layoutMessage: LayoutDisplayMessage = {
         id: (Date.now() + 1).toString(),
         type: 'layout',
-        layoutType: detectedLayout,
+        layoutType,
+        projectTitle,
         sender: 'ai',
         timestamp: new Date()
       };
@@ -112,13 +125,20 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     }, 1000);
   };
 
-  // Render layout component based on layout type
-  const renderLayoutComponent = (layoutType: SpecialLayoutType) => {
+  // Render layout component based on layout type and data
+  const renderLayoutComponent = (layoutType: SpecialLayoutType, projectTitle?: string) => {
     switch (layoutType) {
       case 'projectOverview':
         return <ProjectOverviewLayout />;
       case 'hiringMetrics':
         return <HiringMetricsLayout />;
+      case 'projectPlan':
+        return (
+          <ProjectPlanLayout 
+            projectTitle={projectTitle || 'Untitled Project'} 
+            onApprove={onApproveProject || (() => {})}
+          />
+        );
       default:
         return null;
     }
@@ -140,7 +160,7 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
           } else if (message.type === 'layout') {
             return (
               <div key={message.id} className="my-6">
-                {renderLayoutComponent(message.layoutType)}
+                {renderLayoutComponent(message.layoutType, message.projectTitle)}
               </div>
             );
           }
