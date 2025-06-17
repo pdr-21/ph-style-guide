@@ -49,7 +49,7 @@ const EscalatedTasksSection: React.FC<EscalatedTasksSectionProps> = () => {
       </h3>
       <div className="space-y-4">
         {escalatedTasks.map((task) => (
-          <Card key={task.id} className="bg-white rounded-xl border border-n-100 p-4">
+          <Card key={task.id} className="bg-white rounded-xl border border-n-75 p-4">
             <h4 className="text-sm font-poppins font-medium text-n-500 mb-2">
               {task.title}
             </h4>
