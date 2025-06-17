@@ -1,7 +1,10 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { ArrowRight } from 'lucide-react';
 import ChatMessage from './ChatMessage';
+import ProjectOverviewLayout from './layouts/ProjectOverviewLayout';
+import HiringMetricsLayout from './layouts/HiringMetricsLayout';
 import type { ChatMessage as ChatMessageType } from './ChatMessage';
+import type { SpecialLayoutType } from '../../types';
 
 interface ChatMessagesContainerProps {
   className?: string;
@@ -18,6 +21,7 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [currentLayout, setCurrentLayout] = useState<SpecialLayoutType>('none');
 
   // Expose method to add initial message from parent
   useImperativeHandle(ref, () => ({
@@ -25,6 +29,30 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
       handleSendMessage(message);
     }
   }));
+
+  // Check for special layout keywords
+  const checkForSpecialLayout = (message: string): SpecialLayoutType => {
+    const lowerMessage = message.toLowerCase();
+    
+    // Project overview keywords
+    if (lowerMessage.includes('show me project overview') || 
+        lowerMessage.includes('project overview') ||
+        lowerMessage.includes('show project status') ||
+        lowerMessage.includes('project dashboard')) {
+      return 'projectOverview';
+    }
+    
+    // Hiring metrics keywords
+    if (lowerMessage.includes('analyze hiring metrics') || 
+        lowerMessage.includes('hiring metrics') ||
+        lowerMessage.includes('hiring analytics') ||
+        lowerMessage.includes('show hiring data') ||
+        lowerMessage.includes('hiring performance')) {
+      return 'hiringMetrics';
+    }
+    
+    return 'none';
+  };
 
   // Simulate AI responses
   const getAIResponse = (userMessage: string): string => {
@@ -42,6 +70,20 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
   // Handle sending a message
   const handleSendMessage = (message: string = inputValue) => {
     if (!message.trim()) return;
+
+    // Check for special layout keywords
+    const detectedLayout = checkForSpecialLayout(message);
+    
+    // If we detect a special layout keyword, show the layout
+    if (detectedLayout !== 'none') {
+      setCurrentLayout(detectedLayout);
+      return; // Don't add to chat messages, just show the layout
+    }
+    
+    // If it's a general message and we have a special layout active, reset to chat
+    if (currentLayout !== 'none') {
+      setCurrentLayout('none');
+    }
 
     // Add user message
     const userMessage: ChatMessageType = {
@@ -63,18 +105,33 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     }, 1000);
   };
 
+  // Render content based on current layout
+  const renderContent = () => {
+    switch (currentLayout) {
+      case 'projectOverview':
+        return <ProjectOverviewLayout />;
+      case 'hiringMetrics':
+        return <HiringMetricsLayout />;
+      case 'none':
+      default:
+        return (
+          <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
+            {messages.map((message) => (
+              <ChatMessage
+                key={message.id}
+                message={message}
+                aiAgentImageIndex={0} // Use first agent image for AI
+              />
+            ))}
+          </div>
+        );
+    }
+  };
+
   return (
     <div className={`flex flex-col justify-between h-full min-h-[400px] ${className}`}>
-      {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
-        {messages.map((message) => (
-          <ChatMessage
-            key={message.id}
-            message={message}
-            aiAgentImageIndex={0} // Use first agent image for AI
-          />
-        ))}
-      </div>
+      {/* Messages Container or Special Layout */}
+      {renderContent()}
     </div>
   );
 });
