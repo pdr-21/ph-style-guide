@@ -78,7 +78,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
               <div className="flex flex-col items-center justify-center h-full space-y-8">
                 {/* Greeting */}
                 <h1 className="text-2xl font-poppins font-semibold text-n-500">
-                  {getGreeting()}, Samantha
+                  {getGreeting()}, Paul
                 </h1>
 
                 {/* Chat Input with custom width */}
