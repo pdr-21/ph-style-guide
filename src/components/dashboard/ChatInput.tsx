@@ -19,7 +19,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ showToggleSwitch = true }) => {
   return (
     <div className="w-full">
       {/* Input container */}
-      <div className="bg-white rounded-2xl border border-n-100 p-3 shadow-sm">
+      <div className="bg-white rounded-2xl border border-n-75 p-3 shadow-sm">
         {/* Input field */}
         <div className="mb-4">
           <input
