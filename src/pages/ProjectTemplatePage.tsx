@@ -19,6 +19,7 @@ import type { Initiative } from '../types';
 interface ProjectTemplatePageProps {
   initiativeId: string;
   onBack: () => void;
+  dynamicInitiatives?: Initiative[];
 }
 
 type ExpandedSection = 'tasks' | 'chat';
@@ -26,7 +27,8 @@ type TabId = 'overview' | 'actions' | 'agents' | 'human-in-loop' | 'escalations'
 
 const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({ 
   initiativeId, 
-  onBack 
+  onBack,
+  dynamicInitiatives = []
 }) => {
   // State to manage which section is expanded (only one can be expanded at a time)
   const [expandedSection, setExpandedSection] = useState<ExpandedSection>('chat');
@@ -339,8 +341,9 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
     }
   ];
 
-  // Find the current initiative
-  const currentInitiative = dummyInitiatives.find(init => init.id === initiativeId);
+  // Combine dynamic initiatives with dummy initiatives and find the current initiative
+  const allInitiatives = [...dynamicInitiatives, ...dummyInitiatives];
+  const currentInitiative = allInitiatives.find(init => init.id === initiativeId);
 
   // Initialize selected milestone when initiative changes
   React.useEffect(() => {

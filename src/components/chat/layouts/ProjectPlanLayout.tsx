@@ -71,8 +71,8 @@ const ProjectPlanLayout: React.FC<ProjectPlanLayoutProps> = ({
         <h3 className="text-lg font-poppins font-medium text-n-500">Planned Milestones</h3>
         <div className="space-y-3">
           <div className="flex items-center space-x-3 p-3 bg-gr-25 rounded-lg border border-n-100">
-            <div className="w-8 h-8 bg-b-40 rounded-lg flex items-center justify-center">
-              <Target className="w-4 h-4 text-b-200" />
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <Target className="w-4 h-4 text-n-300" />
             </div>
             <div className="flex-1">
               <div className="text-sm font-poppins font-medium text-n-500">Candidate Sourcing & Screening</div>
@@ -82,8 +82,8 @@ const ProjectPlanLayout: React.FC<ProjectPlanLayoutProps> = ({
           </div>
 
           <div className="flex items-center space-x-3 p-3 bg-gr-25 rounded-lg border border-n-100">
-            <div className="w-8 h-8 bg-g-100 rounded-lg flex items-center justify-center">
-              <Users className="w-4 h-4 text-g-300" />
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <Users className="w-4 h-4 text-n-300" />
             </div>
             <div className="flex-1">
               <div className="text-sm font-poppins font-medium text-n-500">Interview Process</div>
@@ -93,8 +93,8 @@ const ProjectPlanLayout: React.FC<ProjectPlanLayoutProps> = ({
           </div>
 
           <div className="flex items-center space-x-3 p-3 bg-gr-25 rounded-lg border border-n-100">
-            <div className="w-8 h-8 bg-y-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-4 h-4 text-y-400" />
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <FileText className="w-4 h-4 text-n-300" />
             </div>
             <div className="flex-1">
               <div className="text-sm font-poppins font-medium text-n-500">Offer & Negotiation</div>
@@ -104,8 +104,8 @@ const ProjectPlanLayout: React.FC<ProjectPlanLayoutProps> = ({
           </div>
 
           <div className="flex items-center space-x-3 p-3 bg-gr-25 rounded-lg border border-n-100">
-            <div className="w-8 h-8 bg-p-50 rounded-lg flex items-center justify-center">
-              <CheckCircle className="w-4 h-4 text-p-300" />
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <CheckCircle className="w-4 h-4 text-n-300" />
             </div>
             <div className="flex-1">
               <div className="text-sm font-poppins font-medium text-n-500">Onboarding Setup</div>

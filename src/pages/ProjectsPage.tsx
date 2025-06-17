@@ -253,6 +253,7 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({
       <ProjectTemplatePage 
         initiativeId={selectedInitiativeId}
         onBack={handleBackToProjects}
+        dynamicInitiatives={dynamicInitiatives}
       />
     );
   }
