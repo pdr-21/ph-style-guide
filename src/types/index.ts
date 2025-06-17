@@ -5,6 +5,28 @@ export type InitiativeStatus = 'Not Started' | 'In Progress' | 'Completed' | 'Pa
 export type SpotlightFilter = 'All initiatives' | 'My initiatives' | 'Paused' | 'Escalations' | 'Hiring' | 'Onboarding';
 export type SpecialLayoutType = 'none' | 'projectOverview' | 'hiringMetrics';
 
+// Base interface for all chat messages
+export interface BaseMessage {
+  id: string;
+  sender: 'user' | 'ai';
+  timestamp?: Date;
+}
+
+// Chat bubble message (regular text messages)
+export interface ChatBubbleMessage extends BaseMessage {
+  type: 'chat';
+  content: string;
+}
+
+// Layout display message (special layouts)
+export interface LayoutDisplayMessage extends BaseMessage {
+  type: 'layout';
+  layoutType: SpecialLayoutType;
+}
+
+// Union type for all possible chat messages
+export type ChatMessage = ChatBubbleMessage | LayoutDisplayMessage;
+
 export interface Milestone {
   id: string;
   name: string;

@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import { User, Copy, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { getAgentImageByIndex } from '../../lib/agentImages';
 import { cn } from '../../lib/utils';
-
-interface ChatMessage {
-  id: string;
-  content: string;
-  sender: 'user' | 'ai';
-}
+import { ChatBubbleMessage } from '../../types';
 
 interface ChatMessageProps {
-  message: ChatMessage;
+  message: ChatBubbleMessage;
   aiAgentImageIndex: number;
   className?: string;
 }
@@ -111,4 +106,3 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 };
 
 export default ChatMessage;
-export type { ChatMessage };

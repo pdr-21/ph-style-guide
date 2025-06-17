@@ -3,8 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ProjectOverviewLayout from './layouts/ProjectOverviewLayout';
 import HiringMetricsLayout from './layouts/HiringMetricsLayout';
-import type { ChatMessage as ChatMessageType } from './ChatMessage';
-import type { SpecialLayoutType } from '../../types';
+import type { ChatMessage, ChatBubbleMessage, LayoutDisplayMessage, SpecialLayoutType } from '../../types';
 
 interface ChatMessagesContainerProps {
   className?: string;
@@ -13,15 +12,16 @@ interface ChatMessagesContainerProps {
 const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({ 
   className = '' 
 }, ref) => {
-  const [messages, setMessages] = useState<ChatMessageType[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
+      type: 'chat',
       content: 'Hello! I\'m here to help you with this initiative. What would you like to know?',
-      sender: 'ai'
+      sender: 'ai',
+      timestamp: new Date()
     }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const [currentLayout, setCurrentLayout] = useState<SpecialLayoutType>('none');
 
   // Expose method to add initial message from parent
   useImperativeHandle(ref, () => ({
@@ -71,67 +71,82 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
   const handleSendMessage = (message: string = inputValue) => {
     if (!message.trim()) return;
 
-    // Check for special layout keywords
-    const detectedLayout = checkForSpecialLayout(message);
-    
-    // If we detect a special layout keyword, show the layout
-    if (detectedLayout !== 'none') {
-      setCurrentLayout(detectedLayout);
-      return; // Don't add to chat messages, just show the layout
-    }
-    
-    // If it's a general message and we have a special layout active, reset to chat
-    if (currentLayout !== 'none') {
-      setCurrentLayout('none');
-    }
-
     // Add user message
-    const userMessage: ChatMessageType = {
+    const userMessage: ChatBubbleMessage = {
       id: Date.now().toString(),
+      type: 'chat',
       content: message,
-      sender: 'user'
+      sender: 'user',
+      timestamp: new Date()
     };
 
     setMessages(prev => [...prev, userMessage]);
 
+    // Check for special layout keywords
+    const detectedLayout = checkForSpecialLayout(message);
+    
+    // If we detect a special layout keyword, add the layout to messages
+    if (detectedLayout !== 'none') {
+      const layoutMessage: LayoutDisplayMessage = {
+        id: (Date.now() + 1).toString(),
+        type: 'layout',
+        layoutType: detectedLayout,
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, layoutMessage]);
+      return; // Don't add a regular AI response
+    }
+
     // Simulate AI response after a short delay
     setTimeout(() => {
-      const aiMessage: ChatMessageType = {
+      const aiMessage: ChatBubbleMessage = {
         id: (Date.now() + 1).toString(),
+        type: 'chat',
         content: getAIResponse(message),
-        sender: 'ai'
+        sender: 'ai',
+        timestamp: new Date()
       };
       setMessages(prev => [...prev, aiMessage]);
     }, 1000);
   };
 
-  // Render content based on current layout
-  const renderContent = () => {
-    switch (currentLayout) {
+  // Render layout component based on layout type
+  const renderLayoutComponent = (layoutType: SpecialLayoutType) => {
+    switch (layoutType) {
       case 'projectOverview':
         return <ProjectOverviewLayout />;
       case 'hiringMetrics':
         return <HiringMetricsLayout />;
-      case 'none':
       default:
-        return (
-          <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
-            {messages.map((message) => (
-              <ChatMessage
-                key={message.id}
-                message={message}
-                aiAgentImageIndex={0} // Use first agent image for AI
-              />
-            ))}
-          </div>
-        );
+        return null;
     }
   };
 
   return (
     <div className={`flex flex-col justify-between h-full min-h-[400px] ${className}`}>
-      {/* Messages Container or Special Layout */}
-      {renderContent()}
+      {/* Messages Container with embedded layouts */}
+      <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
+        {messages.map((message) => {
+          if (message.type === 'chat') {
+            return (
+              <ChatMessage
+                key={message.id}
+                message={message}
+                aiAgentImageIndex={0} // Use first agent image for AI
+              />
+            );
+          } else if (message.type === 'layout') {
+            return (
+              <div key={message.id} className="my-6">
+                {renderLayoutComponent(message.layoutType)}
+              </div>
+            );
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 });
