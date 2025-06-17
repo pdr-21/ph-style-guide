@@ -49,11 +49,7 @@ const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
       {/* Header */}
       <div className="p-4 border-b border-n-75">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-n-100 rounded flex items-center justify-center">
-              <div className="w-3 h-3 bg-n-300 rounded-sm"></div>
-            </div>
-          </div>
+        
           <button
             onClick={onToggleCollapse}
             className="w-8 h-8 flex items-center justify-center text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors"
