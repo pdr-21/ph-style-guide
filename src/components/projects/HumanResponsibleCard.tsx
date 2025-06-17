@@ -17,7 +17,7 @@ const HumanResponsibleCard: React.FC<HumanResponsibleCardProps> = ({
 }) => {
   return (
     <div className={cn("max-w-md mx-auto", className)}>
-      <Card className="bg-white rounded-xl border border-n-100 p-6 hover:border-n-200 hover:shadow-sm transition-all duration-200">
+      <Card className="bg-white rounded-xl border border-n-75 p-6 hover:border-n-200 hover:shadow-sm transition-all duration-200">
         {/* Header */}
         <div className="text-center mb-6">
           <h3 className="text-lg font-poppins font-semibold text-n-500 mb-2">
