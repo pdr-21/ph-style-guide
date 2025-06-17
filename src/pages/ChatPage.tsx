@@ -72,7 +72,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
         }`}
       >
         <div className="h-full p-6">
-          <div className="bg-white rounded-xl border border-n-100 p-6 h-full flex flex-col">
+          <div className="bg-white rounded-xl p-6 h-full flex flex-col">
             {showInitialInterface ? (
               /* Initial Chat Interface */
               <div className="flex flex-col items-center justify-center h-full space-y-8">
