@@ -11,6 +11,7 @@ import EmailPage from './pages/EmailPage';
 import CallsPage from './pages/CallsPage';
 import SettingsPage from './pages/SettingsPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ChatPage from './pages/ChatPage';
 import { Environment, AppPage } from './types';
 
 function App() {
@@ -56,6 +57,8 @@ function App() {
             return <EmailPage />;
           case 'calls':
             return <CallsPage />;
+          case 'chat':
+            return <ChatPage />;
           case 'projects':
             return <ProjectsPage />;
           case 'settings':

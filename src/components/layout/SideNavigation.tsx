@@ -8,6 +8,7 @@ import {
   BarChart3,
   Mail,
   Phone,
+  MessageSquare,
   FolderOpen
 } from 'lucide-react';
 import { NavigationItem, Environment, AppPage } from '../../types';
@@ -38,6 +39,7 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
     { id: 'email', icon: Mail, label: 'Email', path: '/email' },
     { id: 'calls', icon: Phone, label: 'Calls', path: '/calls' },
+    { id: 'chat', icon: MessageSquare, label: 'Chat', path: '/chat' },
     { id: 'projects', icon: FolderOpen, label: 'Projects', path: '/projects' },
     { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
   ];
