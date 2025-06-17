@@ -14,7 +14,7 @@ const QuickCommandItem: React.FC<QuickCommandItemProps> = ({
   return (
     <div
       onClick={onClick}
-      className="bg-white border border-n-100 rounded-xl p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200 cursor-pointer min-h-[4rem] flex items-center justify-center"
+      className="bg-white border border-n-75 rounded-xl p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200 cursor-pointer min-h-[4rem] flex items-center justify-center"
     >
       {title || description ? (
         <div>
