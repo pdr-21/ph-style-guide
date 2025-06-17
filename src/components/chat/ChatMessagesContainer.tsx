@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ProjectOverviewLayout from './layouts/ProjectOverviewLayout';
 import HiringMetricsLayout from './layouts/HiringMetricsLayout';
-import type { ChatMessage, ChatBubbleMessage, LayoutDisplayMessage, SpecialLayoutType } from '../../types';
+import type { ChatMessage as ChatMessageType, ChatBubbleMessage, LayoutDisplayMessage, SpecialLayoutType } from '../../types';
 
 interface ChatMessagesContainerProps {
   className?: string;
@@ -12,7 +12,7 @@ interface ChatMessagesContainerProps {
 const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({ 
   className = '' 
 }, ref) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessageType[]>([
     {
       id: '1',
       type: 'chat',
