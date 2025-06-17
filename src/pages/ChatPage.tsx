@@ -108,9 +108,6 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
             ) : (
               /* Regular Chat Interface */
               <div className="max-w-[48.875rem] mx-auto h-full flex flex-col">
-                <h3 className="text-lg font-poppins font-semibold text-n-500 mb-4">
-                  AI Assistant Chat
-                </h3>
                 <div className="flex-1 overflow-y-auto">
                   <ChatMessagesContainer ref={chatSectionRef} />
                 </div>

@@ -11,14 +11,12 @@ interface ChatMessage {
 
 interface ChatMessageProps {
   message: ChatMessage;
-  userAvatarImageIndex?: number;
   aiAgentImageIndex: number;
   className?: string;
 }
 
 const ChatMessage: React.FC<ChatMessageProps> = ({
   message,
-  userAvatarImageIndex,
   aiAgentImageIndex,
   className = ''
 }) => {
@@ -37,21 +35,13 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   };
 
   return (
-    <div className={cn("flex items-start space-x-3 py-2", className)}>
+    <div className={cn("flex items-start space-x-3 py-3.5", className)}>
       {/* Avatar - always on the left */}
       <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
         {message.sender === 'user' ? (
-          userAvatarImageIndex !== undefined ? (
-            <img
-              src={getAgentImageByIndex(userAvatarImageIndex)}
-              alt="User"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full bg-n-100 flex items-center justify-center">
-              <User className="w-4 h-4 text-n-300" />
-            </div>
-          )
+          <div className="w-full h-full bg-n-100 flex items-center justify-center">
+            <User className="w-4 h-4 text-n-300" />
+          </div>
         ) : (
           <img
             src={getAgentImageByIndex(aiAgentImageIndex)}
@@ -74,10 +64,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           {/* Message Bubble */}
           <div
             className={cn(
-              "inline-block px-4 py-3 rounded-xl text-sm font-poppins font-normal max-w-full",
+              "inline-block text-sm font-poppins font-normal max-w-full",
               message.sender === 'user'
-                ? "bg-b-200 text-white"
-                : "bg-white text-n-500 border border-n-75"
+                ? "text-n-300"
+                : "text-n-500"
             )}
           >
             {message.content}

@@ -71,40 +71,9 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
           <ChatMessage
             key={message.id}
             message={message}
-            userAvatarImageIndex={0} // Use first agent image for demo user avatar
             aiAgentImageIndex={0} // Use first agent image for AI
           />
         ))}
-      </div>
-
-      {/* Chat Input */}
-      <div className="border-t border-n-75 pt-3 mt-auto px-4">
-        <div className="bg-gr-25 rounded-lg p-3">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Ask about this initiative..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSendMessage(inputValue);
-                  setInputValue('');
-                }
-              }}
-              className="w-full px-3 py-2 pr-10 text-xs font-poppins font-normal text-n-500 placeholder:text-n-200 bg-gr-25 border-none rounded-lg focus:outline-none resize-none"
-            />
-            <button
-              onClick={() => {
-                handleSendMessage(inputValue);
-                setInputValue('');
-              }}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 bg-p-400 text-white rounded-md hover:bg-p-300 transition-colors"
-            >
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
