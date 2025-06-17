@@ -6,7 +6,11 @@ import NewLeadsSection from '../components/dashboard/NewLeadsSection';
 import UpcomingMeetingsSection from '../components/dashboard/UpcomingMeetingsSection';
 import SparkleIcon from '../components/icons/SparkleIcon';
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  onSendMessageAndNavigate?: (message: string) => void;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ onSendMessageAndNavigate }) => {
   // Get current time for greeting
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -39,7 +43,7 @@ const Dashboard: React.FC = () => {
 
             </div>
             {/* Chat Input Component */}
-            <ChatInput />
+            <ChatInput onSendMessageAndNavigate={onSendMessageAndNavigate} />
           </div>
           
           {/* KPI Grid */}

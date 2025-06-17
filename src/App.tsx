@@ -19,6 +19,7 @@ function App() {
   const [activeAppPage, setActiveAppPage] = useState<AppPage>('dashboard');
   const [activeStyleGuideSection, setActiveStyleGuideSection] = useState('colors');
   const [activeComponentSection, setActiveComponentSection] = useState('buttons');
+  const [initialChatMessage, setInitialChatMessage] = useState<string>('');
 
   const handleViewChange = (view: Environment, subView?: string) => {
     setCurrentView(view);
@@ -39,12 +40,18 @@ function App() {
     }
   };
 
+  const handleSendMessageAndNavigate = (message: string) => {
+    setInitialChatMessage(message);
+    setCurrentView('App');
+    setActiveAppPage('chat');
+  };
+
   const renderContent = () => {
     switch (currentView) {
       case 'App':
         switch (activeAppPage) {
           case 'dashboard':
-            return <Dashboard />;
+            return <Dashboard onSendMessageAndNavigate={handleSendMessageAndNavigate} />;
           case 'contacts':
             return <ContactsPage />;
           case 'calendar':
@@ -58,9 +65,9 @@ function App() {
           case 'calls':
             return <CallsPage />;
           case 'chat':
-            return <ChatPage />;
+            return <ChatPage initialChatMessage={initialChatMessage} />;
           case 'projects':
-            return <ProjectsPage />;
+            return <ProjectsPage onSendMessageAndNavigate={handleSendMessageAndNavigate} />;
           case 'settings':
             return <SettingsPage />;
           default:

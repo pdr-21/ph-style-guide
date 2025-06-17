@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { User, Bot, ArrowRight } from 'lucide-react';
 
 interface ChatMessage {
@@ -12,9 +12,9 @@ interface ProjectChatSectionProps {
   className?: string;
 }
 
-const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({ 
+const ProjectChatSection = forwardRef<any, ProjectChatSectionProps>(({ 
   className = '' 
-}) => {
+}, ref) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -24,6 +24,13 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
     }
   ]);
   const [inputValue, setInputValue] = useState('');
+
+  // Expose method to add initial message from parent
+  useImperativeHandle(ref, () => ({
+    addInitialMessage: (message: string) => {
+      handleSendMessage(message);
+    }
+  }));
 
   // Simulate AI responses
   const getAIResponse = (userMessage: string): string => {
@@ -39,7 +46,7 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
   };
 
   // Handle sending a message
-  const handleSendMessage = (message: string) => {
+  const handleSendMessage = (message: string = inputValue) => {
     if (!message.trim()) return;
 
     // Add user message
@@ -140,6 +147,8 @@ const ProjectChatSection: React.FC<ProjectChatSectionProps> = ({
       </div>
     </div>
   );
-};
+});
+
+ProjectChatSection.displayName = 'ProjectChatSection';
 
 export default ProjectChatSection;

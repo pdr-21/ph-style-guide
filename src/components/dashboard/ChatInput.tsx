@@ -4,9 +4,13 @@ import ToggleSwitch from '../ui/ToggleSwitch';
 
 interface ChatInputProps {
   showToggleSwitch?: boolean;
+  onSendMessageAndNavigate?: (message: string) => void;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ showToggleSwitch = true }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ 
+  showToggleSwitch = true, 
+  onSendMessageAndNavigate 
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [activeMode, setActiveMode] = useState('automatic');
 
@@ -15,6 +19,13 @@ const ChatInput: React.FC<ChatInputProps> = ({ showToggleSwitch = true }) => {
     { id: 'goals', label: 'Goals' },
     { id: 'problems', label: 'Problems' },
   ];
+
+  const handleSendMessage = () => {
+    if (inputValue.trim() && onSendMessageAndNavigate) {
+      onSendMessageAndNavigate(inputValue);
+      setInputValue('');
+    }
+  };
 
   return (
     <div className="w-full">
@@ -50,7 +61,10 @@ const ChatInput: React.FC<ChatInputProps> = ({ showToggleSwitch = true }) => {
             <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors">
               <Mic className="w-5 h-5" />
             </button>
-            <button className="p-2 bg-b-200 text-white hover:bg-b-300 rounded-lg transition-colors">
+            <button 
+              onClick={handleSendMessage}
+              className="p-2 bg-b-200 text-white hover:bg-b-300 rounded-lg transition-colors"
+            >
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>

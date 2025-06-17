@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PageHeader from '../components/common/PageHeader';
 import ProjectChatSection from '../components/projects/ProjectChatSection';
 
-const ChatPage: React.FC = () => {
+interface ChatPageProps {
+  initialChatMessage?: string;
+}
+
+const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
+  const chatSectionRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (initialChatMessage && initialChatMessage.trim()) {
+      // Add the initial message to the chat when component mounts or message changes
+      if (chatSectionRef.current && chatSectionRef.current.addInitialMessage) {
+        chatSectionRef.current.addInitialMessage(initialChatMessage);
+      }
+    }
+  }, [initialChatMessage]);
+
   return (
     <div className="h-full flex flex-col">
       <PageHeader 
@@ -17,7 +32,7 @@ const ChatPage: React.FC = () => {
               AI Assistant Chat
             </h3>
             <div className="flex-1">
-              <ProjectChatSection />
+              <ProjectChatSection ref={chatSectionRef} />
             </div>
           </div>
         </div>

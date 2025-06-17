@@ -7,7 +7,11 @@ import EscalatedTasksSection from '../components/projects/EscalatedTasksSection'
 import GoDeeperSection from '../components/projects/GoDeeperSection';
 import ProjectTemplatePage from './ProjectTemplatePage';
 
-const ProjectsPage: React.FC = () => {
+interface ProjectsPageProps {
+  onSendMessageAndNavigate?: (message: string) => void;
+}
+
+const ProjectsPage: React.FC<ProjectsPageProps> = ({ onSendMessageAndNavigate }) => {
   const [selectedInitiativeId, setSelectedInitiativeId] = React.useState<string | null>(null);
 
   // Get current time for greeting
@@ -176,7 +180,10 @@ const ProjectsPage: React.FC = () => {
               </h1>
             </div>
             {/* Chat Input Component without toggle switch */}
-            <ChatInput showToggleSwitch={false} />
+            <ChatInput 
+              showToggleSwitch={false} 
+              onSendMessageAndNavigate={onSendMessageAndNavigate} 
+            />
           </div>
           
           {/* KPI Grid with project-specific data */}
