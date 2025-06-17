@@ -36,9 +36,9 @@ const MilestoneDetail: React.FC<MilestoneDetailProps> = ({
       case 'in-progress':
         return 'bg-b-40 text-b-300 border border-b-200';
       case 'not-started':
-        return 'bg-n-50 text-n-400 border border-n-100';
+        return 'bg-n-50 text-n-400 border border-n-75';
       default:
-        return 'bg-n-50 text-n-400 border border-n-100';
+        return 'bg-n-50 text-n-400 border border-n-75';
     }
   };
 
