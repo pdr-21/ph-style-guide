@@ -21,24 +21,9 @@ const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
     { id: '4', title: 'ICU Nurse Shortlist', timestamp: 'Today' },
   ];
 
+  // When collapsed, return null to completely hide the sidebar
   if (isCollapsed) {
-    return (
-      <div className={cn(
-        "fixed left-16 top-18 w-16 h-[calc(100vh-72px)] bg-gr-25 border-r border-n-75 z-30 flex flex-col",
-        className
-      )}>
-        {/* Expand Button */}
-        <div className="p-4">
-          <button
-            onClick={onToggleCollapse}
-            className="w-8 h-8 flex items-center justify-center text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors"
-            title="Expand chat history"
-          >
-            <PanelLeftOpen className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (
