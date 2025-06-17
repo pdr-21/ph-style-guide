@@ -26,7 +26,7 @@ const SourcingAgentProfileCard: React.FC<SourcingAgentProfileCardProps> = ({
 
   return (
     <Card 
-      className="absolute z-50 bg-white border border-n-100 rounded-xl shadow-lg p-4 w-64"
+      className="absolute z-50 bg-white border border-n-75 rounded-xl shadow-lg p-4 w-64"
       style={{
         top: `${position.top}px`,
         left: `${position.left}px`,
