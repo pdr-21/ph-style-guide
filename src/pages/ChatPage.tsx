@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import PageHeader from '../components/common/PageHeader';
+import React, { useEffect, useRef, useState } from 'react';
 import ProjectChatSection from '../components/projects/ProjectChatSection';
+import ChatHistorySidebar from '../components/chat/ChatHistorySidebar';
 
 interface ChatPageProps {
   initialChatMessage?: string;
@@ -8,6 +8,7 @@ interface ChatPageProps {
 
 const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
   const chatSectionRef = useRef<any>(null);
+  const [isChatHistoryCollapsed, setIsChatHistoryCollapsed] = useState(false);
 
   useEffect(() => {
     if (initialChatMessage && initialChatMessage.trim()) {
@@ -18,15 +19,25 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
     }
   }, [initialChatMessage]);
 
+  const handleToggleChatHistory = () => {
+    setIsChatHistoryCollapsed(!isChatHistoryCollapsed);
+  };
+
   return (
-    <div className="h-full flex flex-col">
-      <PageHeader 
-        title="Chat" 
-        description="Communicate with AI agents and team members" 
+    <div className="h-[calc(100vh-72px)] flex">
+      {/* Chat History Sidebar */}
+      <ChatHistorySidebar
+        isCollapsed={isChatHistoryCollapsed}
+        onToggleCollapse={handleToggleChatHistory}
       />
-      
-      <div className="flex-1 p-8">
-        <div className="max-w-4xl mx-auto h-full">
+
+      {/* Main Chat Area */}
+      <div 
+        className={`flex-1 transition-all duration-300 ${
+          isChatHistoryCollapsed ? 'ml-32' : 'ml-80'
+        }`}
+      >
+        <div className="h-full p-6">
           <div className="bg-white rounded-xl border border-n-100 p-6 h-full flex flex-col">
             <h3 className="text-lg font-poppins font-semibold text-n-500 mb-4">
               AI Assistant Chat

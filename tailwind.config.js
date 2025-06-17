@@ -173,6 +173,8 @@ export default {
       spacing: {
         '18': '4.5rem', // 72px
         '22': '5.5rem', // 88px
+        '80': '20rem', // 320px - for expanded chat history sidebar
+        '32': '8rem', // 128px - for collapsed chat history sidebar
       }
     },
   },
