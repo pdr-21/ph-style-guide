@@ -178,6 +178,15 @@ export default {
         '32': '8rem', // 128px - for collapsed chat history sidebar
       }
     },
+    keyframes: {
+      'gradient-move': {
+        '0%, 100%': { 'background-position': '0% 50%' },
+        '50%': { 'background-position': '100% 50%' }
+      }
+    },
+    animation: {
+      'pulse-gradient': 'gradient-move 3s ease infinite'
+    },
   },
   plugins: [],
 };

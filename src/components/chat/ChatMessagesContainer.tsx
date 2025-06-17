@@ -25,6 +25,8 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingProjectTitle, setLoadingProjectTitle] = useState('');
 
   // Expose method to add initial message from parent
   useImperativeHandle(ref, () => ({
@@ -82,6 +84,12 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
   // Handle sending a message
   const handleSendMessage = (message: string = inputValue) => {
     if (!message.trim()) return;
+    
+    // If already loading, just clear input and return
+    if (isLoading) {
+      setInputValue('');
+      return;
+    }
 
     // Add user message
     const userMessage: ChatBubbleMessage = {
@@ -93,23 +101,47 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
     };
 
     setMessages(prev => [...prev, userMessage]);
+    setInputValue(''); // Clear input immediately after adding user message
 
     // Check for special layout keywords
     const { layoutType, projectTitle } = checkForSpecialLayout(message);
     
     // If we detect a special layout keyword, add the layout to messages
     if (layoutType !== 'none') {
-      const layoutMessage: LayoutDisplayMessage = {
-        id: (Date.now() + 1).toString(),
-        type: 'layout',
-        layoutType,
-        projectTitle,
-        sender: 'ai',
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, layoutMessage]);
-      return; // Don't add a regular AI response
+      if (layoutType === 'projectPlan') {
+        // Set loading state for project plan
+        setIsLoading(true);
+        setLoadingProjectTitle(projectTitle || 'your goal');
+        
+        // Delay the addition of the project plan layout by 15 seconds
+        setTimeout(() => {
+          setIsLoading(false);
+          const layoutMessage: LayoutDisplayMessage = {
+            id: (Date.now() + 1).toString(),
+            type: 'layout',
+            layoutType,
+            projectTitle,
+            sender: 'ai',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, layoutMessage]);
+        }, 15000); // 15 seconds delay
+        
+        return; // Don't add a regular AI response
+      } else {
+        // For other layout types, add immediately
+        const layoutMessage: LayoutDisplayMessage = {
+          id: (Date.now() + 1).toString(),
+          type: 'layout',
+          layoutType,
+          projectTitle,
+          sender: 'ai',
+          timestamp: new Date()
+        };
+        
+        setMessages(prev => [...prev, layoutMessage]);
+        return; // Don't add a regular AI response
+      }
     }
 
     // Simulate AI response after a short delay
@@ -166,6 +198,30 @@ const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({
           }
           return null;
         })}
+        
+        {/* Loading Message */}
+        {isLoading && (
+          <div className="flex items-start space-x-3 py-3.5">
+            {/* AI Avatar */}
+            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img
+                src={getAgentImageByIndex(0)}
+                alt="AI Agent"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Loading Text with Gradient Animation */}
+            <div className="flex-1 min-w-0">
+              <p 
+                className="text-sm font-poppins font-normal bg-gradient-to-r from-n-200 via-n-400 to-n-500 bg-clip-text text-transparent animate-pulse-gradient"
+                style={{ backgroundSize: '200% 100%' }}
+              >
+                Fetching data for {loadingProjectTitle}...
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
