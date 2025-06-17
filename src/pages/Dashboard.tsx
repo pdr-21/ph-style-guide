@@ -38,7 +38,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onSendMessageAndNavigate }) => {
               
               {/* Greeting */}
               <h1 className="text-2xl font-poppins font-semibold text-n-500">
-                {getGreeting()}, John
+                {getGreeting()}, Paul
               </h1>
 
             </div>
