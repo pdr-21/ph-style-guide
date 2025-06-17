@@ -56,7 +56,7 @@ const ProjectActionItem: React.FC<ProjectActionItemProps> = ({
   return (
     <Card 
       className={cn(
-        "bg-white rounded-lg border border-n-100 border-l-4 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200",
+        "bg-white rounded-lg border border-n-75 border-l-4 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200",
         getStatusStyling(),
         className
       )}
