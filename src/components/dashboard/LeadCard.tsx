@@ -18,7 +18,7 @@ const LeadCard: React.FC<LeadCardProps> = ({
   sourcingDaysLeft 
 }) => {
   return (
-    <Card className="bg-white rounded-xl border border-n-100 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200 cursor-pointer">
+    <Card className="bg-white rounded-xl border border-n-75 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200 cursor-pointer">
       {/* Lead count with icon */}
       <div className="flex items-center space-x-2 mb-3">
         <User className="w-4 h-4 text-n-300" />
