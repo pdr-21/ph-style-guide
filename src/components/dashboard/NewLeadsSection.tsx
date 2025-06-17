@@ -95,7 +95,7 @@ const NewLeadsSection: React.FC = () => {
             </h2>
             <Badge 
               variant="secondary" 
-              className="bg-n-50 text-n-400 border-n-100 hover:bg-n-50 px-2 py-1 text-xs font-poppins font-medium"
+              className="bg-n-50 text-n-400 border-n-75 hover:bg-n-50 px-2 py-1 text-xs font-poppins font-medium"
             >
               {totalLeads}
             </Badge>
