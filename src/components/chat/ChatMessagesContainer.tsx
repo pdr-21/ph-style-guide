@@ -1,26 +1,20 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { User, Bot, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import ChatMessage from './ChatMessage';
+import type { ChatMessage as ChatMessageType } from './ChatMessage';
 
-interface ChatMessage {
-  id: string;
-  content: string;
-  sender: 'user' | 'ai';
-  timestamp: Date;
-}
-
-interface ProjectChatSectionProps {
+interface ChatMessagesContainerProps {
   className?: string;
 }
 
-const ProjectChatSection = forwardRef<any, ProjectChatSectionProps>(({ 
+const ChatMessagesContainer = forwardRef<any, ChatMessagesContainerProps>(({ 
   className = '' 
 }, ref) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessageType[]>([
     {
       id: '1',
       content: 'Hello! I\'m here to help you with this initiative. What would you like to know?',
-      sender: 'ai',
-      timestamp: new Date(Date.now() - 5 * 60 * 1000) // 5 minutes ago
+      sender: 'ai'
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -50,74 +44,41 @@ const ProjectChatSection = forwardRef<any, ProjectChatSectionProps>(({
     if (!message.trim()) return;
 
     // Add user message
-    const userMessage: ChatMessage = {
+    const userMessage: ChatMessageType = {
       id: Date.now().toString(),
       content: message,
-      sender: 'user',
-      timestamp: new Date()
+      sender: 'user'
     };
 
     setMessages(prev => [...prev, userMessage]);
 
     // Simulate AI response after a short delay
     setTimeout(() => {
-      const aiMessage: ChatMessage = {
+      const aiMessage: ChatMessageType = {
         id: (Date.now() + 1).toString(),
         content: getAIResponse(message),
-        sender: 'ai',
-        timestamp: new Date()
+        sender: 'ai'
       };
       setMessages(prev => [...prev, aiMessage]);
     }, 1000);
   };
 
-  // Format timestamp for display
-  const formatTime = (timestamp: Date) => {
-    return timestamp.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
   return (
     <div className={`flex flex-col justify-between h-full min-h-[400px] ${className}`}>
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+      <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
         {messages.map((message) => (
-          <div
+          <ChatMessage
             key={message.id}
-            className={`flex items-start space-x-2 ${
-              message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''
-            }`}
-          >
-            {/* Avatar - Only for user messages */}
-            {message.sender === 'user' && (
-              <div className="w-6 h-6 bg-n-50 rounded-full flex items-center justify-center flex-shrink-0">
-                <User className="w-3 h-3 text-n-300" />
-              </div>
-            )}
-
-            {/* Message Bubble */}
-            <div className={`max-w-[80%] ${
-              message.sender === 'user' ? 'text-right' : 'text-left'
-            }`}>
-              <div className={`inline-block px-3 py-2 rounded-lg text-xs font-poppins font-normal ${
-                message.sender === 'user'
-                  ? 'bg-b-200 text-white'
-                  : 'bg-n-50 text-n-500'
-              }`}>
-                {message.content}
-              </div>
-              <div className="text-xs text-n-200 mt-1 font-poppins font-normal">
-                {formatTime(message.timestamp)}
-              </div>
-            </div>
-          </div>
+            message={message}
+            userAvatarImageIndex={0} // Use first agent image for demo user avatar
+            aiAgentImageIndex={0} // Use first agent image for AI
+          />
         ))}
       </div>
 
       {/* Chat Input */}
-      <div className="border-t border-n-75 pt-3 mt-auto">
+      <div className="border-t border-n-75 pt-3 mt-auto px-4">
         <div className="bg-gr-25 rounded-lg p-3">
           <div className="relative">
             <input
@@ -149,6 +110,6 @@ const ProjectChatSection = forwardRef<any, ProjectChatSectionProps>(({
   );
 });
 
-ProjectChatSection.displayName = 'ProjectChatSection';
+ChatMessagesContainer.displayName = 'ChatMessagesContainer';
 
-export default ProjectChatSection;
+export default ChatMessagesContainer;

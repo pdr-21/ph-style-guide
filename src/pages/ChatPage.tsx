@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ProjectChatSection from '../components/projects/ProjectChatSection';
+import ChatMessagesContainer from '../components/chat/ChatMessagesContainer';
 import ChatHistorySidebar from '../components/chat/ChatHistorySidebar';
 import ChatInput from '../components/dashboard/ChatInput';
 import SuggestionButton from '../components/chat/SuggestionButton';
@@ -68,7 +68,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
       {/* Main Chat Area */}
       <div 
         className={`flex-1 transition-all duration-300 ${
-          isChatHistoryCollapsed ? 'ml-0' : 'ml-64'
+          isChatHistoryCollapsed ? 'ml-16' : 'ml-64'
         }`}
       >
         <div className="h-full p-6">
@@ -107,14 +107,37 @@ const ChatPage: React.FC<ChatPageProps> = ({ initialChatMessage }) => {
               </div>
             ) : (
               /* Regular Chat Interface */
-              <>
+              <div className="max-w-[48.875rem] mx-auto h-full flex flex-col">
                 <h3 className="text-lg font-poppins font-semibold text-n-500 mb-4">
                   AI Assistant Chat
                 </h3>
-                <div className="flex-1">
-                  <ProjectChatSection ref={chatSectionRef} />
+                <div className="flex-1 overflow-y-auto">
+                  <ChatMessagesContainer ref={chatSectionRef} />
                 </div>
-              </>
+                
+                {/* Chat Input and Suggestions at bottom */}
+                <div className="mt-4 space-y-4">
+                  {/* Suggestion Buttons */}
+                  <div className="flex gap-4 justify-center">
+                    <SuggestionButton
+                      text="Provide sourcing insights"
+                      onClick={() => handleSuggestionClick("Provide sourcing insights")}
+                    />
+                    <SuggestionButton
+                      text="Analyze hiring metrics"
+                      onClick={() => handleSuggestionClick("Analyze hiring metrics")}
+                    />
+                  </div>
+                  
+                  {/* Chat Input with custom width */}
+                  <div className="w-[46rem] mx-auto">
+                    <ChatInput 
+                      showToggleSwitch={false}
+                      onSendMessageAndNavigate={handleLocalSendMessage}
+                    />
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

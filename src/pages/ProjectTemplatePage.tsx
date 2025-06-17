@@ -3,7 +3,7 @@ import { Button } from '../components/ui/button';
 import { ArrowLeft, Clock } from 'lucide-react';
 import ExpandableSection from '../components/common/ExpandableSection';
 import ProjectTaskList from '../components/projects/ProjectTaskList';
-import ProjectChatSection from '../components/projects/ProjectChatSection';
+import ChatMessagesContainer from '../components/chat/ChatMessagesContainer';
 import NotificationDropdown from '../components/projects/NotificationDropdown';
 import MilestoneTimeline from '../components/projects/MilestoneTimeline';
 import MilestoneList from '../components/projects/MilestoneList';
@@ -693,7 +693,7 @@ const ProjectTemplatePage: React.FC<ProjectTemplatePageProps> = ({
             onToggle={() => handleSectionToggle('chat')}
             className={expandedSection === 'chat' ? 'flex-1' : 'flex-shrink-0'}
           >
-            <ProjectChatSection />
+            <ChatMessagesContainer />
           </ExpandableSection>
         </div>
       </div>
