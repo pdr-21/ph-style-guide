@@ -31,7 +31,7 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
   const TypeIcon = type === 'online' ? Monitor : MapPin;
 
   return (
-    <Card className="bg-white rounded-xl border border-n-100 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200">
+    <Card className="bg-white rounded-xl border border-n-75 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200">
       {/* Date */}
       <div className="flex items-center justify-between mb-3">
         <div className="text-center">
