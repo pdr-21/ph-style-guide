@@ -15,7 +15,7 @@ const SuggestionButton: React.FC<SuggestionButtonProps> = ({
     <div className={`p-[1px] rounded-xl bg-gradient-to-r from-[#FFBD45] via-[#CDC4F5] via-[#C8EFEB] to-[#EBA680] ${className}`}>
       <button
         onClick={onClick}
-        className="w-full bg-white rounded-xl px-4 py-3 flex items-center space-x-3 hover:bg-n-40 transition-colors"
+        className="w-full bg-white rounded-xl px-3 py-2 flex items-center space-x-3 hover:bg-n-40 transition-colors"
       >
         {/* AI Gradient SVG Icon */}
         <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
