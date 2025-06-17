@@ -18,7 +18,7 @@ interface JobItemProps {
 
 const JobItem: React.FC<JobItemProps> = ({ title, jobId, location, metrics }) => {
   return (
-    <Card className="bg-white rounded-xl border border-n-100 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200">
+    <Card className="bg-white rounded-xl border border-n-75 p-4 hover:border-n-200 hover:shadow-sm transition-all duration-200">
       <div className="flex items-center justify-between">
         {/* Left side - Job info */}
         <div className="flex-1">
