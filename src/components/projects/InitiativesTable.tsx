@@ -12,9 +12,10 @@ import ViewInitiativeButton from './ViewInitiativeButton';
 
 interface InitiativesTableProps {
   onView?: (initiativeId: string) => void;
+  dynamicInitiatives?: Initiative[];
 }
 
-const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
+const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView, dynamicInitiatives = [] }) => {
   const [activeSpotlight, setActiveSpotlight] = useState<SpotlightFilter>('All initiatives');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -497,8 +498,11 @@ const InitiativesTable: React.FC<InitiativesTableProps> = ({ onView }) => {
     }
   ];
 
+  // Combine dynamic initiatives with dummy initiatives
+  const allInitiatives = [...dynamicInitiatives, ...dummyInitiatives];
+
   // Filter initiatives based on active spotlight
-  const filteredInitiatives = dummyInitiatives.filter(initiative => {
+  const filteredInitiatives = allInitiatives.filter(initiative => {
     if (activeSpotlight === 'All initiatives') return true;
     if (activeSpotlight === 'Paused') return initiative.status === 'Paused';
     if (activeSpotlight === 'Escalations') return initiative.status === 'Escalated';

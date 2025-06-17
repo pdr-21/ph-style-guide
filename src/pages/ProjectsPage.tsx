@@ -6,13 +6,106 @@ import InitiativesTable from '../components/projects/InitiativesTable';
 import EscalatedTasksSection from '../components/projects/EscalatedTasksSection';
 import GoDeeperSection from '../components/projects/GoDeeperSection';
 import ProjectTemplatePage from './ProjectTemplatePage';
+import { Initiative } from '../types';
 
 interface ProjectsPageProps {
   onSendMessageAndNavigate?: (message: string) => void;
+  newlyCreatedProjectInfo?: { id: string; title: string } | null;
 }
 
-const ProjectsPage: React.FC<ProjectsPageProps> = ({ onSendMessageAndNavigate }) => {
+const ProjectsPage: React.FC<ProjectsPageProps> = ({ 
+  onSendMessageAndNavigate, 
+  newlyCreatedProjectInfo 
+}) => {
   const [selectedInitiativeId, setSelectedInitiativeId] = React.useState<string | null>(null);
+  const [dynamicInitiatives, setDynamicInitiatives] = React.useState<Initiative[]>([]);
+
+  // Watch for newly created projects from chat
+  React.useEffect(() => {
+    if (newlyCreatedProjectInfo) {
+      // Create a new initiative with default incomplete state
+      const newInitiative: Initiative = {
+        id: newlyCreatedProjectInfo.id,
+        name: newlyCreatedProjectInfo.title,
+        shortDescription: 'AI-generated hiring initiative created from chat interaction',
+        status: 'Not Started',
+        startDate: new Date().toISOString().split('T')[0], // Today's date
+        endDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 90 days from now
+        taskDistribution: {
+          total: 0,
+          completed: 0,
+          escalated: 0,
+          paused: 0,
+          notStarted: 0
+        },
+        aiAgents: [
+          {
+            id: 'agent1',
+            name: 'Sourcing Agent Alpha',
+            imageIndex: 0,
+            leadsFound: 0,
+            successRate: 94.2,
+            avgResponseTime: '2.3h'
+          },
+          {
+            id: 'agent2',
+            name: 'Screening Agent Beta',
+            imageIndex: 1,
+            leadsFound: 0,
+            successRate: 89.7,
+            avgResponseTime: '1.8h'
+          },
+          {
+            id: 'agent3',
+            name: 'Coordination Agent Gamma',
+            imageIndex: 3,
+            leadsFound: 0,
+            successRate: 92.1,
+            avgResponseTime: '3.1h'
+          }
+        ],
+        humanInLoop: {
+          id: 'human1',
+          name: 'Sarah Johnson',
+          initials: 'SJ',
+          role: 'Senior Hiring Manager',
+          department: 'Engineering',
+          email: 'sarah.johnson@company.com',
+          imageIndex: 2
+        },
+        category: 'Hiring',
+        milestones: [
+          {
+            id: 'milestone1',
+            name: 'Project Setup',
+            description: 'Initialize project and configure AI agents',
+            dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 7 days from now
+            status: 'not-started',
+            progressPercentage: 0,
+            assignedAgentId: 'agent1',
+            attachedFiles: []
+          }
+        ],
+        attachedFiles: [],
+        actions: [
+          {
+            id: 'action1',
+            title: 'Configure project parameters',
+            description: 'Set up initial project configuration and requirements',
+            status: 'not-started',
+            category: 'Setup',
+            milestoneId: 'milestone1'
+          }
+        ]
+      };
+
+      // Add to dynamic initiatives
+      setDynamicInitiatives(prev => [newInitiative, ...prev]);
+      
+      // Automatically navigate to the new project's detail page
+      setSelectedInitiativeId(newlyCreatedProjectInfo.id);
+    }
+  }, [newlyCreatedProjectInfo]);
 
   // Get current time for greeting
   const getGreeting = () => {
@@ -199,7 +292,10 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({ onSendMessageAndNavigate })
 
       {/* Initiatives Section - Full Width */}
       <div className="mt-8">
-        <InitiativesTable onView={handleViewInitiative} />
+        <InitiativesTable 
+          onView={handleViewInitiative} 
+          dynamicInitiatives={dynamicInitiatives}
+        />
       </div>
     </div>
   );

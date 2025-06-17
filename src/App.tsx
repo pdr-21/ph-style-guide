@@ -20,6 +20,7 @@ function App() {
   const [activeStyleGuideSection, setActiveStyleGuideSection] = useState('colors');
   const [activeComponentSection, setActiveComponentSection] = useState('buttons');
   const [initialChatMessage, setInitialChatMessage] = useState<string>('');
+  const [newlyCreatedProjectInfo, setNewlyCreatedProjectInfo] = useState<{ id: string; title: string } | null>(null);
 
   const handleViewChange = (view: Environment, subView?: string) => {
     setCurrentView(view);
@@ -50,6 +51,20 @@ function App() {
     setActiveAppPage('chat');
   };
 
+  const handleApproveProjectAndNavigate = (projectTitle: string) => {
+    // Generate a unique ID for the new project
+    const newProjectId = `project-${Date.now()}`;
+    
+    // Set the newly created project info
+    setNewlyCreatedProjectInfo({
+      id: newProjectId,
+      title: projectTitle
+    });
+    
+    // Navigate to the Projects page
+    setCurrentView('App');
+    setActiveAppPage('projects');
+  };
   const renderContent = () => {
     switch (currentView) {
       case 'App':
@@ -69,9 +84,15 @@ function App() {
           case 'calls':
             return <CallsPage />;
           case 'chat':
-            return <ChatPage initialChatMessage={initialChatMessage} />;
+            return <ChatPage 
+              initialChatMessage={initialChatMessage} 
+              onApproveProject={handleApproveProjectAndNavigate}
+            />;
           case 'projects':
-            return <ProjectsPage onSendMessageAndNavigate={handleSendMessageAndNavigate} />;
+            return <ProjectsPage 
+              onSendMessageAndNavigate={handleSendMessageAndNavigate}
+              newlyCreatedProjectInfo={newlyCreatedProjectInfo}
+            />;
           case 'settings':
             return <SettingsPage />;
           default:
