@@ -1,6 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { ArrowRight } from 'lucide-react';
 import ChatMessage from './ChatMessage';
+import { getAgentImageByIndex } from '../../lib/agentImages';
 import ProjectOverviewLayout from './layouts/ProjectOverviewLayout';
 import HiringMetricsLayout from './layouts/HiringMetricsLayout';
 import ProjectPlanLayout from './layouts/ProjectPlanLayout';
