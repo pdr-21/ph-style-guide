@@ -25,9 +25,13 @@ function App() {
     setCurrentView(view);
     if (view === 'App' && subView) {
       // Check if subView is a valid AppPage
-      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'projects', 'settings'];
+      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'chat', 'projects', 'settings'];
       if (validAppPages.includes(subView as AppPage)) {
         setActiveAppPage(subView as AppPage);
+        // Clear initial chat message when navigating directly to chat
+        if (subView === 'chat') {
+          setInitialChatMessage('');
+        }
       } else {
         setActiveAppPage('dashboard');
       }
