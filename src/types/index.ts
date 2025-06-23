@@ -1,6 +1,6 @@
 export type Environment = 'App' | 'Components' | 'Style Guide';
 export type NavigationItemType = 'icon' | 'text';
-export type AppPage = 'dashboard' | 'contacts' | 'calendar' | 'reports' | 'documents' | 'email' | 'calls' | 'settings';
+export type AppPage = 'dashboard' | 'contacts' | 'calendar' | 'reports' | 'documents' | 'email' | 'calls' | 'projects' | 'settings';
 
 export interface User {
   name: string;
