@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { Paperclip, Mic, ArrowRight } from 'lucide-react';
-import ToggleSwitch from '../ui/ToggleSwitch';
+import { Dropdown } from '../ui/dropdown';
 
 const ChatInput: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
-  const [activeMode, setActiveMode] = useState('automatic');
 
-  const modeOptions = [
-    { id: 'automatic', label: 'Automatic' },
-    { id: 'goals', label: 'Goals' },
-    { id: 'problems', label: 'Problems' },
+  // Dropdown states
+  const [responseDepth, setResponseDepth] = useState('quick');
+  const [knowledgeSource, setKnowledgeSource] = useState('company');
+
+  const responseDepthOptions = [
+    { label: 'Quick response', value: 'quick' },
+    { label: 'Deep thinking', value: 'deep' },
+  ];
+
+  const knowledgeSourceOptions = [
+    { label: 'Company knowledge', value: 'company' },
+    { label: 'Web', value: 'web' },
+    { label: 'Auto', value: 'auto' },
   ];
 
   return (
@@ -27,24 +35,44 @@ const ChatInput: React.FC = () => {
           />
         </div>
 
-        {/* Bottom section with toggle and actions */}
-        <div className="flex items-center justify-between">
-          {/* Toggle Switch */}
-          <ToggleSwitch
-            options={modeOptions}
-            activeOptionId={activeMode}
-            onOptionChange={setActiveMode}
-          />
-
-          {/* Action buttons */}
+        {/* Bottom section with controls and actions */}
+        <div className="flex items-center justify-between flex-wrap gap-3 md:gap-0">
+          {/* Left controls */}
           <div className="flex items-center space-x-3">
-            <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors">
+            {/* File attachment button */}
+            <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors" aria-label="Attach file">
               <Paperclip className="w-5 h-5" />
             </button>
-            <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors">
+
+            {/* Response depth dropdown */}
+            <div className="w-48">
+              <Dropdown
+                options={responseDepthOptions}
+                value={responseDepth}
+                onChange={setResponseDepth}
+                size="sm"
+                className="h-9 whitespace-nowrap text-xs"
+              />
+            </div>
+
+            {/* Knowledge source dropdown */}
+            <div className="w-48">
+              <Dropdown
+                options={knowledgeSourceOptions}
+                value={knowledgeSource}
+                onChange={setKnowledgeSource}
+                size="sm"
+                className="h-9 whitespace-nowrap text-xs"
+              />
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex items-center space-x-3 ml-auto">
+            <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors" aria-label="Record audio">
               <Mic className="w-5 h-5" />
             </button>
-            <button className="p-2 bg-b-200 text-white hover:bg-b-300 rounded-lg transition-colors">
+            <button className="p-2 bg-b-200 text-white hover:bg-b-300 rounded-lg transition-colors" aria-label="Send message">
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>

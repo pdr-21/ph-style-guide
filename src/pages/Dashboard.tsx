@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatInput from '../components/dashboard/ChatInput';
+import QuickActionsSection from '../components/dashboard/QuickActionsSection';
 import KPIGrid from '../components/dashboard/KPIGrid';
 import MyJobsSection from '../components/dashboard/MyJobsSection';
 import NewLeadsSection from '../components/dashboard/NewLeadsSection';
@@ -40,6 +41,9 @@ const Dashboard: React.FC = () => {
             </div>
             {/* Chat Input Component */}
             <ChatInput />
+
+            {/* Quick Actions Section */}
+            <QuickActionsSection />
           </div>
           
           {/* KPI Grid */}

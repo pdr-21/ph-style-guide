@@ -197,7 +197,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             aria-disabled={disabled}
             {...props}
           >
-            <span className={selectedOption ? "text-n-500" : "text-n-200"}>
+            <span className={`${selectedOption ? "text-n-500" : "text-n-200"} truncate whitespace-nowrap`}>
               {selectedOption ? selectedOption.label : placeholder}
             </span>
             

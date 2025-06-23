@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
 import Components from './pages/Components';
@@ -11,6 +11,7 @@ import EmailPage from './pages/EmailPage';
 import CallsPage from './pages/CallsPage';
 import SettingsPage from './pages/SettingsPage';
 import { Environment, AppPage } from './types';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
   const [currentView, setCurrentView] = useState<Environment>('App');
@@ -18,24 +19,59 @@ function App() {
   const [activeStyleGuideSection, setActiveStyleGuideSection] = useState('colors');
   const [activeComponentSection, setActiveComponentSection] = useState('buttons');
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleViewChange = (view: Environment, subView?: string) => {
     setCurrentView(view);
-    if (view === 'App' && subView) {
-      // Check if subView is a valid AppPage
-      const validAppPages: AppPage[] = ['dashboard', 'contacts', 'calendar', 'reports', 'documents', 'email', 'calls', 'projects', 'settings'];
-      if (validAppPages.includes(subView as AppPage)) {
-        setActiveAppPage(subView as AppPage);
-      } else {
-        setActiveAppPage('dashboard');
-      }
-    } else if (view === 'App') {
-      setActiveAppPage('dashboard');
-    } else if (view === 'Style Guide' && subView) {
-      setActiveStyleGuideSection(subView);
-    } else if (view === 'Components' && subView) {
-      setActiveComponentSection(subView);
+
+    if (view === 'App') {
+      const appPathMap: Record<AppPage, string> = {
+        dashboard: '/',
+        contacts: '/contacts',
+        calendar: '/calendar',
+        reports: '/reports',
+        documents: '/documents',
+        email: '/email',
+        calls: '/calls',
+        projects: '/projects',
+        settings: '/settings'
+      };
+
+      const target = subView && appPathMap[subView as AppPage] ? appPathMap[subView as AppPage] : '/';
+      navigate(target);
+      const nextPage: AppPage = subView && appPathMap[subView as AppPage] ? (subView as AppPage) : 'dashboard';
+      setActiveAppPage(nextPage);
+    } else if (view === 'Style Guide') {
+      const section = subView || 'colors';
+      navigate(`/style-guide/${section}`);
+      setActiveStyleGuideSection(section);
+    } else if (view === 'Components') {
+      const section = subView || 'buttons';
+      navigate(`/components/${section}`);
+      setActiveComponentSection(section);
     }
   };
+
+  // Sync component state with URL (e.g., when user navigates via browser buttons or direct link)
+  useEffect(() => {
+    const path = location.pathname;
+
+    if (path.startsWith('/style-guide')) {
+      setCurrentView('Style Guide');
+      const [, , section = 'colors'] = path.split('/');
+      setActiveStyleGuideSection(section);
+    } else if (path.startsWith('/components')) {
+      setCurrentView('Components');
+      const [, , section = 'buttons'] = path.split('/');
+      setActiveComponentSection(section);
+    } else {
+      // Default to App environment
+      setCurrentView('App');
+      const pagePath = path === '/' ? 'dashboard' : path.replace(/^\//, '') as AppPage;
+      setActiveAppPage(pagePath);
+    }
+  }, [location.pathname]);
 
   const renderContent = () => {
     switch (currentView) {
