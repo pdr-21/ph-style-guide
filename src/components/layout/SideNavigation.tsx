@@ -7,8 +7,7 @@ import {
   Settings, 
   BarChart3,
   Mail,
-  Phone,
-  FolderOpen
+  Phone
 } from 'lucide-react';
 import { NavigationItem, Environment, AppPage } from '../../types';
 import SideNavigationItem from './SideNavigationItem';
@@ -38,7 +37,6 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
     { id: 'email', icon: Mail, label: 'Email', path: '/email' },
     { id: 'calls', icon: Phone, label: 'Calls', path: '/calls' },
-    { id: 'projects', icon: FolderOpen, label: 'Projects', path: '/projects' },
     { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
   ];
 
@@ -56,9 +54,6 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
   const componentItems: NavigationItem[] = [
     { id: 'buttons', label: 'Buttons', path: '/components/buttons' },
     { id: 'inputs', label: 'Inputs', path: '/components/inputs' },
-    { id: 'dropdowns', label: 'Dropdowns', path: '/components/dropdowns' },
-    { id: 'kpi-cards', label: 'KPI Cards', path: '/components/kpi-cards' },
-    { id: 'toggle-switch', label: 'Toggle Switch', path: '/components/toggle-switch' },
     { id: 'side-nav-item', label: 'Side Nav Item', path: '/components/side-nav-item' },
     { id: 'side-nav', label: 'Side Navigation', path: '/components/side-nav' },
     { id: 'top-nav', label: 'Top Navigation', path: '/components/top-nav' },
