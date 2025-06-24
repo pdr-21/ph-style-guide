@@ -1,5 +1,7 @@
 import React from 'react';
 import { Search, Settings, LayoutGrid } from 'lucide-react';
+import Avatar from '../ui/avatar';
+import { userImages } from '../../lib/userImages';
 import { Environment } from '../../types';
 import AppSwitcherDropdown from '../ui/app-switcher-dropdown';
 
@@ -71,9 +73,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
           )}
 
           {/* Profile Container */}
-          <div className="w-8 h-8 bg-b-300 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-medium">JD</span>
-          </div>
+          <Avatar name="John Doe" src={userImages.johnDoe} />
         </div>
       </div>
     </nav>

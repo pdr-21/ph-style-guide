@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Star } from 'lucide-react';
+import { userImages } from '../../lib/userImages';
+import Avatar from '../ui/avatar';
 
 const actions: string[] = [
   'Open 10 new locations in the US',
@@ -126,9 +128,9 @@ const QuickActionsSection: React.FC = () => {
                     <p><span className="font-medium">Meeting date:</span> 12-04-2024</p>
                     <div className="flex items-center gap-1">
                       <span className="font-medium">Meeting participants:</span>
-                      <img src="https://source.unsplash.com/20x20/?face,man" alt="John Doe" className="w-5 h-5 rounded-full" />
+                      <Avatar name="John Doe" src={userImages.johnDoe} sizeClass="w-5 h-5" />
                       <span>John Doe (me),</span>
-                      <img src="https://source.unsplash.com/20x20/?face,woman" alt="Mathilde Zwike" className="w-5 h-5 rounded-full" />
+                      <Avatar name="Mathilde Zwike" src={userImages.mathildeZwike} sizeClass="w-5 h-5" />
                       <span>Mathilde Zwike</span>
                     </div>
                     <button className="mt-1 self-start px-3 py-1 bg-b-200 text-white rounded-full text-[10px] hover:bg-b-300 transition-colors">Follow-up</button>
