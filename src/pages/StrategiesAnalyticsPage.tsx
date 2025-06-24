@@ -2,6 +2,7 @@ import React from 'react';
 import PageHeader from '../components/common/PageHeader';
 import { Button } from '../components/ui/button';
 import { Plus } from 'lucide-react';
+import ChatBubble from '../components/common/ChatBubble';
 
 const StrategiesAnalyticsPage: React.FC = () => {
   return (
@@ -21,6 +22,8 @@ const StrategiesAnalyticsPage: React.FC = () => {
       <div className="p-8">
         <p>This is the analytics page for strategies.</p>
       </div>
+
+      <ChatBubble />
     </div>
   );
 };

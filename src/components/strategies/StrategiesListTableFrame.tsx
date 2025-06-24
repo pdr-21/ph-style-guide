@@ -266,28 +266,28 @@ const StrategiesListTableFrame: React.FC = () => {
           <tbody>
             {rows.map((row, idx) => (
               <tr key={idx} className="text-sm text-n-500">
-                <td className="px-6 py-4 whitespace-nowrap max-w-xs">
+                <td className="px-6 py-4 whitespace-nowrap max-w-xs bg-white">
                   {row.name}
                 </td>
-                <td className="px-6 py-4 max-w-[280px] truncate">
+                <td className="px-6 py-4 max-w-[280px] truncate bg-white">
                   {row.description}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap w-[148px]">
+                <td className="px-6 py-4 whitespace-nowrap w-[148px] bg-white">
                   <StatusBadge label={row.status} />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap w-[132px]">
+                <td className="px-6 py-4 whitespace-nowrap w-[132px] bg-white">
                   {row.startDate}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap w-[132px]">
+                <td className="px-6 py-4 whitespace-nowrap w-[132px] bg-white">
                   {row.endDate}
                 </td>
-                <td className="px-6 py-4 w-[148px]">
+                <td className="px-6 py-4 w-[148px] bg-white">
                   <TaskDistribution percent={row.progress} />
                 </td>
                 <td className="px-6 py-4">
                   <AvatarStack images={[agentImages[0], agentImages[1], agentImages[2]]} />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap w-[148px]">
+                <td className="px-6 py-4 whitespace-nowrap w-[148px] bg-white">
                   <div className="flex items-center gap-2">
                     <div className="relative group">
                       <img src={row.human.src} alt={row.human.name} className="w-8 h-8 rounded-full border-2 border-white bg-white object-cover" />
@@ -298,7 +298,7 @@ const StrategiesListTableFrame: React.FC = () => {
                     <span className="text-sm font-normal text-n-500">{row.human.name}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap w-[148px]">
+                <td className="px-6 py-4 whitespace-nowrap w-[148px] bg-white">
                   <div className="flex items-center gap-4">
                     <button className="text-n-300 hover:text-n-500">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">

@@ -3,6 +3,7 @@ import PageHeader from '../components/common/PageHeader';
 import { Button } from '../components/ui/button';
 import { Plus } from 'lucide-react';
 import StrategiesListTableFrame from '../components/strategies/StrategiesListTableFrame';
+import ChatBubble from '../components/common/ChatBubble';
 
 const StrategiesListPage: React.FC = () => {
   return (
@@ -22,6 +23,8 @@ const StrategiesListPage: React.FC = () => {
       <div className="p-6">
         <StrategiesListTableFrame />
       </div>
+
+      <ChatBubble />
     </div>
   );
 };
