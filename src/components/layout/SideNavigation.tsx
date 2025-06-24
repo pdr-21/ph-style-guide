@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Home, 
   Users, 
@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { NavigationItem, Environment, AppPage } from '../../types';
 import SideNavigationItem from './SideNavigationItem';
+import SideNavigationDropdown from './SideNavigationDropdown';
 
 interface SideNavigationProps {
   currentView: Environment;
@@ -28,6 +29,12 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
   activeStyleGuideSection, 
   activeComponentSection 
 }) => {
+  const [activeItem, setActiveItem] = useState(activeAppPage);
+
+  // Sync with prop changes (e.g., when route changes via Link navigation)
+  useEffect(() => {
+    setActiveItem(activeAppPage);
+  }, [activeAppPage]);
 
   // App navigation items (icons only)
   const appNavigationItems: NavigationItem[] = [
@@ -38,8 +45,13 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     { id: 'documents', icon: FileText, label: 'Documents', path: '/documents' },
     { id: 'email', icon: Mail, label: 'Email', path: '/email' },
     { id: 'calls', icon: Phone, label: 'Calls', path: '/calls' },
-    { id: 'projects', icon: FolderOpen, label: 'Projects', path: '/projects' },
+    { id: 'strategies', icon: FolderOpen, label: 'Strategies', path: '/strategies' },
     { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
+  ];
+
+  const strategiesSubItems = [
+    { id: 'analytics', label: 'Analytics', path: '/strategies/analytics' },
+    { id: 'list', label: 'List', path: '/strategies/list' },
   ];
 
   // Style Guide navigation items (text only)
@@ -69,15 +81,27 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
       <aside className="fixed left-0 top-18 w-16 h-[calc(100vh-72px)] bg-gr-25 border-r border-n-75 z-40">
         <nav className="py-4">
           <ul className="space-y-2">
-            {appNavigationItems.map((item) => (
-              <SideNavigationItem
-                key={item.id}
-                item={item}
-                isActive={activeAppPage === item.id}
-                onClick={() => onEnvironmentChange('App', item.id)}
-                type="icon"
-              />
-            ))}
+            {appNavigationItems.map((item) => {
+              if (item.id === 'strategies') {
+                return (
+                  <SideNavigationDropdown
+                    key={item.id}
+                    item={item}
+                    subItems={strategiesSubItems}
+                    isActive={activeItem.startsWith('strategies')}
+                  />
+                );
+              }
+              return (
+                <SideNavigationItem
+                  key={item.id}
+                  item={item}
+                  isActive={activeItem === item.id}
+                  onClick={() => setActiveItem(item.id as AppPage)}
+                  type="icon"
+                />
+              );
+            })}
           </ul>
         </nav>
       </aside>

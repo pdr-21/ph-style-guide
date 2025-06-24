@@ -10,8 +10,11 @@ import DocumentsPage from './pages/DocumentsPage';
 import EmailPage from './pages/EmailPage';
 import CallsPage from './pages/CallsPage';
 import SettingsPage from './pages/SettingsPage';
+import StrategiesPage from './pages/StrategiesPage';
+import StrategiesListPage from './pages/StrategiesListPage';
+import StrategiesAnalyticsPage from './pages/StrategiesAnalyticsPage';
 import { Environment, AppPage } from './types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [currentView, setCurrentView] = useState<Environment>('App');
@@ -34,7 +37,9 @@ function App() {
         documents: '/documents',
         email: '/email',
         calls: '/calls',
-        projects: '/projects',
+        strategies: '/strategies',
+        'strategies/list': '/strategies/list',
+        'strategies/analytics': '/strategies/analytics',
         settings: '/settings'
       };
 
@@ -73,41 +78,6 @@ function App() {
     }
   }, [location.pathname]);
 
-  const renderContent = () => {
-    switch (currentView) {
-      case 'App':
-        switch (activeAppPage) {
-          case 'dashboard':
-            return <Dashboard />;
-          case 'contacts':
-            return <ContactsPage />;
-          case 'calendar':
-            return <CalendarPage />;
-          case 'reports':
-            return <ReportsPage />;
-          case 'documents':
-            return <DocumentsPage />;
-          case 'email':
-            return <EmailPage />;
-          case 'calls':
-            return <CallsPage />;
-          case 'projects':
-            // Placeholder for external link - will be handled later
-            return <Dashboard />; // Temporarily show dashboard
-          case 'settings':
-            return <SettingsPage />;
-          default:
-            return <Dashboard />;
-        }
-      case 'Components':
-        return <Components activeComponentSection={activeComponentSection} />;
-      case 'Style Guide':
-        return <StyleGuide activeSection={activeStyleGuideSection} />;
-      default:
-        return <Dashboard />;
-    }
-  };
-
   return (
     <Layout 
       currentView={currentView} 
@@ -116,7 +86,21 @@ function App() {
       activeStyleGuideSection={activeStyleGuideSection}
       activeComponentSection={activeComponentSection}
     >
-      {renderContent()}
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/documents" element={<DocumentsPage />} />
+        <Route path="/email" element={<EmailPage />} />
+        <Route path="/calls" element={<CallsPage />} />
+        <Route path="/strategies" element={<StrategiesPage />} />
+        <Route path="/strategies/list" element={<StrategiesListPage />} />
+        <Route path="/strategies/analytics" element={<StrategiesAnalyticsPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/style-guide/:section" element={<StyleGuide activeSection={activeStyleGuideSection} />} />
+        <Route path="/components/:section" element={<Components activeComponentSection={activeComponentSection} />} />
+      </Routes>
     </Layout>
   );
 }
