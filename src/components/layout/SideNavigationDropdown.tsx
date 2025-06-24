@@ -39,7 +39,7 @@ const SideNavigationDropdown: React.FC<SideNavigationDropdownProps> = ({
         </Link>
       </Tooltip>
       {isHovered && (
-        <div className="absolute left-full ml-2 w-40 bg-white border border-n-100 rounded-lg shadow-lg">
+        <div className="absolute left-full ml-2 w-52 bg-white border border-n-100 rounded-lg shadow-lg">
           <ul className="py-1">
             {subItems.map((subItem) => (
               <li key={subItem.id}>

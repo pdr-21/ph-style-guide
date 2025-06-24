@@ -50,8 +50,8 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
   ];
 
   const strategiesSubItems = [
-    { id: 'analytics', label: 'Analytics', path: '/strategies/analytics' },
-    { id: 'list', label: 'List', path: '/strategies/list' },
+    { id: 'analytics', label: 'Strategies Analytics', path: '/strategies/analytics' },
+    { id: 'list', label: 'Strategies List', path: '/strategies/list' },
   ];
 
   // Style Guide navigation items (text only)
