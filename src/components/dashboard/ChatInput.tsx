@@ -39,11 +39,6 @@ const ChatInput: React.FC = () => {
         <div className="flex items-center justify-between flex-wrap gap-3 md:gap-0">
           {/* Left controls */}
           <div className="flex items-center space-x-3">
-            {/* File attachment button */}
-            <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors" aria-label="Attach file">
-              <Paperclip className="w-5 h-5" />
-            </button>
-
             {/* Response depth dropdown */}
             <div className="w-48">
               <Dropdown
@@ -69,6 +64,10 @@ const ChatInput: React.FC = () => {
 
           {/* Action buttons */}
           <div className="flex items-center space-x-3 ml-auto">
+            {/* File attachment button */}
+            <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors" aria-label="Attach file">
+              <Paperclip className="w-5 h-5" />
+            </button>
             <button className="p-2 text-n-300 hover:text-n-500 hover:bg-n-50 rounded-lg transition-colors" aria-label="Record audio">
               <Mic className="w-5 h-5" />
             </button>

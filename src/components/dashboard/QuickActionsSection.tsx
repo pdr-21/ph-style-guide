@@ -25,6 +25,7 @@ const QuickActionsSection: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
   const [popoverPos, setPopoverPos] = useState({ top: 0, left: 0 });
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -45,7 +46,7 @@ const QuickActionsSection: React.FC = () => {
       </h2>
 
       <div className="flex flex-wrap gap-3 items-center">
-        {actions.map((action) => (
+        {actions.map((action, idx) => (
           <button
             key={action}
             className="bg-white border border-n-75 rounded-full px-4 py-3 text-xs font-poppins font-medium text-n-500 text-left shadow-sm hover:bg-n-40 transition-colors"
@@ -57,6 +58,7 @@ const QuickActionsSection: React.FC = () => {
                   top: rect.bottom - parentRect.top + 8,
                   left: rect.left - parentRect.left,
                 });
+                setHoveredIdx(idx);
                 setShowPopover(true);
               }
             }}
@@ -99,15 +101,71 @@ const QuickActionsSection: React.FC = () => {
       </div>
 
       {/* Popover */}
-      {showPopover && (
+      {showPopover && hoveredIdx !== null && (
         <div
           data-popover="quick-action"
           onMouseLeave={() => setShowPopover(false)}
-          className="absolute z-30 px-4 py-3 bg-white border border-n-100 rounded-xl shadow-lg flex items-center gap-2"
+          className="absolute z-30 w-80 px-4 py-3 bg-white border border-n-100 rounded-xl shadow-lg flex flex-col gap-2"
           style={{ top: popoverPos.top, left: popoverPos.left }}
         >
-          <Star className="w-4 h-4 text-b-200 fill-b-200" />
-          <span className="text-xs font-poppins font-medium text-b-200 whitespace-nowrap">AI Insight based on:</span>
+          {/* Header */}
+          <div className="flex items-center gap-2">
+            <Star className="w-4 h-4 text-n-300" />
+            <span className="text-xs font-poppins text-n-300">AI Strategy based on:</span>
+          </div>
+
+          {/* Dynamic content */}
+          {(() => {
+            const scenario = hoveredIdx % 3;
+            switch (scenario) {
+              case 0:
+                return (
+                  <div className="flex flex-col gap-2 text-xs text-n-500">
+                    <p className="font-medium">Transcript from meeting John x Mathilde - EMEA Expansion</p>
+                    <p className="italic">"... we want to open an office in the Netherlands and it would be nice to come up with a strategy for moving a few departments there..."</p>
+                    <p><span className="font-medium">Meeting date:</span> 12-04-2024</p>
+                    <div className="flex items-center gap-1">
+                      <span className="font-medium">Meeting participants:</span>
+                      <img src="https://source.unsplash.com/20x20/?face,man" alt="John Doe" className="w-5 h-5 rounded-full" />
+                      <span>John Doe (me),</span>
+                      <img src="https://source.unsplash.com/20x20/?face,woman" alt="Mathilde Zwike" className="w-5 h-5 rounded-full" />
+                      <span>Mathilde Zwike</span>
+                    </div>
+                    <button className="mt-1 self-start px-3 py-1 bg-b-200 text-white rounded-full text-[10px] hover:bg-b-300 transition-colors">Follow-up</button>
+                  </div>
+                );
+              case 1:
+                return (
+                  <div className="flex flex-col gap-2 text-xs text-n-500">
+                    <p className="font-medium">Latest legislation developments require compliance with new regulations.</p>
+                    <a
+                      href="https://example.com/new-regulation"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-b-300 hover:underline"
+                    >
+                      View regulation details
+                    </a>
+                    <button className="mt-1 self-start px-3 py-1 bg-b-200 text-white rounded-full text-[10px] hover:bg-b-300 transition-colors">Follow-up</button>
+                  </div>
+                );
+              default:
+                return (
+                  <div className="flex flex-col gap-2 text-xs text-n-500">
+                    <p className="font-medium">Quarterly Revenue Growth KPI shows a 25% increase compared to last year.</p>
+                    <a
+                      href="https://example.com/kpi-dashboard"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-b-300 hover:underline"
+                    >
+                      View KPI dashboard
+                    </a>
+                    <button className="mt-1 self-start px-3 py-1 bg-b-200 text-white rounded-full text-[10px] hover:bg-b-300 transition-colors">Follow-up</button>
+                  </div>
+                );
+            }
+          })()}
         </div>
       )}
     </div>
