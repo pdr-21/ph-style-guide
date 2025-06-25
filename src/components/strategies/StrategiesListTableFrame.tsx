@@ -2,6 +2,7 @@ import React from 'react';
 import { Search, Filter } from 'lucide-react';
 import { Button } from '../ui/button';
 import { agentImages } from '../../lib/agentImages';
+import { useStrategies } from '../../context/StrategiesContext';
 
 const quickFilters = [
   'All',
@@ -109,6 +110,7 @@ const rows = [
       name: 'Jane Smith',
       src: 'https://images.unsplash.com/photo-1553514029-1318c9127859?q=80&w=128&auto=format&fit=crop&ixlib=rb-4.0',
     },
+    selectedAgents: null,
   },
   {
     name: 'Onboarding Process Optimization',
@@ -121,6 +123,7 @@ const rows = [
       name: 'Mark Johnson',
       src: 'https://images.unsplash.com/photo-1618077360395-f3068be8e001?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0',
     },
+    selectedAgents: null,
   },
   {
     name: 'Team Management Upskilling',
@@ -133,6 +136,7 @@ const rows = [
       name: 'Emily Davis',
       src: 'https://plus.unsplash.com/premium_photo-1661730351855-346069d20ef5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
     },
+    selectedAgents: null,
   },
   {
     name: 'Retention Improvement Strategy',
@@ -145,6 +149,7 @@ const rows = [
       name: 'Alex Carter',
       src: 'https://images.unsplash.com/photo-1624395213232-ea2bcd36b865?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0',
     },
+    selectedAgents: null,
   },
   {
     name: 'Diversity Hiring Initiative',
@@ -157,6 +162,7 @@ const rows = [
       name: 'Sophia Lee',
       src: 'https://plus.unsplash.com/premium_photo-1664537980500-30bb5ec506e1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
     },
+    selectedAgents: null,
   },
   {
     name: 'Automation Implementation',
@@ -169,6 +175,7 @@ const rows = [
       name: 'Olivia Brown',
       src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0',
     },
+    selectedAgents: null,
   },
 ];
 
@@ -210,6 +217,29 @@ const RowActions: React.FC = () => {
 };
 
 const StrategiesListTableFrame: React.FC = () => {
+  const { strategies } = useStrategies();
+
+  // Combine static rows with dynamic strategies for demo purposes
+  const allRows = [
+    ...strategies.map(strategy => ({
+      name: strategy.name,
+      description: strategy.description,
+      status: strategy.status,
+      startDate: strategy.startDate,
+      endDate: strategy.endDate,
+      progress: strategy.progress,
+      human: strategy.humanInLoop ? {
+        name: strategy.humanInLoop.name,
+        src: strategy.humanInLoop.avatar,
+      } : {
+        name: 'Unassigned',
+        src: 'https://images.unsplash.com/photo-1553514029-1318c9127859?q=80&w=128&auto=format&fit=crop&ixlib=rb-4.0',
+      },
+      selectedAgents: strategy.selectedAgents,
+    })),
+    ...rows // Keep existing static rows for demo
+  ];
+
   return (
     <div className="border border-n-75 rounded-[10px] bg-white">
       {/* Quick filter tags */}
@@ -264,7 +294,7 @@ const StrategiesListTableFrame: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, idx) => (
+            {allRows.map((row, idx) => (
               <tr key={idx} className="text-sm text-n-500">
                 <td className="px-6 py-4 whitespace-nowrap max-w-xs bg-white">
                   {row.name}
@@ -285,7 +315,13 @@ const StrategiesListTableFrame: React.FC = () => {
                   <TaskDistribution percent={row.progress} />
                 </td>
                 <td className="px-6 py-4">
-                  <AvatarStack images={[agentImages[0], agentImages[1], agentImages[2]]} />
+                  <AvatarStack 
+                    images={
+                      row.selectedAgents 
+                        ? row.selectedAgents.slice(0, 3).map((agent: any) => agent.avatar)
+                        : [agentImages[0], agentImages[1], agentImages[2]]
+                    } 
+                  />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap w-[148px] bg-white">
                   <div className="flex items-center gap-2">

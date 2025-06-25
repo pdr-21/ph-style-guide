@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useStrategies } from '../context/StrategiesContext';
 import { Bell, ChevronDown, Flag, Target, User, Edit3, Bot, Plus, Calendar, CheckCircle2, BarChart3 } from 'lucide-react';
 import Breadcrumbs from '../components/common/Breadcrumbs';
 import { Button } from '../components/ui/button';
@@ -10,6 +11,8 @@ import { getAgentImageByIndex } from '../lib/agentImages';
 
 const NewStrategyPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { addStrategy } = useStrategies();
   const strategyName = searchParams.get('name') || 'New Strategy';
   const goal = searchParams.get('goal') || '';
   const humanInLoop = searchParams.get('human') || '';
@@ -437,6 +440,78 @@ const NewStrategyPage: React.FC = () => {
     return Math.round(totalProgress / milestoneList.length);
   };
 
+  // Generate end date based on latest milestone or default 90 days
+  const generateEndDate = () => {
+    if (milestoneList.length === 0) {
+      // Default to 90 days from now
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 90);
+      return endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    
+    // Find the latest milestone due date
+    const latestMilestone = milestoneList.reduce((latest: any, current: any) => {
+      return current.dueDate > latest.dueDate ? current : latest;
+    });
+    
+    // Add buffer of 7 days after the latest milestone
+    const endDate = new Date(latestMilestone.dueDate);
+    endDate.setDate(endDate.getDate() + 7);
+    return endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
+  // Handle starting/saving the strategy
+  const handleStartStrategy = () => {
+    // Validate required fields
+    if (!editedTitle.trim()) {
+      alert('Please enter a strategy name');
+      return;
+    }
+    
+    if (milestoneList.length === 0) {
+      alert('Please add at least one milestone');
+      return;
+    }
+    
+    if (selectedAgents.length === 0) {
+      alert('Please select at least one AI agent');
+      return;
+    }
+
+    // Prepare human in loop data
+    let humanInLoopData = null;
+    if (editedHuman) {
+      const humanInfo = getHumanInfo(editedHuman);
+      const profileData = getHumanProfileData(editedHuman);
+      humanInLoopData = {
+        name: humanInfo?.name || 'Unknown',
+        avatar: humanInfo?.avatar || '',
+        role: profileData.role,
+        department: profileData.department,
+        email: profileData.email,
+      };
+    }
+
+    // Create the strategy object
+    const newStrategy = {
+      name: editedTitle,
+      description: editedDescription || 'No description provided',
+      status: 'In Progress' as const,
+      startDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      endDate: generateEndDate(),
+      progress: calculateCompletionRate(),
+      milestones: milestoneList,
+      selectedAgents: selectedAgents,
+      humanInLoop: humanInLoopData,
+    };
+
+    // Add strategy to context
+    addStrategy(newStrategy);
+    
+    // Navigate to strategies list
+    navigate('/strategies/list');
+  };
+
   return (
     <div className="min-h-screen bg-gr-25">
       <div ref={strategyContainerRef} className="max-w-7xl mx-auto px-6 py-8 relative">
@@ -508,7 +583,12 @@ const NewStrategyPage: React.FC = () => {
                     </div>
                     
                     {/* Start Strategy Button */}
-                    <Button variant="default" size="sm" className="h-8 px-4">
+                    <Button 
+                      variant="default" 
+                      size="sm" 
+                      className="h-8 px-4"
+                      onClick={handleStartStrategy}
+                    >
                       Start Strategy
                     </Button>
                   </div>

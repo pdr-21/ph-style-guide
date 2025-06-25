@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Layout from './components/layout/Layout';
+import { StrategiesProvider } from './context/StrategiesContext';
 import Dashboard from './pages/Dashboard';
 import Components from './pages/Components';
 import StyleGuide from './pages/StyleGuide';
@@ -80,30 +81,32 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <Layout 
-      currentView={currentView} 
-      onViewChange={handleViewChange}
-      activeAppPage={activeAppPage}
-      activeStyleGuideSection={activeStyleGuideSection}
-      activeComponentSection={activeComponentSection}
-    >
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="/calendar" element={<CalendarPage />} />
-        <Route path="/reports" element={<ReportsPage />} />
-        <Route path="/documents" element={<DocumentsPage />} />
-        <Route path="/email" element={<EmailPage />} />
-        <Route path="/calls" element={<CallsPage />} />
-        <Route path="/strategies" element={<StrategiesPage />} />
-        <Route path="/strategies/list" element={<StrategiesListPage />} />
-        <Route path="/strategies/analytics" element={<StrategiesAnalyticsPage />} />
-        <Route path="/strategies/new" element={<NewStrategyPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/style-guide/:section" element={<StyleGuide activeSection={activeStyleGuideSection} />} />
-        <Route path="/components/:section" element={<Components activeComponentSection={activeComponentSection} />} />
-      </Routes>
-    </Layout>
+    <StrategiesProvider>
+      <Layout 
+        currentView={currentView} 
+        onViewChange={handleViewChange}
+        activeAppPage={activeAppPage}
+        activeStyleGuideSection={activeStyleGuideSection}
+        activeComponentSection={activeComponentSection}
+      >
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/documents" element={<DocumentsPage />} />
+          <Route path="/email" element={<EmailPage />} />
+          <Route path="/calls" element={<CallsPage />} />
+          <Route path="/strategies" element={<StrategiesPage />} />
+          <Route path="/strategies/list" element={<StrategiesListPage />} />
+          <Route path="/strategies/analytics" element={<StrategiesAnalyticsPage />} />
+          <Route path="/strategies/new" element={<NewStrategyPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/style-guide/:section" element={<StyleGuide activeSection={activeStyleGuideSection} />} />
+          <Route path="/components/:section" element={<Components activeComponentSection={activeComponentSection} />} />
+        </Routes>
+      </Layout>
+    </StrategiesProvider>
   );
 }
 
