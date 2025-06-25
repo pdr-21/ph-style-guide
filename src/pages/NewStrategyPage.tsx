@@ -8,6 +8,7 @@ import ChatBubble from '../components/common/ChatBubble';
 import AgentProfileCard from '../components/common/AgentProfileCard';
 import { userImages } from '../lib/userImages';
 import { getAgentImageByIndex } from '../lib/agentImages';
+import { NewStrategyProvider } from '../context/NewStrategyContext';
 
 const NewStrategyPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -512,8 +513,25 @@ const NewStrategyPage: React.FC = () => {
     navigate('/strategies/list');
   };
 
+  // Prepare context value
+  const contextValue = {
+    editedTitle,
+    editedDescription,
+    editedHuman,
+    milestoneList,
+    selectedAgents,
+    setEditedTitle,
+    setEditedDescription,
+    setEditedHuman,
+    setMilestoneList,
+    setSelectedAgents,
+    agentOptions,
+    humanOptions,
+  };
+
   return (
-    <div className="min-h-screen bg-gr-25">
+    <NewStrategyProvider value={contextValue}>
+      <div className="min-h-screen bg-gr-25">
       <div ref={strategyContainerRef} className="max-w-7xl mx-auto px-6 py-8 relative">
         {/* Header Section with Breadcrumbs and Status */}
         <div className="flex justify-center">
@@ -1079,6 +1097,7 @@ const NewStrategyPage: React.FC = () => {
       {/* Chat Bubble */}
       <ChatBubble />
     </div>
+    </NewStrategyProvider>
   );
 };
 

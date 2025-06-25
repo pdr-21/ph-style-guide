@@ -1,17 +1,33 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import SparkleIcon from '../icons/SparkleIcon';
 import { X, ChevronLeft, FileText, Target as TargetIcon, User as UserIcon, ChevronDown, ArrowRight, RotateCcw } from 'lucide-react';
 import { Button } from '../ui/button';
 import { userImages } from '../../lib/userImages';
 import { getAgentImageByIndex } from '../../lib/agentImages';
+import { useStrategies } from '../../context/StrategiesContext';
+import { useNewStrategy } from '../../context/NewStrategyContext';
 
 const quickOptions = [
   'Rethink a strategy',
   'Open 10 new locations in the US',
   'Expand to EMEA Region',
   'Downscale and reduce employee costs',
+];
+
+const strategyEditingOptions = [
+  'Improve the description',
+  'Add a new milestone',
+  'Suggest a better strategy name',
+  'Review current milestones',
+];
+
+const newStrategyOptions = [
+  'Improve the strategy name',
+  'Write a better description',
+  'Add more milestones',
+  'Suggest relevant AI agents',
 ];
 
 // Strategy detection patterns
@@ -61,7 +77,25 @@ interface ChatState {
 const ChatBubble: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isStrategyPage = location.pathname.startsWith('/strategies/new');
+  const { strategies, updateStrategy } = useStrategies();
+  const isStrategyPage = location.pathname.startsWith('/strategies/new') || location.pathname.startsWith('/strategies/view/');
+  
+  // Get current strategy if we're on a strategy details page
+  const isStrategyDetailsPage = location.pathname.startsWith('/strategies/view/');
+  const strategyId = isStrategyDetailsPage ? location.pathname.split('/').pop() : null;
+  const currentStrategy = strategyId ? strategies.find(s => s.id === strategyId) : null;
+  
+  // Get NewStrategy context if we're on the new strategy page
+  const isNewStrategyPage = location.pathname.startsWith('/strategies/new');
+  let newStrategyContext = null;
+  try {
+    if (isNewStrategyPage) {
+      newStrategyContext = useNewStrategy();
+    }
+  } catch {
+    // Context not available, ignore
+    newStrategyContext = null;
+  }
   
   const [open, setOpen] = useState(false);
   const [stage, setStage] = useState<'options' | 'form' | 'chat'>('options');
@@ -107,6 +141,145 @@ const ChatBubble: React.FC = () => {
     window.addEventListener('mousedown', handleClick);
     return () => window.removeEventListener('mousedown', handleClick);
   }, [humanDropdownOpen]);
+
+  // Function to parse AI response for strategy updates
+  const parseStrategyUpdates = (aiResponse: string) => {
+    const updates: any = {};
+    
+    // Look for structured update commands in the AI response
+    const titleMatch = aiResponse.match(/UPDATE_TITLE:\s*(.+?)(?:\n|$)/i);
+    const descriptionMatch = aiResponse.match(/UPDATE_DESCRIPTION:\s*([\s\S]+?)(?:\nUPDATE_|$)/i);
+    const milestoneMatch = aiResponse.match(/UPDATE_MILESTONE:\s*(\d+):\s*(.+?)(?:\n|$)/i);
+    const addMilestoneMatch = aiResponse.match(/ADD_MILESTONE:\s*(.+?)(?:\n|$)/i);
+    
+    if (titleMatch) {
+      updates.name = titleMatch[1].trim();
+    }
+    
+    if (descriptionMatch) {
+      updates.description = descriptionMatch[1].trim();
+    }
+    
+    if (milestoneMatch && currentStrategy) {
+      const milestoneIndex = parseInt(milestoneMatch[1]) - 1;
+      const newMilestoneName = milestoneMatch[2].trim();
+      
+      if (milestoneIndex >= 0 && milestoneIndex < currentStrategy.milestones.length) {
+        const updatedMilestones = [...currentStrategy.milestones];
+        updatedMilestones[milestoneIndex] = {
+          ...updatedMilestones[milestoneIndex],
+          name: newMilestoneName
+        };
+        updates.milestones = updatedMilestones;
+      }
+    }
+    
+    if (addMilestoneMatch && currentStrategy) {
+      const newMilestone = {
+        id: Math.max(...currentStrategy.milestones.map(m => m.id), 0) + 1,
+        name: addMilestoneMatch[1].trim(),
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+        assignedAgent: currentStrategy.selectedAgents[0]?.name || 'Unassigned',
+        progress: 0
+      };
+      
+      updates.milestones = [...currentStrategy.milestones, newMilestone];
+    }
+    
+    return updates;
+  };
+
+  // Function to apply strategy updates
+  const applyStrategyUpdates = (updates: any) => {
+    if (currentStrategy && strategyId && Object.keys(updates).length > 0) {
+      updateStrategy(strategyId, updates);
+      
+      // Add a confirmation message to chat
+      const confirmationMessage: Message = {
+        id: `update-${Date.now()}`,
+        text: "✅ I've updated your strategy with the changes above.",
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, confirmationMessage]);
+    }
+  };
+
+  // Function to parse AI response for new strategy updates
+  const parseNewStrategyUpdates = (aiResponse: string) => {
+    const updates: any = {};
+    
+    // Look for structured update commands in the AI response
+    const titleMatch = aiResponse.match(/UPDATE_TITLE:\s*(.+?)(?:\n|$)/i);
+    const descriptionMatch = aiResponse.match(/UPDATE_DESCRIPTION:\s*([\s\S]+?)(?:\nUPDATE_|$)/i);
+    const addMilestoneMatch = aiResponse.match(/ADD_MILESTONE:\s*(.+?)(?:\n|$)/i);
+    const addAgentMatch = aiResponse.match(/ADD_AGENT:\s*(.+?)(?:\n|$)/i);
+    
+    if (titleMatch) {
+      updates.title = titleMatch[1].trim();
+    }
+    
+    if (descriptionMatch) {
+      updates.description = descriptionMatch[1].trim();
+    }
+    
+    if (addMilestoneMatch && newStrategyContext) {
+      const newMilestone = {
+        id: Math.max(...newStrategyContext.milestoneList.map((m: any) => m.id), 0) + 1,
+        name: addMilestoneMatch[1].trim(),
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+        assignedAgent: newStrategyContext.selectedAgents[0]?.name || '',
+        progress: 0
+      };
+      
+      updates.milestones = [...newStrategyContext.milestoneList, newMilestone];
+    }
+    
+    if (addAgentMatch && newStrategyContext) {
+      const agentName = addAgentMatch[1].trim();
+      const agent = newStrategyContext.agentOptions.find((a: any) => 
+        a.name.toLowerCase().includes(agentName.toLowerCase())
+      );
+      
+      if (agent && !newStrategyContext.selectedAgents.some((a: any) => a.name === agent.name)) {
+        updates.agents = [...newStrategyContext.selectedAgents, agent];
+      }
+    }
+    
+    return updates;
+  };
+
+  // Function to apply new strategy updates
+  const applyNewStrategyUpdates = (updates: any) => {
+    if (newStrategyContext && Object.keys(updates).length > 0) {
+      if (updates.title) {
+        newStrategyContext.setEditedTitle(updates.title);
+      }
+      
+      if (updates.description) {
+        newStrategyContext.setEditedDescription(updates.description);
+      }
+      
+      if (updates.milestones) {
+        newStrategyContext.setMilestoneList(updates.milestones);
+      }
+      
+      if (updates.agents) {
+        newStrategyContext.setSelectedAgents(updates.agents);
+      }
+      
+      // Add a confirmation message to chat
+      const confirmationMessage: Message = {
+        id: `update-${Date.now()}`,
+        text: "✅ I've updated your strategy with the changes above.",
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, confirmationMessage]);
+    }
+  };
 
   // Function to detect strategy intent from user message
   const detectStrategyIntent = (message: string) => {
@@ -274,18 +447,41 @@ const ChatBubble: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Call OpenAI API
+      // Call OpenAI API with enhanced context for strategy details page
+      const requestBody: any = {
+        messages: currentMessages,
+        strategyName: chatState.strategyName || strategyName,
+        goal: chatState.goal,
+        humanInLoop: chatState.humanInLoop || selectedHuman,
+      };
+
+      // Add current strategy context if we're on strategy details page
+      if (currentStrategy) {
+        requestBody.currentStrategy = {
+          name: currentStrategy.name,
+          description: currentStrategy.description,
+          milestones: currentStrategy.milestones.map(m => m.name),
+        };
+        requestBody.canUpdateStrategy = true;
+      }
+
+      // Add new strategy context if we're on new strategy page
+      if (newStrategyContext) {
+        requestBody.newStrategy = {
+          title: newStrategyContext.editedTitle,
+          description: newStrategyContext.editedDescription,
+          milestones: newStrategyContext.milestoneList.map((m: any) => m.name),
+          selectedAgents: newStrategyContext.selectedAgents.map((a: any) => a.name),
+        };
+        requestBody.canUpdateNewStrategy = true;
+      }
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          messages: currentMessages,
-          strategyName: chatState.strategyName || strategyName,
-          goal: chatState.goal,
-          humanInLoop: chatState.humanInLoop || selectedHuman,
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -294,15 +490,42 @@ const ChatBubble: React.FC = () => {
 
       const data = await response.json();
       
+      // Check for strategy updates in the AI response
+      const updates = parseStrategyUpdates(data.reply);
+      const newStrategyUpdates = parseNewStrategyUpdates(data.reply);
+      
+      // Clean the AI response by removing update commands
+      let cleanedResponse = data.reply
+        .replace(/UPDATE_TITLE:\s*(.+?)(?:\n|$)/gi, '')
+        .replace(/UPDATE_DESCRIPTION:\s*([\s\S]+?)(?:\nUPDATE_|$)/gi, '')
+        .replace(/UPDATE_MILESTONE:\s*(\d+):\s*(.+?)(?:\n|$)/gi, '')
+        .replace(/ADD_MILESTONE:\s*(.+?)(?:\n|$)/gi, '')
+        .replace(/ADD_AGENT:\s*(.+?)(?:\n|$)/gi, '')
+        .trim();
+      
       // Add AI response
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.reply,
+        text: cleanedResponse,
         sender: 'ai',
         timestamp: new Date(),
       };
 
       setMessages(prev => [...prev, aiMessage]);
+      
+      // Apply strategy updates if any were found
+      if (Object.keys(updates).length > 0) {
+        setTimeout(() => {
+          applyStrategyUpdates(updates);
+        }, 1000); // Delay to show the AI response first
+      }
+      
+      // Apply new strategy updates if any were found
+      if (Object.keys(newStrategyUpdates).length > 0) {
+        setTimeout(() => {
+          applyNewStrategyUpdates(newStrategyUpdates);
+        }, 1000); // Delay to show the AI response first
+      }
     } catch (error) {
       console.error('Error calling OpenAI API:', error);
       
@@ -618,15 +841,28 @@ const ChatBubble: React.FC = () => {
       >
         {/* Quick options */}
         <div className="flex flex-col gap-1 p-3">
-          {quickOptions.map((opt) => (
+          {(isStrategyDetailsPage && currentStrategy 
+            ? strategyEditingOptions 
+            : isNewStrategyPage && newStrategyContext 
+            ? newStrategyOptions 
+            : quickOptions
+          ).map((opt) => (
             <button
               key={opt}
               className="flex rounded-[12px] px-3 py-3 justify-start text-sm font-normal text-n-200 hover:bg-n-40 hover:text-n-400 transition-colors"
-              onClick={() => {
-                if (opt === 'Expand to EMEA Region') {
-                  setStage('form');
-                }
-              }}
+                              onClick={async () => {
+                  if (isStrategyDetailsPage && currentStrategy) {
+                    // Handle strategy editing options
+                    setInputMessage(opt);
+                    setTimeout(() => handleSubmitMessage(), 100);
+                  } else if (isNewStrategyPage && newStrategyContext) {
+                    // Handle new strategy editing options
+                    setInputMessage(opt);
+                    setTimeout(() => handleSubmitMessage(), 100);
+                  } else if (opt === 'Expand to EMEA Region') {
+                    setStage('form');
+                  }
+                }}
             >
               {opt}
             </button>

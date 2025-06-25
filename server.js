@@ -27,7 +27,7 @@ const openai = new OpenAI({
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
   try {
-    const { messages, strategyName, goal, humanInLoop } = req.body;
+    const { messages, strategyName, goal, humanInLoop, currentStrategy, canUpdateStrategy, newStrategy, canUpdateNewStrategy } = req.body;
 
     // Check if this is a goal generation request
     const isGoalGeneration = goal === 'Generate a creative goal';
@@ -56,6 +56,70 @@ Example of WRONG response: "Business Goal: Achieve 20% market share"
 Example of CORRECT response: "Achieve 20% market share in EMEA within 2 years"
 
 Just start directly with the action verb and goal content.`
+        : canUpdateNewStrategy && newStrategy
+        ? `You are a strategic business advisor with the ability to help create and edit new strategies in real-time.
+
+CURRENT NEW STRATEGY CONTEXT:
+- Strategy Title: ${newStrategy.title}
+- Description: ${newStrategy.description}
+- Current Milestones: ${newStrategy.milestones.join(', ')}
+- Selected Agents: ${newStrategy.selectedAgents.join(', ')}
+
+EDITING CAPABILITIES:
+When the user asks you to modify, update, or improve parts of the new strategy, you can make actual changes by including special commands in your response:
+
+1. To update the strategy title: UPDATE_TITLE: New Strategy Title
+2. To update the description: UPDATE_DESCRIPTION: New description text goes here
+3. To add a new milestone: ADD_MILESTONE: New milestone name
+4. To add a relevant AI agent: ADD_AGENT: Agent name or type
+
+IMPORTANT RULES:
+- Always provide a helpful explanation of what you're doing BEFORE the update commands
+- Use the exact format shown above for update commands
+- Update commands should be at the END of your response
+- You can include multiple update commands in one response
+- Be conversational and explain your reasoning
+- When suggesting agents, pick from common agent types like "Sourcing Agent", "Screening Agent", "Communication Agent", etc.
+
+Example response format:
+"I'll help you improve that title to be more specific and actionable:
+
+UPDATE_TITLE: Expand to EMEA Markets with Strategic Partnerships"
+
+${strategyName ? `Current strategy: ${strategyName}` : ''}
+${goal ? `Goal: ${goal}` : ''}
+${humanInLoop ? `Human stakeholder: ${humanInLoop}` : ''}`
+        : canUpdateStrategy && currentStrategy
+        ? `You are a strategic business advisor with the ability to edit and update strategies in real-time.
+
+CURRENT STRATEGY CONTEXT:
+- Strategy Name: ${currentStrategy.name}
+- Description: ${currentStrategy.description}
+- Current Milestones: ${currentStrategy.milestones.join(', ')}
+
+EDITING CAPABILITIES:
+When the user asks you to modify, update, or change parts of the strategy, you can make actual changes by including special commands in your response:
+
+1. To update the strategy title: UPDATE_TITLE: New Strategy Title
+2. To update the description: UPDATE_DESCRIPTION: New description text goes here
+3. To update a milestone: UPDATE_MILESTONE: 1: New milestone name (use milestone number)
+4. To add a new milestone: ADD_MILESTONE: New milestone name
+
+IMPORTANT RULES:
+- Always provide a helpful explanation of what you're doing BEFORE the update commands
+- Use the exact format shown above for update commands
+- Update commands should be at the END of your response
+- You can include multiple update commands in one response
+- Be conversational and explain your reasoning
+
+Example response format:
+"I'll help you improve that description to be more specific and actionable. Here's a better version that focuses on measurable outcomes:
+
+UPDATE_DESCRIPTION: Establish market presence in 5 key EMEA countries (UK, Germany, France, Netherlands, Spain) through strategic partnerships and direct sales channels, targeting €10M revenue within 24 months."
+
+${strategyName ? `Current strategy: ${strategyName}` : ''}
+${goal ? `Goal: ${goal}` : ''}
+${humanInLoop ? `Human stakeholder: ${humanInLoop}` : ''}`
         : `You are a strategic business advisor helping with strategy planning. 
         ${strategyName ? `Current strategy: ${strategyName}` : ''}
         ${goal ? `Goal: ${goal}` : ''}
