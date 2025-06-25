@@ -13,6 +13,7 @@ import SettingsPage from './pages/SettingsPage';
 import StrategiesPage from './pages/StrategiesPage';
 import StrategiesListPage from './pages/StrategiesListPage';
 import StrategiesAnalyticsPage from './pages/StrategiesAnalyticsPage';
+import NewStrategyPage from './pages/NewStrategyPage';
 import { Environment, AppPage } from './types';
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 
@@ -97,6 +98,7 @@ function App() {
         <Route path="/strategies" element={<StrategiesPage />} />
         <Route path="/strategies/list" element={<StrategiesListPage />} />
         <Route path="/strategies/analytics" element={<StrategiesAnalyticsPage />} />
+        <Route path="/strategies/new" element={<NewStrategyPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/style-guide/:section" element={<StyleGuide activeSection={activeStyleGuideSection} />} />
         <Route path="/components/:section" element={<Components activeComponentSection={activeComponentSection} />} />
