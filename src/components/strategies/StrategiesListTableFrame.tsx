@@ -3,6 +3,7 @@ import { Search, Filter } from 'lucide-react';
 import { Button } from '../ui/button';
 import { agentImages } from '../../lib/agentImages';
 import { useStrategies } from '../../context/StrategiesContext';
+import { useNavigate } from 'react-router-dom';
 
 const quickFilters = [
   'All',
@@ -218,10 +219,12 @@ const RowActions: React.FC = () => {
 
 const StrategiesListTableFrame: React.FC = () => {
   const { strategies } = useStrategies();
+  const navigate = useNavigate();
 
   // Combine static rows with dynamic strategies for demo purposes
   const allRows = [
     ...strategies.map(strategy => ({
+      id: strategy.id, // Add ID for navigation
       name: strategy.name,
       description: strategy.description,
       status: strategy.status,
@@ -236,9 +239,17 @@ const StrategiesListTableFrame: React.FC = () => {
         src: 'https://images.unsplash.com/photo-1553514029-1318c9127859?q=80&w=128&auto=format&fit=crop&ixlib=rb-4.0',
       },
       selectedAgents: strategy.selectedAgents,
+      isUserCreated: true, // Flag to identify user-created strategies
     })),
-    ...rows // Keep existing static rows for demo
+    ...rows.map(row => ({ ...row, isUserCreated: false, selectedAgents: null })) // Keep existing static rows for demo
   ];
+
+  // Handle row click to navigate to strategy details
+  const handleRowClick = (row: any) => {
+    if (row.isUserCreated && row.id) {
+      navigate(`/strategies/view/${row.id}`);
+    }
+  };
 
   return (
     <div className="border border-n-75 rounded-[10px] bg-white">
@@ -295,7 +306,11 @@ const StrategiesListTableFrame: React.FC = () => {
           </thead>
           <tbody>
             {allRows.map((row, idx) => (
-              <tr key={idx} className="text-sm text-n-500">
+              <tr 
+                key={idx} 
+                className={`text-sm text-n-500 ${row.isUserCreated ? 'cursor-pointer hover:bg-n-25 transition-colors' : ''}`}
+                onClick={() => handleRowClick(row)}
+              >
                 <td className="px-6 py-4 whitespace-nowrap max-w-xs bg-white">
                   {row.name}
                 </td>
